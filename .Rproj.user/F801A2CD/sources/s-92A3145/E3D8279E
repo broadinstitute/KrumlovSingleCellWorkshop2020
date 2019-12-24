@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1577141279301.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3106530691",
+    "id" : "E3D8279E",
+    "lastKnownWriteTime" : 1577224546,
+    "last_content_update" : 1577224546680,
+    "path" : "~/Documents/projects/KrumlovSingleCellWorkshop2020/_output.yml",
+    "project_path" : "_output.yml",
+    "properties" : {
+        "cursorPosition" : "18,20",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "yaml"
+}
