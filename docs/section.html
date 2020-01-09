@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>9  | ANALYSIS OF SINGLE CELL RNA-SEQ DATA</title>
+  <meta name="description" content="9  | ANALYSIS OF SINGLE CELL RNA-SEQ DATA" />
+  <meta name="generator" content="bookdown 0.14 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="9  | ANALYSIS OF SINGLE CELL RNA-SEQ DATA" />
+  <meta property="og:type" content="book" />
+  <meta property="og:url" content="https://broadinstitute.github.io/KrumlovSingleCellWorkship2020/" />
+  <meta property="og:image" content="https://broadinstitute.github.io/KrumlovSingleCellWorkship2020/images/cover.png" />
+  
+  <meta name="github-repo" content="broadinstitute/KrumlovSingleCellWorkship2020" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="9  | ANALYSIS OF SINGLE CELL RNA-SEQ DATA" />
+  
+  
+  <meta name="twitter:image" content="https://broadinstitute.github.io/KrumlovSingleCellWorkship2020/images/cover.png" />
+
+<meta name="author" content="Kirk Gosik" />
+
+
+<meta name="date" content="2020-01-16" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="r-eval-false-pcaplotobject-pbmc-dim-1-1-dim-2-2.html"/>
+<link rel="next" href="references.html"/>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+
+
+<style type="text/css">
+a.sourceLine { display: inline-block; line-height: 1.25; }
+a.sourceLine { pointer-events: none; color: inherit; text-decoration: inherit; }
+a.sourceLine:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode { white-space: pre; position: relative; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+code.sourceCode { white-space: pre-wrap; }
+a.sourceLine { text-indent: -1em; padding-left: 1em; }
+}
+pre.numberSource a.sourceLine
+  { position: relative; left: -4em; }
+pre.numberSource a.sourceLine::before
+  { content: attr(title);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; pointer-events: all; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+    color: #aaaaaa;
+  }
+pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+div.sourceCode
+  {  }
+@media screen {
+a.sourceLine::before { text-decoration: underline; }
+}
+code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code span.at { color: #7d9029; } /* Attribute */
+code span.bn { color: #40a070; } /* BaseN */
+code span.bu { } /* BuiltIn */
+code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code span.ch { color: #4070a0; } /* Char */
+code span.cn { color: #880000; } /* Constant */
+code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code span.dt { color: #902000; } /* DataType */
+code span.dv { color: #40a070; } /* DecVal */
+code span.er { color: #ff0000; font-weight: bold; } /* Error */
+code span.ex { } /* Extension */
+code span.fl { color: #40a070; } /* Float */
+code span.fu { color: #06287e; } /* Function */
+code span.im { } /* Import */
+code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code span.op { color: #666666; } /* Operator */
+code span.ot { color: #007020; } /* Other */
+code span.pp { color: #bc7a00; } /* Preprocessor */
+code span.sc { color: #4070a0; } /* SpecialChar */
+code span.ss { color: #bb6688; } /* SpecialString */
+code span.st { color: #4070a0; } /* String */
+code span.va { color: #19177c; } /* Variable */
+code span.vs { color: #4070a0; } /* VerbatimString */
+code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">ANALYSIS OF SINGLE CELL RNA-SEQ DATA</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Introduction</a><ul>
+<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#course-overview"><i class="fa fa-check"></i><b>1.1</b> COURSE OVERVIEW</a></li>
+<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#targeted-audience-assumed-background"><i class="fa fa-check"></i><b>1.2</b> TARGETED AUDIENCE &amp; ASSUMED BACKGROUND</a></li>
+<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#course-format"><i class="fa fa-check"></i><b>1.3</b> COURSE FORMAT</a></li>
+<li class="chapter" data-level="1.4" data-path="index.html"><a href="index.html#getting-started"><i class="fa fa-check"></i><b>1.4</b> Getting Started</a></li>
+<li class="chapter" data-level="1.5" data-path="index.html"><a href="index.html#session-content"><i class="fa fa-check"></i><b>1.5</b> SESSION CONTENT</a><ul>
+<li class="chapter" data-level="1.5.1" data-path="index.html"><a href="index.html#introduction-1"><i class="fa fa-check"></i><b>1.5.1</b> Introduction</a></li>
+<li class="chapter" data-level="1.5.2" data-path="index.html"><a href="index.html#transcriptome-quantification"><i class="fa fa-check"></i><b>1.5.2</b> Transcriptome Quantification</a></li>
+<li class="chapter" data-level="1.5.3" data-path="index.html"><a href="index.html#expression-qc-and-normalization"><i class="fa fa-check"></i><b>1.5.3</b> Expression QC and Normalization</a></li>
+<li class="chapter" data-level="1.5.4" data-path="index.html"><a href="index.html#data-wrangling-scrnaseq"><i class="fa fa-check"></i><b>1.5.4</b> Data Wrangling scRNAseq</a></li>
+<li class="chapter" data-level="1.5.5" data-path="index.html"><a href="index.html#identifying-cell-populations"><i class="fa fa-check"></i><b>1.5.5</b> Identifying Cell Populations</a></li>
+<li class="chapter" data-level="1.5.6" data-path="index.html"><a href="index.html#feature-selection-and-cluster-analysis"><i class="fa fa-check"></i><b>1.5.6</b> Feature Selection and Cluster Analysis</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="intro.html"><a href="intro.html"><i class="fa fa-check"></i><b>2</b> Introduction</a></li>
+<li class="chapter" data-level="3" data-path="transcriptome-quantification-1.html"><a href="transcriptome-quantification-1.html"><i class="fa fa-check"></i><b>3</b> Transcriptome Quantification</a></li>
+<li class="chapter" data-level="4" data-path="expression-qc-and-normalization-1.html"><a href="expression-qc-and-normalization-1.html"><i class="fa fa-check"></i><b>4</b> Expression QC and Normalization</a></li>
+<li class="chapter" data-level="5" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html"><i class="fa fa-check"></i><b>5</b> Data Wrangling scRNAseq</a><ul>
+<li class="chapter" data-level="5.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#goal"><i class="fa fa-check"></i><b>5.1</b> Goal</a></li>
+<li class="chapter" data-level="5.2" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#introduction-2"><i class="fa fa-check"></i><b>5.2</b> Introduction</a><ul>
+<li class="chapter" data-level="5.2.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#load-necessary-packages"><i class="fa fa-check"></i><b>5.2.1</b> Load necessary packages</a></li>
+<li class="chapter" data-level="5.2.2" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#read-in-nsclc-counts-matrix."><i class="fa fa-check"></i><b>5.2.2</b> Read in NSCLC counts matrix.</a></li>
+<li class="chapter" data-level="5.2.3" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#lets-examine-the-sparse-counts-matrix"><i class="fa fa-check"></i><b>5.2.3</b> Let’s examine the sparse counts matrix</a></li>
+<li class="chapter" data-level="5.2.4" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#how-big-is-the-matrix"><i class="fa fa-check"></i><b>5.2.4</b> How big is the matrix?</a></li>
+<li class="chapter" data-level="5.2.5" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#how-much-memory-does-a-sparse-matrix-take-up-relative-to-a-dense-matrix"><i class="fa fa-check"></i><b>5.2.5</b> How much memory does a sparse matrix take up relative to a dense matrix?</a></li>
+</ul></li>
+<li class="chapter" data-level="5.3" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#filtering-low-quality-cells"><i class="fa fa-check"></i><b>5.3</b> Filtering low-quality cells</a><ul>
+<li class="chapter" data-level="5.3.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#look-at-the-summary-counts-for-genes-and-cells"><i class="fa fa-check"></i><b>5.3.1</b> Look at the summary counts for genes and cells</a></li>
+<li class="chapter" data-level="5.3.2" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#plot-cells-ranked-by-their-number-of-detected-genes."><i class="fa fa-check"></i><b>5.3.2</b> Plot cells ranked by their number of detected genes.</a></li>
+</ul></li>
+<li class="chapter" data-level="5.4" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#beginning-with-seurat-httpsatijalab.orgseurat"><i class="fa fa-check"></i><b>5.4</b> Beginning with Seurat: <span>http://satijalab.org/seurat/</span></a><ul>
+<li class="chapter" data-level="5.4.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#creating-a-seurat-object"><i class="fa fa-check"></i><b>5.4.1</b> Creating a seurat object</a></li>
+</ul></li>
+<li class="chapter" data-level="5.5" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#preprocessing-step-1-filter-out-low-quality-cells"><i class="fa fa-check"></i><b>5.5</b> Preprocessing step 1 : Filter out low-quality cells</a></li>
+<li class="chapter" data-level="5.6" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#examine-contents-of-seurat-object"><i class="fa fa-check"></i><b>5.6</b> Examine contents of Seurat object</a><ul>
+<li class="chapter" data-level="5.6.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#preprocessing-step-2-expression-normalization"><i class="fa fa-check"></i><b>5.6.1</b> Preprocessing step 2 : Expression normalization</a></li>
+</ul></li>
+<li class="chapter" data-level="5.7" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#detection-of-variable-genes-across-the-single-cells"><i class="fa fa-check"></i><b>5.7</b> Detection of variable genes across the single cells</a></li>
+<li class="chapter" data-level="5.8" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#gene-set-expression-across-cells"><i class="fa fa-check"></i><b>5.8</b> Gene set expression across cells</a></li>
+</ul></li>
+<li class="chapter" data-level="6" data-path="identifying-cell-populations-1.html"><a href="identifying-cell-populations-1.html"><i class="fa fa-check"></i><b>6</b> Identifying Cell Populations</a><ul>
+<li class="chapter" data-level="6.1" data-path="identifying-cell-populations-1.html"><a href="identifying-cell-populations-1.html#google-slides"><i class="fa fa-check"></i><b>6.1</b> Google Slides</a></li>
+</ul></li>
+<li class="chapter" data-level="7" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html"><i class="fa fa-check"></i><b>7</b> Feature Selection and Cluster Analysis</a><ul>
+<li class="chapter" data-level="7.1" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html#abstract"><i class="fa fa-check"></i><b>7.1</b> Abstract</a></li>
+<li class="chapter" data-level="7.2" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html#seurat-tutorial"><i class="fa fa-check"></i><b>7.2</b> Seurat Tutorial</a><ul>
+<li class="chapter" data-level="7.2.1" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html#preprocessing-steps"><i class="fa fa-check"></i><b>7.2.1</b> Preprocessing Steps</a></li>
+<li class="chapter" data-level="7.2.2" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html#start-of-identifying-cell-types"><i class="fa fa-check"></i><b>7.2.2</b> Start of Identifying Cell Types</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="8" data-path="r-eval-false-pcaplotobject-pbmc-dim-1-1-dim-2-2.html"><a href="r-eval-false-pcaplotobject-pbmc-dim-1-1-dim-2-2.html"><i class="fa fa-check"></i><b>8</b> <code>{r, eval = FALSE} # PCAPlot(object = pbmc, dim.1 = 1, dim.2 = 2) #</code></a></li>
+<li class="chapter" data-level="9" data-path="section.html"><a href="section.html"><i class="fa fa-check"></i><b>9</b> </a><ul>
+<li class="chapter" data-level="9.1" data-path="section.html"><a href="section.html#feature-selection"><i class="fa fa-check"></i><b>9.1</b> Feature Selection</a><ul>
+<li class="chapter" data-level="9.1.1" data-path="section.html"><a href="section.html#differential-expression-analysis"><i class="fa fa-check"></i><b>9.1.1</b> Differential Expression Analysis</a></li>
+<li class="chapter" data-level="9.1.2" data-path="section.html"><a href="section.html#dimensionality-reduction"><i class="fa fa-check"></i><b>9.1.2</b> Dimensionality Reduction</a></li>
+<li class="chapter" data-level="9.1.3" data-path="section.html"><a href="section.html#independent-components-analysis-ica"><i class="fa fa-check"></i><b>9.1.3</b> Independent Components Analysis (ICA)</a></li>
+<li class="chapter" data-level="9.1.4" data-path="section.html"><a href="section.html#clustering"><i class="fa fa-check"></i><b>9.1.4</b> Clustering</a></li>
+<li class="chapter" data-level="9.1.5" data-path="section.html"><a href="section.html#check-clusters"><i class="fa fa-check"></i><b>9.1.5</b> Check Clusters</a></li>
+<li class="chapter" data-level="9.1.6" data-path="section.html"><a href="section.html#practice-visualizingembedding"><i class="fa fa-check"></i><b>9.1.6</b> Practice Visualizing/Embedding</a></li>
+</ul></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">ANALYSIS OF SINGLE CELL RNA-SEQ DATA</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="section" class="section level1">
+<h1><span class="header-section-number">9</span> </h1>
+<div class="sourceCode" id="cb35"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb35-1" title="1"><span class="co"># ProjectPCA scores each gene in the dataset (including genes not included</span></a>
+<a class="sourceLine" id="cb35-2" title="2"><span class="co"># in the PCA) based on their correlation with the calculated components.</span></a>
+<a class="sourceLine" id="cb35-3" title="3"><span class="co"># Though we don&#39;t use this further here, it can be used to identify markers</span></a>
+<a class="sourceLine" id="cb35-4" title="4"><span class="co"># that are strongly correlated with cellular heterogeneity, but may not have</span></a>
+<a class="sourceLine" id="cb35-5" title="5"><span class="co"># passed through variable gene selection.  The results of the projected PCA</span></a>
+<a class="sourceLine" id="cb35-6" title="6"><span class="co"># can be explored by setting use.full=T in the functions above</span></a>
+<a class="sourceLine" id="cb35-7" title="7">seurat &lt;-<span class="st"> </span><span class="kw">Project</span>(<span class="dt">object =</span> seurat, <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>)</a></code></pre></div>
+<div id="genes-by-pcs" class="section level4">
+<h4><span class="header-section-number">9.0.0.1</span> Genes by PCs</h4>
+<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" title="1"><span class="kw">DimHeatmap</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb36-2" title="2">          <span class="dt">dims =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb36-3" title="3">          <span class="dt">cells =</span> <span class="dv">50</span>, </a>
+<a class="sourceLine" id="cb36-4" title="4">          <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>,</a>
+<a class="sourceLine" id="cb36-5" title="5">          <span class="dt">do.balanced =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb36-6" title="6">          <span class="dt">label.columns =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<p>Check other PCs to plot</p>
+<div class="sourceCode" id="cb37"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb37-1" title="1"><span class="kw">PCHeatmap</span>()</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" title="1"><span class="kw">ElbowPlot</span>(<span class="dt">object =</span> seurat, <span class="dt">ndims =</span> <span class="dv">10</span>, <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb39"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb39-1" title="1"><span class="co"># save.SNN = T saves the SNN so that the clustering algorithm can be rerun</span></a>
+<a class="sourceLine" id="cb39-2" title="2"><span class="co"># using the same graph but with a different resolution value (see docs for</span></a>
+<a class="sourceLine" id="cb39-3" title="3"><span class="co"># full details)</span></a>
+<a class="sourceLine" id="cb39-4" title="4"><span class="kw">set.seed</span>(<span class="dv">2019</span>)</a>
+<a class="sourceLine" id="cb39-5" title="5">seurat &lt;-<span class="st"> </span><span class="kw">FindClusters</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb39-6" title="6">                     <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>, </a>
+<a class="sourceLine" id="cb39-7" title="7">                     <span class="dt">dims.use =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb39-8" title="8">                     <span class="dt">resolution =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb39-9" title="9">                     <span class="dt">print.output =</span> <span class="dv">0</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" title="1"><span class="kw">set.seed</span>(<span class="kw">runif</span>(<span class="dv">100</span>))</a>
+<a class="sourceLine" id="cb40-2" title="2">seurat &lt;-<span class="st"> </span><span class="kw">RunTSNE</span>(seurat, <span class="dt">reduction.use =</span> <span class="st">&quot;pca&quot;</span>, <span class="dt">dims.use =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dt">perplexity=</span><span class="dv">10</span>)</a>
+<a class="sourceLine" id="cb40-3" title="3"></a>
+<a class="sourceLine" id="cb40-4" title="4"><span class="co"># note that you can set do.label=T to help label individual clusters</span></a>
+<a class="sourceLine" id="cb40-5" title="5"><span class="kw">TSNEPlot</span>(<span class="dt">object =</span> seurat)</a></code></pre></div>
+<div class="sourceCode" id="cb41"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb41-1" title="1"><span class="co"># find all markers of cluster 1</span></a>
+<a class="sourceLine" id="cb41-2" title="2">cluster1.markers &lt;-<span class="st"> </span><span class="kw">FindMarkers</span>(<span class="dt">object =</span> seurat, <span class="dt">ident.1 =</span> <span class="dv">1</span>, <span class="dt">min.pct =</span> <span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb41-3" title="3"><span class="kw">print</span>(<span class="dt">x =</span> <span class="kw">head</span>(<span class="dt">x =</span> cluster1.markers, <span class="dt">n =</span> <span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" title="1"><span class="co"># find all markers distinguishing cluster 2 from clusters 0 and 1</span></a>
+<a class="sourceLine" id="cb42-2" title="2">cluster2.markers &lt;-<span class="st"> </span><span class="kw">FindMarkers</span>(<span class="dt">object =</span> seurat, <span class="dt">ident.1 =</span> <span class="dv">2</span>, <span class="dt">ident.2 =</span> <span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">min.pct =</span> <span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb42-3" title="3"><span class="kw">print</span>(<span class="dt">x =</span> <span class="kw">head</span>(<span class="dt">x =</span> cluster5.markers, <span class="dt">n =</span> <span class="dv">5</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb43"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb43-1" title="1"><span class="co"># find markers for every cluster compared to all remaining cells, report</span></a>
+<a class="sourceLine" id="cb43-2" title="2"><span class="co"># only the positive ones</span></a>
+<a class="sourceLine" id="cb43-3" title="3">pbmc.markers &lt;-<span class="st"> </span><span class="kw">FindAllMarkers</span>(<span class="dt">object =</span> seurat, <span class="dt">only.pos =</span> <span class="ot">TRUE</span>, <span class="dt">min.pct =</span> <span class="fl">0.25</span>, <span class="dt">thresh.use =</span> <span class="fl">0.25</span>)</a>
+<a class="sourceLine" id="cb43-4" title="4">pbmc.markers <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cluster) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">top_n</span>(<span class="dv">2</span>, avg_logFC)</a></code></pre></div>
+</div>
+<div id="find-marker-genes" class="section level4">
+<h4><span class="header-section-number">9.0.0.2</span> Find Marker Genes</h4>
+<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" title="1">cluster1.markers &lt;-<span class="st"> </span><span class="kw">FindMarkers</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb44-2" title="2">                                <span class="dt">ident.1 =</span> <span class="dv">0</span>, </a>
+<a class="sourceLine" id="cb44-3" title="3">                                <span class="dt">thresh.use =</span> <span class="fl">0.25</span>, </a>
+<a class="sourceLine" id="cb44-4" title="4">                                <span class="dt">test.use =</span> <span class="st">&quot;roc&quot;</span>, </a>
+<a class="sourceLine" id="cb44-5" title="5">                                <span class="dt">only.pos =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb44-6" title="6"></a>
+<a class="sourceLine" id="cb44-7" title="7"></a>
+<a class="sourceLine" id="cb44-8" title="8"><span class="kw">VlnPlot</span>(<span class="dt">object =</span> seurat, <span class="dt">features.plot =</span> <span class="kw">c</span>(<span class="st">&quot;MS4A1&quot;</span>, <span class="st">&quot;CD79A&quot;</span>))</a></code></pre></div>
+<div class="sourceCode" id="cb45"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb45-1" title="1"><span class="co"># you can plot raw UMI counts as well</span></a>
+<a class="sourceLine" id="cb45-2" title="2"><span class="kw">VlnPlot</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb45-3" title="3">        <span class="dt">features.plot =</span> <span class="kw">c</span>(<span class="st">&quot;NKG7&quot;</span>, <span class="st">&quot;PF4&quot;</span>), </a>
+<a class="sourceLine" id="cb45-4" title="4">        <span class="dt">use.raw =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb45-5" title="5">        <span class="dt">y.log =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb46"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb46-1" title="1"><span class="kw">FeaturePlot</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb46-2" title="2">            <span class="dt">features.plot =</span> <span class="kw">c</span>(<span class="st">&quot;MS4A1&quot;</span>, <span class="st">&quot;GNLY&quot;</span>, <span class="st">&quot;CD3E&quot;</span>, <span class="st">&quot;CD14&quot;</span>, <span class="st">&quot;FCER1A&quot;</span>, <span class="st">&quot;FCGR3A&quot;</span>, <span class="st">&quot;LYZ&quot;</span>, <span class="st">&quot;PPBP&quot;</span>, <span class="st">&quot;CD8A&quot;</span>),</a>
+<a class="sourceLine" id="cb46-3" title="3">            <span class="dt">cols.use =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>), </a>
+<a class="sourceLine" id="cb46-4" title="4">            <span class="dt">reduction =</span> <span class="st">&quot;tsne&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" title="1">top10 &lt;-<span class="st"> </span>pbmc.markers <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">group_by</span>(cluster) <span class="op">%&gt;%</span><span class="st"> </span><span class="kw">top_n</span>(<span class="dv">10</span>, avg_logFC)</a>
+<a class="sourceLine" id="cb47-2" title="2"><span class="co"># setting slim.col.label to TRUE will print just the cluster IDS instead of</span></a>
+<a class="sourceLine" id="cb47-3" title="3"><span class="co"># every cell name</span></a>
+<a class="sourceLine" id="cb47-4" title="4"><span class="kw">DoHeatmap</span>(<span class="dt">object =</span> seurat, <span class="dt">genes.use =</span> top10<span class="op">$</span>gene, <span class="dt">slim.col.label =</span> <span class="ot">TRUE</span>, <span class="dt">remove.key =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb48-1" title="1">current.cluster.ids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">3</span>, <span class="dv">4</span>, <span class="dv">5</span>, <span class="dv">6</span>, <span class="dv">7</span>)</a>
+<a class="sourceLine" id="cb48-2" title="2">new.cluster.ids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;CD4 T cells&quot;</span>, <span class="st">&quot;CD14+ Monocytes&quot;</span>, <span class="st">&quot;B cells&quot;</span>, <span class="st">&quot;CD8 T cells&quot;</span>, <span class="st">&quot;FCGR3A+ Monocytes&quot;</span>, <span class="st">&quot;NK cells&quot;</span>, <span class="st">&quot;Dendritic cells&quot;</span>, <span class="st">&quot;Megakaryocytes&quot;</span>)</a>
+<a class="sourceLine" id="cb48-3" title="3">seurat<span class="op">@</span>ident &lt;-<span class="st"> </span>plyr<span class="op">::</span><span class="kw">mapvalues</span>(<span class="dt">x =</span> seurat<span class="op">@</span>ident, <span class="dt">from =</span> current.cluster.ids, <span class="dt">to =</span> new.cluster.ids)</a>
+<a class="sourceLine" id="cb48-4" title="4"><span class="kw">TSNEPlot</span>(<span class="dt">object =</span> seurat, <span class="dt">do.label =</span> <span class="ot">TRUE</span>, <span class="dt">pt.size =</span> <span class="fl">0.5</span>)</a></code></pre></div>
+</div>
+<div id="further-subdivisions-within-cell-types" class="section level4">
+<h4><span class="header-section-number">9.0.0.3</span> Further subdivisions within cell types</h4>
+<p>If you perturb some of our parameter choices above (for example, setting resolution=0.8 or changing the number of PCs), you might see the CD4 T cells subdivide into two groups. You can explore this subdivision to find markers separating the two T cell subsets. However, before reclustering (which will overwrite <a href="mailto:object@ident" class="email">object@ident</a>), we can stash our renamed identities to be easily recovered later.</p>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" title="1"><span class="co"># First lets stash our identities for later</span></a>
+<a class="sourceLine" id="cb49-2" title="2">seurat &lt;-<span class="st"> </span><span class="kw">StashIdent</span>(<span class="dt">object =</span> seurat, <span class="dt">save.name =</span> <span class="st">&quot;ClusterNames_0.6&quot;</span>)</a>
+<a class="sourceLine" id="cb49-3" title="3"><span class="co"># Note that if you set save.snn=T above, you don&#39;t need to recalculate the</span></a>
+<a class="sourceLine" id="cb49-4" title="4"><span class="co"># SNN, and can simply put: pbmc &lt;- FindClusters(pbmc,resolution = 0.8)</span></a>
+<a class="sourceLine" id="cb49-5" title="5">seurat &lt;-<span class="st"> </span><span class="kw">FindClusters</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb49-6" title="6">                     <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>, </a>
+<a class="sourceLine" id="cb49-7" title="7">                     <span class="dt">dims =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb49-8" title="8">                     <span class="dt">resolution =</span> <span class="fl">0.8</span>, </a>
+<a class="sourceLine" id="cb49-9" title="9">                     <span class="dt">print.output =</span> <span class="ot">FALSE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb50-1" title="1"><span class="co">## Warning in BuildSNN(object = object, genes.use = genes.use, reduction.type</span></a>
+<a class="sourceLine" id="cb50-2" title="2"><span class="co">## = reduction.type, : Build parameters exactly match those of already</span></a>
+<a class="sourceLine" id="cb50-3" title="3"><span class="co">## computed and stored SNN. To force recalculation, set force.recalc to TRUE.</span></a>
+<a class="sourceLine" id="cb50-4" title="4"><span class="co"># Demonstration of how to plot two tSNE plots side by side, and how to color</span></a>
+<a class="sourceLine" id="cb50-5" title="5"><span class="co"># points based on different criteria</span></a>
+<a class="sourceLine" id="cb50-6" title="6">plot1 &lt;-<span class="st"> </span><span class="kw">TSNEPlot</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb50-7" title="7">                  <span class="dt">do.return =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb50-8" title="8">                  <span class="dt">no.legend =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb50-9" title="9">                  <span class="dt">do.label =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb50-10" title="10"></a>
+<a class="sourceLine" id="cb50-11" title="11">plot2 &lt;-<span class="st"> </span><span class="kw">TSNEPlot</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb50-12" title="12">                  <span class="dt">do.return =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb50-13" title="13">                  <span class="dt">group.by =</span> <span class="st">&quot;ClusterNames_0.6&quot;</span>, </a>
+<a class="sourceLine" id="cb50-14" title="14">                  <span class="dt">no.legend =</span> <span class="ot">TRUE</span>, </a>
+<a class="sourceLine" id="cb50-15" title="15">                  <span class="dt">do.label =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb50-16" title="16"></a>
+<a class="sourceLine" id="cb50-17" title="17"><span class="kw">plot_grid</span>(plot1, plot2)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" title="1"><span class="co"># Find discriminating markers</span></a>
+<a class="sourceLine" id="cb51-2" title="2">tcell.markers &lt;-<span class="st"> </span><span class="kw">FindMarkers</span>(<span class="dt">object =</span> seurat, <span class="dt">ident.1 =</span> <span class="dv">0</span>, <span class="dt">ident.2 =</span> <span class="dv">1</span>)</a>
+<a class="sourceLine" id="cb51-3" title="3"></a>
+<a class="sourceLine" id="cb51-4" title="4"><span class="co"># Most of the markers tend to be expressed in C1 (i.e. S100A4). However, we</span></a>
+<a class="sourceLine" id="cb51-5" title="5"><span class="co"># can see that CCR7 is upregulated in C0, strongly indicating that we can</span></a>
+<a class="sourceLine" id="cb51-6" title="6"><span class="co"># differentiate memory from naive CD4 cells.  cols.use demarcates the color</span></a>
+<a class="sourceLine" id="cb51-7" title="7"><span class="co"># palette from low to high expression</span></a>
+<a class="sourceLine" id="cb51-8" title="8"><span class="kw">FeaturePlot</span>(<span class="dt">object =</span> seurat, <span class="dt">features.plot =</span> <span class="kw">c</span>(<span class="st">&quot;S100A4&quot;</span>, <span class="st">&quot;CCR7&quot;</span>), <span class="dt">cols.use =</span> <span class="kw">c</span>(<span class="st">&quot;green&quot;</span>, <span class="st">&quot;blue&quot;</span>))</a></code></pre></div>
+</div>
+<div id="feature-selection" class="section level2">
+<h2><span class="header-section-number">9.1</span> Feature Selection</h2>
+<div id="differential-expression-analysis" class="section level3">
+<h3><span class="header-section-number">9.1.1</span> Differential Expression Analysis</h3>
+<div id="differential-expression-tests" class="section level4">
+<h4><span class="header-section-number">9.1.1.1</span> Differential Expression Tests</h4>
+<p>One of the most commonly performed tasks for RNA-seq data is differential gene expression (DE) analysis. Although well- established tools exist for such analysis in bulk RNA-seq data6–8, methods for scRNA-seq data are just emerging. Given the special characteristics of scRNA-seq data, including generally low library sizes, high noise levels and a large fraction of so-called ‘dropout’ events, it is unclear whether DE methods that have been devel- oped for bulk RNA-seq are suitable also for scRNA-seq</p>
+<div class="sourceCode" id="cb52"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb52-1" title="1"><span class="co">## Differential expression using DESeq2</span></a>
+<a class="sourceLine" id="cb52-2" title="2"><span class="kw">DESeq2DETest</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb52-3" title="3">             cells<span class="fl">.1</span>, </a>
+<a class="sourceLine" id="cb52-4" title="4">             cells<span class="fl">.2</span>, </a>
+<a class="sourceLine" id="cb52-5" title="5">             <span class="dt">genes.use =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb52-6" title="6">             <span class="dt">assay.type =</span> <span class="st">&quot;RNA&quot;</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" title="1"><span class="co">## Likelihood ratio test for zero-inflated data</span></a>
+<a class="sourceLine" id="cb53-2" title="2"><span class="kw">DiffExpTest</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb53-3" title="3">            cells<span class="fl">.1</span>, </a>
+<a class="sourceLine" id="cb53-4" title="4">            cells<span class="fl">.2</span>, </a>
+<a class="sourceLine" id="cb53-5" title="5">            <span class="dt">assay.type =</span> <span class="st">&quot;RNA&quot;</span>, </a>
+<a class="sourceLine" id="cb53-6" title="6">            <span class="dt">genes.use =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb53-7" title="7">            <span class="dt">print.bar =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb54-1" title="1"><span class="co">## t-test</span></a>
+<a class="sourceLine" id="cb54-2" title="2"><span class="kw">DiffTTest</span>(<span class="dt">object =</span> seurat, </a>
+<a class="sourceLine" id="cb54-3" title="3">          cells<span class="fl">.1</span>, </a>
+<a class="sourceLine" id="cb54-4" title="4">          cells<span class="fl">.2</span>, </a>
+<a class="sourceLine" id="cb54-5" title="5">          <span class="dt">genes.use =</span> <span class="ot">NULL</span>, </a>
+<a class="sourceLine" id="cb54-6" title="6">          <span class="dt">print.bar =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb54-7" title="7">          <span class="dt">assay.type =</span> <span class="st">&quot;RNA&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="dimensionality-reduction" class="section level3">
+<h3><span class="header-section-number">9.1.2</span> Dimensionality Reduction</h3>
+<div id="principal-components-analysis-pca" class="section level4">
+<h4><span class="header-section-number">9.1.2.1</span> Principal Components Analysis (PCA)</h4>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" title="1"><span class="kw">RunPCA</span>()</a></code></pre></div>
+</div>
+</div>
+<div id="independent-components-analysis-ica" class="section level3">
+<h3><span class="header-section-number">9.1.3</span> Independent Components Analysis (ICA)</h3>
+<div class="sourceCode" id="cb56"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb56-1" title="1"><span class="kw">RunICA</span>()</a></code></pre></div>
+</div>
+<div id="clustering" class="section level3">
+<h3><span class="header-section-number">9.1.4</span> Clustering</h3>
+<div id="kmeans" class="section level4">
+<h4><span class="header-section-number">9.1.4.1</span> Kmeans</h4>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" title="1"><span class="kw">DoKMeans</span>(object, <span class="dt">genes.use =</span> <span class="ot">NULL</span>, <span class="dt">k.genes =</span> <span class="ot">NULL</span>, <span class="dt">k.cells =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb57-2" title="2"><span class="dt">k.seed =</span> <span class="dv">1</span>, <span class="dt">do.plot =</span> <span class="ot">FALSE</span>, <span class="dt">data.cut =</span> <span class="fl">2.5</span>,</a>
+<a class="sourceLine" id="cb57-3" title="3"><span class="dt">k.cols =</span> <span class="kw">PurpleAndYellow</span>(), <span class="dt">set.ident =</span> <span class="ot">TRUE</span>, <span class="dt">do.constrained =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb57-4" title="4"><span class="dt">assay.type =</span> <span class="st">&quot;RNA&quot;</span>, ...)</a></code></pre></div>
+</div>
+<div id="louvain" class="section level4">
+<h4><span class="header-section-number">9.1.4.2</span> Louvain</h4>
+<div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb58-1" title="1"><span class="co">##  Neighborhood graph</span></a>
+<a class="sourceLine" id="cb58-2" title="2"><span class="kw">BuildSNN</span>(object, <span class="dt">genes.use =</span> <span class="ot">NULL</span>, <span class="dt">reduction.type =</span> <span class="st">&quot;pca&quot;</span>,</a>
+<a class="sourceLine" id="cb58-3" title="3"><span class="dt">dims.use =</span> <span class="ot">NULL</span>, <span class="dt">k.param =</span> <span class="dv">10</span>, <span class="dt">plot.SNN =</span> <span class="ot">FALSE</span>, <span class="dt">prune.SNN =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb58-4" title="4"><span class="dt">print.output =</span> <span class="ot">TRUE</span>, <span class="dt">distance.matrix =</span> <span class="ot">NULL</span>, <span class="dt">force.recalc =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb58-5" title="5"><span class="dt">filename =</span> <span class="ot">NULL</span>, <span class="dt">save.SNN =</span> <span class="ot">TRUE</span>, <span class="dt">nn.eps =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb58-6" title="6"></a>
+<a class="sourceLine" id="cb58-7" title="7"><span class="kw">FindClusters</span>(object, <span class="dt">genes.use =</span> <span class="ot">NULL</span>, <span class="dt">reduction.type =</span> <span class="st">&quot;pca&quot;</span>,</a>
+<a class="sourceLine" id="cb58-8" title="8"><span class="dt">dims.use =</span> <span class="ot">NULL</span>, <span class="dt">k.param =</span> <span class="dv">30</span>, <span class="dt">plot.SNN =</span> <span class="ot">FALSE</span>, <span class="dt">prune.SNN =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">15</span>,</a>
+<a class="sourceLine" id="cb58-9" title="9"><span class="dt">print.output =</span> <span class="ot">TRUE</span>, <span class="dt">distance.matrix =</span> <span class="ot">NULL</span>, <span class="dt">save.SNN =</span> <span class="ot">FALSE</span>,</a>
+<a class="sourceLine" id="cb58-10" title="10"><span class="dt">reuse.SNN =</span> <span class="ot">FALSE</span>, <span class="dt">force.recalc =</span> <span class="ot">FALSE</span>, <span class="dt">nn.eps =</span> <span class="dv">0</span>,</a>
+<a class="sourceLine" id="cb58-11" title="11"><span class="dt">modularity.fxn =</span> <span class="dv">1</span>, <span class="dt">resolution =</span> <span class="fl">0.8</span>, <span class="dt">algorithm =</span> <span class="dv">1</span>, <span class="dt">n.start =</span> <span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb58-12" title="12"><span class="dt">n.iter =</span> <span class="dv">10</span>, <span class="dt">random.seed =</span> <span class="dv">0</span>, <span class="dt">temp.file.location =</span> <span class="ot">NULL</span>,</a>
+<a class="sourceLine" id="cb58-13" title="13"><span class="dt">edge.file.name =</span> <span class="ot">NULL</span>)</a></code></pre></div>
+</div>
+<div id="probabilistic-lda" class="section level4">
+<h4><span class="header-section-number">9.1.4.3</span> Probabilistic (LDA)</h4>
+<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" title="1"><span class="kw">set.seed</span>(<span class="dv">2019</span>)</a>
+<a class="sourceLine" id="cb59-2" title="2"></a>
+<a class="sourceLine" id="cb59-3" title="3">pbmc_small &lt;-<span class="st"> </span><span class="kw">NormalizeData</span>(<span class="dt">object =</span> pbmc_small, <span class="dt">normalization.method =</span> <span class="st">&quot;LogNormalize&quot;</span>, <span class="dt">scale.factor =</span> <span class="dv">10000</span>)</a>
+<a class="sourceLine" id="cb59-4" title="4">pbmc_small &lt;-<span class="st"> </span><span class="kw">RunPCA</span>(<span class="dt">object =</span> pbmc_small)</a>
+<a class="sourceLine" id="cb59-5" title="5">pbmc_small &lt;-<span class="st"> </span><span class="kw">FindClusters</span>(<span class="dt">object =</span> pbmc_small, </a>
+<a class="sourceLine" id="cb59-6" title="6">                           <span class="dt">reduction =</span> <span class="st">&quot;pca&quot;</span>, </a>
+<a class="sourceLine" id="cb59-7" title="7">                           <span class="dt">dims.use =</span> <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, </a>
+<a class="sourceLine" id="cb59-8" title="8">                           <span class="dt">resolution =</span> <span class="dv">1</span>, </a>
+<a class="sourceLine" id="cb59-9" title="9">                           <span class="dt">print.output =</span> <span class="dv">0</span>)</a>
+<a class="sourceLine" id="cb59-10" title="10"></a>
+<a class="sourceLine" id="cb59-11" title="11">pbmc_counts &lt;-<span class="st"> </span><span class="kw">as.matrix</span>(pbmc_small<span class="op">@</span>assays<span class="op">$</span>RNA<span class="op">@</span>data)</a>
+<a class="sourceLine" id="cb59-12" title="12">pbmc_meta &lt;-<span class="st"> </span>pbmc_small<span class="op">@</span>meta.data</a>
+<a class="sourceLine" id="cb59-13" title="13">gene_names &lt;-<span class="st"> </span><span class="kw">rownames</span>(pbmc_counts)</a>
+<a class="sourceLine" id="cb59-14" title="14"></a>
+<a class="sourceLine" id="cb59-15" title="15"></a>
+<a class="sourceLine" id="cb59-16" title="16">pbmc_FitGoM &lt;-<span class="st"> </span><span class="kw">FitGoM</span>(<span class="kw">t</span>(pbmc_counts), <span class="dt">K=</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb59-17" title="17"></a>
+<a class="sourceLine" id="cb59-18" title="18"></a>
+<a class="sourceLine" id="cb59-19" title="19">omega &lt;-<span class="st"> </span>pbmc_FitGoM<span class="op">$</span>fit<span class="op">$</span>omega</a>
+<a class="sourceLine" id="cb59-20" title="20"></a>
+<a class="sourceLine" id="cb59-21" title="21">annotation &lt;-<span class="st"> </span><span class="kw">data.frame</span>(<span class="dt">sample_id =</span> <span class="kw">rownames</span>(omega),</a>
+<a class="sourceLine" id="cb59-22" title="22">                         <span class="dt">tissue_label =</span> <span class="kw">paste0</span>(<span class="st">&quot;topic&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>))</a>
+<a class="sourceLine" id="cb59-23" title="23"></a>
+<a class="sourceLine" id="cb59-24" title="24"><span class="kw">colnames</span>(omega) &lt;-<span class="st"> </span><span class="kw">paste0</span>(<span class="st">&quot;topic&quot;</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">4</span>)</a>
+<a class="sourceLine" id="cb59-25" title="25"><span class="kw">rownames</span>(omega) &lt;-<span class="st"> </span>annotation<span class="op">$</span>sample_id;</a>
+<a class="sourceLine" id="cb59-26" title="26"></a>
+<a class="sourceLine" id="cb59-27" title="27"><span class="kw">StructureGGplot</span>(<span class="dt">omega =</span> omega,</a>
+<a class="sourceLine" id="cb59-28" title="28">                <span class="dt">annotation =</span> annotation,</a>
+<a class="sourceLine" id="cb59-29" title="29">                <span class="dt">palette =</span> RColorBrewer<span class="op">::</span><span class="kw">brewer.pal</span>(<span class="dv">4</span>, <span class="st">&quot;Dark2&quot;</span>),</a>
+<a class="sourceLine" id="cb59-30" title="30">                <span class="dt">yaxis_label =</span> <span class="st">&quot;Cells&quot;</span>,</a>
+<a class="sourceLine" id="cb59-31" title="31">                <span class="dt">order_sample =</span> <span class="ot">TRUE</span>,</a>
+<a class="sourceLine" id="cb59-32" title="32">                <span class="dt">axis_tick =</span> <span class="kw">list</span>(<span class="dt">axis_ticks_length =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb59-33" title="33">                                 <span class="dt">axis_ticks_lwd_y =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb59-34" title="34">                                 <span class="dt">axis_ticks_lwd_x =</span> <span class="fl">.1</span>,</a>
+<a class="sourceLine" id="cb59-35" title="35">                                 <span class="dt">axis_label_size =</span> <span class="dv">7</span>,</a>
+<a class="sourceLine" id="cb59-36" title="36">                                 <span class="dt">axis_label_face =</span> <span class="st">&quot;bold&quot;</span>))</a>
+<a class="sourceLine" id="cb59-37" title="37"></a>
+<a class="sourceLine" id="cb59-38" title="38"></a>
+<a class="sourceLine" id="cb59-39" title="39"><span class="co">## Add Topic Scores to Meta Data Part of the Seurat Object</span></a>
+<a class="sourceLine" id="cb59-40" title="40">pbmc_small<span class="op">@</span>meta.data &lt;-<span class="st"> </span><span class="kw">cbind</span>(pbmc_meta, omega)</a></code></pre></div>
+<div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb60-1" title="1">pbmc_small<span class="op">@</span>meta.data <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-2" title="2"><span class="st">  </span><span class="kw">group_by</span>(RNA_snn_res<span class="fl">.1</span>) <span class="op">%&gt;%</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb60-3" title="3"><span class="st">  </span><span class="kw">summarise</span>(<span class="dt">topic1 =</span> <span class="kw">mean</span>(topic1),</a>
+<a class="sourceLine" id="cb60-4" title="4">            <span class="dt">topic2 =</span> <span class="kw">mean</span>(topic2),</a>
+<a class="sourceLine" id="cb60-5" title="5">            <span class="dt">topic3 =</span> <span class="kw">mean</span>(topic3),</a>
+<a class="sourceLine" id="cb60-6" title="6">            <span class="dt">topic4 =</span> <span class="kw">mean</span>(topic4))</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" title="1"><span class="co">## ggplot object, you can add layers</span></a>
+<a class="sourceLine" id="cb61-2" title="2">p1 &lt;-<span class="st"> </span><span class="kw">TSNEPlot</span>(pbmc_small, <span class="dt">do.return =</span> <span class="ot">TRUE</span>) <span class="op">+</span><span class="st"> </span><span class="kw">labs</span>(<span class="dt">title =</span> <span class="st">&quot;Resolution 1&quot;</span>) <span class="co">## return ggplot object</span></a>
+<a class="sourceLine" id="cb61-3" title="3">p1</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" title="1">p2 &lt;-<span class="st"> </span><span class="kw">FeaturePlot</span>(<span class="dt">object =</span> pbmc_small, </a>
+<a class="sourceLine" id="cb62-2" title="2">                  <span class="dt">features =</span> <span class="kw">c</span>(<span class="st">&quot;topic1&quot;</span>, <span class="st">&quot;topic2&quot;</span>, <span class="st">&quot;topic3&quot;</span>, <span class="st">&quot;topic4&quot;</span>), </a>
+<a class="sourceLine" id="cb62-3" title="3">                  <span class="dt">cols =</span> <span class="kw">c</span>(<span class="st">&quot;grey&quot;</span>, <span class="st">&quot;blue&quot;</span>), </a>
+<a class="sourceLine" id="cb62-4" title="4">                  <span class="dt">reduction =</span> <span class="st">&quot;tsne&quot;</span>) <span class="co">## return ggplot object</span></a>
+<a class="sourceLine" id="cb62-5" title="5"></a>
+<a class="sourceLine" id="cb62-6" title="6">p2</a></code></pre></div>
+</div>
+<div id="extract-top-feature" class="section level4">
+<h4><span class="header-section-number">9.1.4.4</span> Extract Top Feature</h4>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" title="1">theta_mat &lt;-<span class="st"> </span>pbmc_FitGoM<span class="op">$</span>fit<span class="op">$</span>theta</a>
+<a class="sourceLine" id="cb63-2" title="2"></a>
+<a class="sourceLine" id="cb63-3" title="3">top_features &lt;-<span class="st"> </span><span class="kw">ExtractTopFeatures</span>(theta_mat, </a>
+<a class="sourceLine" id="cb63-4" title="4">                                   <span class="dt">top_features=</span><span class="dv">100</span>,</a>
+<a class="sourceLine" id="cb63-5" title="5">                                   <span class="dt">method=</span><span class="st">&quot;poisson&quot;</span>, </a>
+<a class="sourceLine" id="cb63-6" title="6">                                   <span class="dt">options=</span><span class="st">&quot;min&quot;</span>)</a>
+<a class="sourceLine" id="cb63-7" title="7"></a>
+<a class="sourceLine" id="cb63-8" title="8">gene_list &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, </a>
+<a class="sourceLine" id="cb63-9" title="9">                     <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="kw">dim</span>(top_features<span class="op">$</span>indices)[<span class="dv">1</span>],</a>
+<a class="sourceLine" id="cb63-10" title="10">                            <span class="cf">function</span>(x) gene_names[top_features<span class="op">$</span>indices[x,]]))</a></code></pre></div>
+<p>We tabulate the top <span class="math inline">\(5\)</span> genes for these <span class="math inline">\(6\)</span> clusters.</p>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" title="1">tmp &lt;-<span class="st"> </span><span class="kw">do.call</span>(rbind, <span class="kw">lapply</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="cf">function</span>(i) <span class="kw">toString</span>(gene_list[,i])))</a>
+<a class="sourceLine" id="cb64-2" title="2"><span class="kw">rownames</span>(tmp) &lt;-<span class="st"> </span><span class="kw">paste</span>(<span class="st">&quot;Cluster&quot;</span>, <span class="kw">c</span>(<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>))</a>
+<a class="sourceLine" id="cb64-3" title="3">tmp <span class="op">%&gt;%</span></a>
+<a class="sourceLine" id="cb64-4" title="4"><span class="st">  </span>knitr<span class="op">::</span><span class="kw">kable</span>(<span class="st">&quot;html&quot;</span>)</a></code></pre></div>
+</div>
+</div>
+<div id="check-clusters" class="section level3">
+<h3><span class="header-section-number">9.1.5</span> Check Clusters</h3>
+<p>Use Classifier to predict cell cluster. See how it predicts using hold out data.</p>
+<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" title="1">test.pbmc &lt;-<span class="st"> </span><span class="kw">SubsetData</span>(<span class="dt">object =</span> pbmc_small, <span class="dt">cells.use =</span> pbmc_small<span class="op">@</span>cell.names[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>])</a>
+<a class="sourceLine" id="cb65-2" title="2">train.pbmc &lt;-<span class="st"> </span><span class="kw">SubsetData</span>(<span class="dt">object =</span> pbmc_small, <span class="dt">cells.use =</span> pbmc_small<span class="op">@</span>cell.names[<span class="dv">11</span><span class="op">:</span><span class="dv">80</span>])</a>
+<a class="sourceLine" id="cb65-3" title="3">predicted.classes &lt;-<span class="st"> </span><span class="kw">ClassifyCells</span>(</a>
+<a class="sourceLine" id="cb65-4" title="4">  <span class="dt">object =</span> train.pbmc,</a>
+<a class="sourceLine" id="cb65-5" title="5">  <span class="dt">training.classes =</span> train.pbmc<span class="op">@</span>ident,</a>
+<a class="sourceLine" id="cb65-6" title="6">  <span class="dt">new.data =</span> test.pbmc<span class="op">@</span>data</a>
+<a class="sourceLine" id="cb65-7" title="7">)</a>
+<a class="sourceLine" id="cb65-8" title="8"></a>
+<a class="sourceLine" id="cb65-9" title="9"></a>
+<a class="sourceLine" id="cb65-10" title="10"><span class="kw">table</span>(predicted.classes, test.pbmc<span class="op">@</span>ident)</a></code></pre></div>
+<p>Visually check by comparing centroids of clusters in gene space and embedding space.</p>
+<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" title="1">pmbc_small &lt;-<span class="st"> </span><span class="kw">GetCentroids</span>(pbmc_small, <span class="dt">cells.use=</span>pbmc_small<span class="op">@</span>cell.names)</a></code></pre></div>
+</div>
+<div id="practice-visualizingembedding" class="section level3">
+<h3><span class="header-section-number">9.1.6</span> Practice Visualizing/Embedding</h3>
+<div id="tsne" class="section level4">
+<h4><span class="header-section-number">9.1.6.1</span> tSNE</h4>
+<p>Change the parameter settings for tSNE</p>
+<div class="sourceCode" id="cb67"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb67-1" title="1"><span class="kw">RunTSNE</span>()</a></code></pre></div>
+</div>
+<div id="umap" class="section level4">
+<h4><span class="header-section-number">9.1.6.2</span> UMAP</h4>
+<p>Change the parameter settings for UMAP</p>
+<div class="sourceCode" id="cb68"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb68-1" title="1"><span class="kw">RunUMAP</span>()</a></code></pre></div>
+
+</div>
+</div>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="r-eval-false-pcaplotobject-pbmc-dim-1-1-dim-2-2.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="references.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"google": false,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": ["facebook", "google", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": null,
+"text": null
+},
+"history": {
+"link": null,
+"text": null
+},
+"download": ["KrumlovSingleCellWorkshop2020.pdf", "KrumlovSingleCellWorkshop2020.epub"],
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
