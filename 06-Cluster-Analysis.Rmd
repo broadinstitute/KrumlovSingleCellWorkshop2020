@@ -17,7 +17,7 @@ Cells are the basic building blocks of organisms and each cell is unique. Single
 
 ## Seurat Tutorial
 
-Task: Change the directory name to mydir/ where you saved your data
+**Task: Change the dirname to dir where you saved your data**
 ```{r read_data_clust}
 library(Seurat)
 library(dplyr)
@@ -35,7 +35,7 @@ counts <- counts[,1:1000]
 
 ```{r create_seurat_clust} 
 ### seurat<-CreateSeuratObject(raw.data = counts, ? = 3, ? = 350, project = "10X_NSCLC")
-seurat <- CreateSeuratObject(counts = counts, min.cells = 3, min.features = 350, project = "10X_NSCLC")
+seurat <- CreateSeuratObject(counts = counts, min.cells = 3, min.features = 350, project = "10X_PBMC")
 ```
 
 
@@ -74,7 +74,7 @@ FeatureScatter(object = seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RN
 
 This is not run becuase we are already working with a subset.  This is here for reference.
 
-```{r subset_data}
+```{r subset_data, eval = FALSE}
 # We filter out cells that have unique gene counts over 2,500 or less than
 # 200 Note that low.thresholds and high.thresholds are used to define a
 # 'gate'.  -Inf and Inf should be used if you don't want a lower or upper
@@ -100,8 +100,7 @@ seurat <- NormalizeData(object = seurat, normalization.method = "LogNormalize", 
 ```{r var_genes_clust}
 seurat <- FindVariableFeatures(object = seurat, 
                                mean.function = ExpMean, 
-                               dispersion.function = LogVMR, 
-                               do.plot = FALSE)
+                               dispersion.function = LogVMR)
 ```
 
 
@@ -116,7 +115,7 @@ This part is where you mean center the data, substract the mean.  You also divid
 seurat <- ScaleData(object = seurat, vars.to.regress = c("batch", "percent.mt"))
 ```
 
-Try Regressing Other Variables
+**Task: Try Regressing Other Variables**
 ```{r regrress_other}
 ## randomly making a batch id data.frame
 batch_ids <- data.frame(barcode = rownames(seurat@meta.data), 
