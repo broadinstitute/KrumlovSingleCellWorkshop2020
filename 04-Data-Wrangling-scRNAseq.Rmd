@@ -36,8 +36,8 @@ Task: Change the directory name to mydir/ where you saved your data
 
 **Task: Check the <code>dirname</code> to dir where you saved your data**
 ```{r read_data}
-dirname <- "/home/genomics/workshop_materials/scrna/"
-## dirname <- "/Users/kgosik/Documents/data/cellranger/"
+## dirname <- "/home/genomics/workshop_materials/scrna/"
+dirname <- "/Users/kgosik/Documents/data/cellranger/vdj-nsclc/"
 counts_matrix_filename = paste0(dirname, "filtered_gene_bc_matrices/GRCh38/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
