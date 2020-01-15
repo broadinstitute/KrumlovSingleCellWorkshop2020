@@ -37,7 +37,7 @@ Task: Change the directory name to mydir/ where you saved your data
 ```{r read_data}
 dirname <- "/home/genomics/workshop_materials/scrna/"
 ## dirname <- "/Users/kgosik/Documents/data/cellranger/"
-counts_matrix_filename = paste0(dirname, "vdj-nsclc/filtered_gene_bc_matrices/GRCh38/")
+counts_matrix_filename = paste0(dirname, "filtered_gene_bc_matrices/GRCh38/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
 # To minimize memory use on the docker - choose only the first 1000 cells
