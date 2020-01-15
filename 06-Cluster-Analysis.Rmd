@@ -29,6 +29,8 @@ tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
 
 **Task: Check the dirname to directory where you saved your data**
 ```{r read_data_clust}
+opts_knit$set(progress=FALSE, verbose=FALSE)
+
 library(Seurat)
 library(dplyr)
 library(ggplot2)
