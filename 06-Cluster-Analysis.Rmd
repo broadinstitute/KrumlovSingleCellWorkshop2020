@@ -21,9 +21,9 @@ For this tutorial, we will be analyzing the a dataset of Peripheral Blood Mononu
 
 
 ```{bash get_data, eval = FALSE}
-mkdir workshop_materials/scrna/pbmc3k
-wget https://s3-us-west-2.amazonaws.com/10x.files/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz -O workshop_materials/scrna/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz && \
-cd workshop_materials/scrna/pbmc3k/ && \
+mkdir /home/genomics/workshop_materials/scrna/pbmc3k
+wget https://s3-us-west-2.amazonaws.com/10x.files/samples/cell/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz -O /home/genomics/workshop_materials/scrna/pbmc3k/pbmc3k_filtered_gene_bc_matrices.tar.gz && \
+cd /home/genomics/workshop_materials/scrna/pbmc3k/ && \
 tar -xzf pbmc3k_filtered_gene_bc_matrices.tar.gz
 ```
 
@@ -35,7 +35,7 @@ library(ggplot2)
 library(CountClust)
 
 dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "pbmc3k/filtered_gene_bc_matrices/hg19/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -102,12 +102,9 @@ seurat <- NormalizeData(object = seurat, normalization.method = "LogNormalize", 
 ```{r cell_cycle_genes_pbmc}
 # Read in a list of cell cycle markers, from Tirosh et al, 2015.
 # We can segregate this list into markers of G2/M phase and markers of S phase.
-cc.genes <- readLines(paste0(dirname, "regev_lab_cell_cycle_genes.txt"))
-
-
-s.genes <- cc.genes[1:43]
+s.genes <- Seurat::cc.genes$s.genes
 s.genes <- s.genes[s.genes %in% rownames(seurat)] # genes in dataset
-g2m.genes <- cc.genes[44:97]
+g2m.genes <- Seurat::cc.genes$g2m.genes
 g2m.genes <- g2m.genes[g2m.genes %in% rownames(seurat)] # genes in dataset
 
 seurat <- CellCycleScoring(object = seurat, s.features = s.genes, g2m.features = g2m.genes, set.ident = TRUE)

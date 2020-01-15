@@ -36,7 +36,7 @@ Task: Change the directory name to mydir/ where you saved your data
 **Task: Check the <code>dirname</code> to dir where you saved your data**
 ```{r read_data}
 dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "vdj-nsclc/filtered_gene_bc_matrices/GRCh38/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -278,7 +278,7 @@ A third metric we use is the number of house keeping genes expressed in a cell. 
 
 ```{r hkgenes}
 # Load the the list of house keeping genes
-hkgenes <- read.table(paste0(dirname, "tirosh_house_keeping.txt"), skip = 2)
+hkgenes <- read.table(paste0(dirname, "housekeepers.txt"), skip = 2)
 hkgenes <- as.vector(hkgenes$V1)
 
 # remove hkgenes that were not found
@@ -549,12 +549,9 @@ Below, we look at genes involved in: T cells, the cell cycle and the stress sign
 ```{r cell_cycle_genes}
 # Read in a list of cell cycle markers, from Tirosh et al, 2015.
 # We can segregate this list into markers of G2/M phase and markers of S phase.
-cc.genes <- readLines(paste0(dirname, "regev_lab_cell_cycle_genes.txt"))
-
-
-s.genes <- cc.genes[1:43]
+s.genes <- Seurat::cc.genes$s.genes
 s.genes <- s.genes[s.genes %in% rownames(seurat)] # genes in dataset
-g2m.genes <- cc.genes[44:97]
+g2m.genes <- Seurat::cc.genes$g2m.genes
 g2m.genes <- g2m.genes[g2m.genes %in% rownames(seurat)] # genes in dataset
 
 seurat <- CellCycleScoring(object = seurat, s.features = s.genes, g2m.features = g2m.genes, set.ident = TRUE)
