@@ -816,7 +816,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..@ commands    :List of 10
 ##   .. ..$ NormalizeData.RNA       :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;NormalizeData.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:20:07&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:38:41&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;NormalizeData(object = seurat, normalization.method = \&quot;LogNormalize\&quot;, &quot; &quot;    scale.factor = 10000)&quot;
 ##   .. .. .. ..@ params     :List of 5
@@ -827,7 +827,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose             : logi TRUE
 ##   .. ..$ FindVariableFeatures.RNA:Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindVariableFeatures.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:20:08&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:38:42&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;FindVariableFeatures(object = seurat, mean.function = ExpMean, &quot; &quot;    dispersion.function = LogVMR)&quot;
 ##   .. .. .. ..@ params     :List of 12
@@ -845,7 +845,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose            : logi TRUE
 ##   .. ..$ ScaleData.RNA           :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;ScaleData.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:20:27&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:39:04&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;ScaleData(object = seurat, vars.to.regress = \&quot;batch_id\&quot;)&quot;
 ##   .. .. .. ..@ params     :List of 11
@@ -862,7 +862,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose           : logi TRUE
 ##   .. ..$ RunPCA.RNA              :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;RunPCA.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:20:37&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:39:10&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;RunPCA(object = seurat, do.print = TRUE, pcs.print = 1:5, &quot; &quot;    genes.print = 5)&quot;
 ##   .. .. .. ..@ params     :List of 10
@@ -878,7 +878,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ seed.use       : num 42
 ##   .. ..$ ProjectDim.RNA.pca      :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;ProjectDim.RNA.pca&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:20:38&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:39:11&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;ProjectDim(object = seurat, reduction = \&quot;pca\&quot;)&quot;
 ##   .. .. .. ..@ params     :List of 7
@@ -891,7 +891,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose        : logi TRUE
 ##   .. ..$ JackStraw.RNA.pca       :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;JackStraw.RNA.pca&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:24:13&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:42:47&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;JackStraw(object = seurat, reduction = \&quot;pca\&quot;)&quot;
 ##   .. .. .. ..@ params     :List of 7
@@ -904,7 +904,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ maxit        : num 1000
 ##   .. ..$ ScoreJackStraw          :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;ScoreJackStraw&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:24:13&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:42:47&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;ScoreJackStraw(seurat, dims = 1:20)&quot;
 ##   .. .. .. ..@ params     :List of 4
@@ -914,7 +914,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ do.plot     : logi FALSE
 ##   .. ..$ FindNeighbors.RNA.pca   :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindNeighbors.RNA.pca&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:24:14&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:42:48&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;FindNeighbors(object = seurat, dims = 1:10)&quot;
 ##   .. .. .. ..@ params     :List of 13
@@ -933,7 +933,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ graph.name  : chr [1:2] &quot;RNA_nn&quot; &quot;RNA_snn&quot;
 ##   .. ..$ RunTSNE                 :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;RunTSNE&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:24:20&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:42:54&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;RunTSNE(seurat, reduction.use = \&quot;pca\&quot;, dims.use = 1:10, &quot; &quot;    perplexity = 10)&quot;
 ##   .. .. .. ..@ params     :List of 9
@@ -948,7 +948,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ reduction.key : chr &quot;tSNE_&quot;
 ##   .. ..$ FindClusters            :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindClusters&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:26:03&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 19:44:37&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;FindClusters(object = seurat, reduction = \&quot;pca\&quot;, dims = 1:10, &quot; &quot;    resolution = 0.8)&quot;
 ##   .. .. .. ..@ params     :List of 10
