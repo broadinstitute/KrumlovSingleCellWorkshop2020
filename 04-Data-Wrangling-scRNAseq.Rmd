@@ -22,7 +22,7 @@ For this tutorial, we will be analyzing the a dataset of Non-Small Cell Lung Can
 When loading libraries, we are asking R to load code for us written by someone else. It is a convenient way to leverage and reproduce methodology developed by others.
 
 ```{r setup, warning = FALSE, message = FALSE}
-opts_knit$set(progress=FALSE, verbose=FALSE)
+knitr::opts_knit$set(progress=FALSE, verbose=FALSE)
 
 library(Seurat)
 library(dplyr)
