@@ -237,7 +237,8 @@ seurat <- FindNeighbors(object = seurat, dims = 1:10)
 seurat <- FindClusters(object = seurat, 
                        reduction = "pca", 
                        dims = 1:10, 
-                       resolution = 0.5)
+                       resolution = 0.5,
+                       random.seed = 2020)
 ```
 
 
@@ -293,13 +294,13 @@ head(cluster5.markers)
 
 
 ```{r cluster3_markers}
-cluster2.markers <- FindMarkers(object = seurat, 
+cluster3.markers <- FindMarkers(object = seurat, 
                                 ident.1 = 2, 
                                 thresh.use = 0.25, 
                                 test.use = "roc", 
                                 only.pos = TRUE)
 
-head(cluster2.markers)
+head(cluster3.markers)
 ```
 
 
@@ -341,7 +342,7 @@ DoHeatmap(object = seurat, features = top10$gene, label = TRUE)
 ```
 
 ```{r new_names}
-new.cluster.ids <- c("Memory CD4 T", "CD14+ Mono", "B", "Naive CD4 T", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
+new.cluster.ids <- c("Memory CD4 T", "CD14+ Mono", "Naive CD4 T", "B", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
 names(x = new.cluster.ids) <- levels(x = seurat)
 seurat <- RenameIdents(object = seurat, new.cluster.ids)
 

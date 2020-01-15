@@ -147,8 +147,12 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="1.5.6" data-path="index.html"><a href="index.html#feature-selection-and-cluster-analysis"><i class="fa fa-check"></i><b>1.5.6</b> Feature Selection and Cluster Analysis</a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="transcriptome-quantification-1.html"><a href="transcriptome-quantification-1.html"><i class="fa fa-check"></i><b>2</b> Transcriptome Quantification</a></li>
-<li class="chapter" data-level="3" data-path="expression-qc-and-normalization-1.html"><a href="expression-qc-and-normalization-1.html"><i class="fa fa-check"></i><b>3</b> Expression QC and Normalization</a></li>
+<li class="chapter" data-level="2" data-path="transcriptome-quantification-1.html"><a href="transcriptome-quantification-1.html"><i class="fa fa-check"></i><b>2</b> Transcriptome Quantification</a><ul>
+<li class="chapter" data-level="2.1" data-path="transcriptome-quantification-1.html"><a href="transcriptome-quantification-1.html#google-slides"><i class="fa fa-check"></i><b>2.1</b> Google Slides</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="expression-qc-and-normalization-1.html"><a href="expression-qc-and-normalization-1.html"><i class="fa fa-check"></i><b>3</b> Expression QC and Normalization</a><ul>
+<li class="chapter" data-level="3.1" data-path="expression-qc-and-normalization-1.html"><a href="expression-qc-and-normalization-1.html#google-slides-1"><i class="fa fa-check"></i><b>3.1</b> Google Slides</a></li>
+</ul></li>
 <li class="chapter" data-level="4" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html"><i class="fa fa-check"></i><b>4</b> Data Wrangling scRNAseq</a><ul>
 <li class="chapter" data-level="4.1" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#goal"><i class="fa fa-check"></i><b>4.1</b> Goal</a></li>
 <li class="chapter" data-level="4.2" data-path="data-wrangling-scrnaseq-1.html"><a href="data-wrangling-scrnaseq-1.html#introduction-2"><i class="fa fa-check"></i><b>4.2</b> Introduction</a><ul>
@@ -175,7 +179,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <li class="chapter" data-level="5.4" data-path="the-following-examples-use-the-pbmc-3k-dataset.html"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#gene-set-expression-across-cells"><i class="fa fa-check"></i><b>5.4</b> Gene set expression across cells</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="identifying-cell-populations-1.html"><a href="identifying-cell-populations-1.html"><i class="fa fa-check"></i><b>6</b> Identifying Cell Populations</a><ul>
-<li class="chapter" data-level="6.1" data-path="identifying-cell-populations-1.html"><a href="identifying-cell-populations-1.html#google-slides"><i class="fa fa-check"></i><b>6.1</b> Google Slides</a></li>
+<li class="chapter" data-level="6.1" data-path="identifying-cell-populations-1.html"><a href="identifying-cell-populations-1.html#google-slides-2"><i class="fa fa-check"></i><b>6.1</b> Google Slides</a></li>
 </ul></li>
 <li class="chapter" data-level="7" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html"><i class="fa fa-check"></i><b>7</b> Feature Selection and Cluster Analysis</a><ul>
 <li class="chapter" data-level="7.1" data-path="feature-selection-and-cluster-analysis-1.html"><a href="feature-selection-and-cluster-analysis-1.html#abstract"><i class="fa fa-check"></i><b>7.1</b> Abstract</a></li>
@@ -710,7 +714,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Here we calculated the percent mitochondrial reads and added it to the Seurat object in the slot named meta.data. This allowed us to plot using the violin plot function provided by Seurat.</p>
 <p>A third metric we use is the number of house keeping genes expressed in a cell. These genes reflect commomn processes active in a cell and hence are a good global quality measure. They are also abundant and are usually steadliy expressed in cells, thus less sensitive to the high dropout.</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-1"></a><span class="co"># Load the the list of house keeping genes</span></span>
-<span id="cb60-2"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-2"></a>hkgenes &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">paste0</span>(dirname, <span class="st">&quot;tirosh_house_keeping.txt&quot;</span>), <span class="dt">skip =</span> <span class="dv">2</span>)</span>
+<span id="cb60-2"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-2"></a>hkgenes &lt;-<span class="st"> </span><span class="kw">read.table</span>(<span class="kw">paste0</span>(dirname, <span class="st">&quot;housekeepers.txt&quot;</span>), <span class="dt">skip =</span> <span class="dv">2</span>)</span>
 <span id="cb60-3"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-3"></a>hkgenes &lt;-<span class="st"> </span><span class="kw">as.vector</span>(hkgenes<span class="op">$</span>V1)</span>
 <span id="cb60-4"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-4"></a></span>
 <span id="cb60-5"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb60-5"></a><span class="co"># remove hkgenes that were not found</span></span>
@@ -844,15 +848,12 @@ Play with the parameters - what makes the function find more variable genes? les
 <p>Below, we look at genes involved in: T cells, the cell cycle and the stress signature upon cell dissociation. We calculate these genes average expression levels on the single cell level, while controlling for technical effects.</p>
 <div class="sourceCode" id="cb82"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb82-1"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-1"></a><span class="co"># Read in a list of cell cycle markers, from Tirosh et al, 2015.</span></span>
 <span id="cb82-2"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-2"></a><span class="co"># We can segregate this list into markers of G2/M phase and markers of S phase.</span></span>
-<span id="cb82-3"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-3"></a>cc.genes &lt;-<span class="st"> </span><span class="kw">readLines</span>(<span class="kw">paste0</span>(dirname, <span class="st">&quot;regev_lab_cell_cycle_genes.txt&quot;</span>))</span>
-<span id="cb82-4"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-4"></a></span>
-<span id="cb82-5"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-5"></a></span>
-<span id="cb82-6"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-6"></a>s.genes &lt;-<span class="st"> </span>cc.genes[<span class="dv">1</span><span class="op">:</span><span class="dv">43</span>]</span>
-<span id="cb82-7"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-7"></a>s.genes &lt;-<span class="st"> </span>s.genes[s.genes <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(seurat)] <span class="co"># genes in dataset</span></span>
-<span id="cb82-8"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-8"></a>g2m.genes &lt;-<span class="st"> </span>cc.genes[<span class="dv">44</span><span class="op">:</span><span class="dv">97</span>]</span>
-<span id="cb82-9"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-9"></a>g2m.genes &lt;-<span class="st"> </span>g2m.genes[g2m.genes <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(seurat)] <span class="co"># genes in dataset</span></span>
-<span id="cb82-10"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-10"></a></span>
-<span id="cb82-11"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-11"></a>seurat &lt;-<span class="st"> </span><span class="kw">CellCycleScoring</span>(<span class="dt">object =</span> seurat, <span class="dt">s.features =</span> s.genes, <span class="dt">g2m.features =</span> g2m.genes, <span class="dt">set.ident =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
+<span id="cb82-3"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-3"></a>s.genes &lt;-<span class="st"> </span>Seurat<span class="op">::</span>cc.genes<span class="op">$</span>s.genes</span>
+<span id="cb82-4"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-4"></a>s.genes &lt;-<span class="st"> </span>s.genes[s.genes <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(seurat)] <span class="co"># genes in dataset</span></span>
+<span id="cb82-5"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-5"></a>g2m.genes &lt;-<span class="st"> </span>Seurat<span class="op">::</span>cc.genes<span class="op">$</span>g2m.genes</span>
+<span id="cb82-6"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-6"></a>g2m.genes &lt;-<span class="st"> </span>g2m.genes[g2m.genes <span class="op">%in%</span><span class="st"> </span><span class="kw">rownames</span>(seurat)] <span class="co"># genes in dataset</span></span>
+<span id="cb82-7"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-7"></a></span>
+<span id="cb82-8"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb82-8"></a>seurat &lt;-<span class="st"> </span><span class="kw">CellCycleScoring</span>(<span class="dt">object =</span> seurat, <span class="dt">s.features =</span> s.genes, <span class="dt">g2m.features =</span> g2m.genes, <span class="dt">set.ident =</span> <span class="ot">TRUE</span>)</span></code></pre></div>
 <p><strong>Task: Use markers for dissociation to calculate dissociation score</strong></p>
 <div class="sourceCode" id="cb83"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb83-1"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb83-1"></a><span class="co"># Genes upregulated during dissociation of tissue into single cells.</span></span>
 <span id="cb83-2"><a href="the-following-examples-use-the-pbmc-3k-dataset.html#cb83-2"></a>genes.dissoc &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;ATF3&quot;</span>, <span class="st">&quot;BTG2&quot;</span>, <span class="st">&quot;CEBPB&quot;</span>, <span class="st">&quot;CEBPD&quot;</span>, <span class="st">&quot;CXCL3&quot;</span>, <span class="st">&quot;CXCL2&quot;</span>, <span class="st">&quot;CXCL1&quot;</span>, <span class="st">&quot;DNAJA1&quot;</span>, <span class="st">&quot;DNAJB1&quot;</span>, <span class="st">&quot;DUSP1&quot;</span>, </span>
