@@ -593,11 +593,11 @@ gene_list <- do.call(rbind,
 ```
 
 
-We tabulate the top `5` genes for these `6` clusters.
+We tabulate the top `5` genes for these `4` topics
 
 ```{r topic_genes_by_cluster}
 out_table <- do.call(rbind, lapply(1:5, function(i) toString(gene_list[,i])))
-rownames(out_table) <- paste("Cluster", c(1:5))
+rownames(out_table) <- paste("Topic", c(1:4))
 out_table
 ```
 
