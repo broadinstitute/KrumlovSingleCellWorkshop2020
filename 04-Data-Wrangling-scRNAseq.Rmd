@@ -25,7 +25,6 @@ When loading libraries, we are asking R to load code for us written by someone e
 library(Seurat)
 library(dplyr)
 library(Matrix)
-library(gdata)
 ```
 
 ###  Read in NSCLC counts matrix.
