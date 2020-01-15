@@ -217,6 +217,11 @@ seurat <- ScoreJackStraw(seurat, dims = 1:20)
 
 
 
+```{r jack_straw_plot}
+JackStrawPlot(seurat, dims = 1:15)
+```
+
+
 ```{r pcsiggenes, eval = FALSE, echo = FALSE}
 PCASigGenes(object = seurat, pcs.use = 1:2, pval.cut = 0.1)
 ```
