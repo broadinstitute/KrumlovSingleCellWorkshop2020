@@ -36,8 +36,8 @@ library(dplyr)
 library(ggplot2)
 library(CountClust)
 
-## dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/"
+dirname <- "/home/genomics/workshop_materials/scrna/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "pbmc3k/filtered_gene_bc_matrices/hg19/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -131,7 +131,7 @@ seurat <- ScaleData(object = seurat, vars.to.regress = c("batch", "percent.mt"))
 ```
 
 **Task: Try Regressing Other Variables**
-```{r regrress_other}
+```{r regrress_other, eval = FALSE}
 ## randomly making a batch id data.frame
 batch_ids <- data.frame(barcode = rownames(seurat@meta.data), 
                         batch_id = sample(0:2, NROW(seurat@meta.data), replace = TRUE),
@@ -210,14 +210,14 @@ DimHeatmap()
 ```
 
 
-```{r jack_straw}
+```{r jack_straw, eval = FALSE}
 seurat <- JackStraw(object = seurat, reduction = "pca")
 seurat <- ScoreJackStraw(seurat, dims = 1:20)
 ```
 
 
 
-```{r jack_straw_plot}
+```{r jack_straw_plot, eval = FALSE}
 JackStrawPlot(seurat, dims = 1:15)
 ```
 
@@ -300,14 +300,14 @@ head(cluster5.markers)
 ```
 
 
-```{r cluster2_markers}
-cluster2.markers <- FindMarkers(object = seurat, 
-                                ident.1 = 2, 
+```{r cluster3_markers}
+cluster3.markers <- FindMarkers(object = seurat, 
+                                ident.1 = 3, 
                                 thresh.use = 0.25, 
                                 test.use = "roc", 
                                 only.pos = TRUE)
 
-head(cluster2.markers)
+head(cluster3.markers)
 ```
 
 
@@ -349,7 +349,7 @@ DoHeatmap(object = seurat, features = top10$gene, label = TRUE)
 ```
 
 ```{r new_names}
-new.cluster.ids <- c("Memory CD4 T", "CD14+ Mono", "B", "Naive CD4 T", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
+new.cluster.ids <- c("Memory CD4 T", "CD14+ Mono", "Naive CD4 T", "B", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
 names(x = new.cluster.ids) <- levels(x = seurat)
 seurat <- RenameIdents(object = seurat, new.cluster.ids)
 
@@ -365,7 +365,7 @@ If you perturb some of our parameter choices above (for example, setting resolut
 
 ```{r tune_params}
 # First lets stash our identities for later
-seurat <- StashIdent(object = seurat, save.name = "ClusterNames_0.6")
+seurat[["ClusterNames_0.6"]] <- Idents(object = seurat)
 # Note that if you set save.snn=T above, you don't need to recalculate the
 # SNN, and can simply put: pbmc <- FindClusters(pbmc,resolution = 0.8)
 seurat <- FindClusters(object = seurat, 
@@ -596,7 +596,7 @@ gene_list <- do.call(rbind,
 We tabulate the top `5` genes for these `4` topics
 
 ```{r topic_genes_by_cluster}
-out_table <- do.call(rbind, lapply(1:5, function(i) toString(gene_list[,i])))
+out_table <- do.call(rbind, lapply(1:4, function(i) toString(gene_list[i,1:5])))
 rownames(out_table) <- paste("Topic", c(1:4))
 out_table
 ```

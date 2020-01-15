@@ -233,10 +233,11 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="load-necessary-packages" class="section level3">
 <h3><span class="header-section-number">4.2.1</span> Load necessary packages</h3>
 <p>When loading libraries, we are asking R to load code for us written by someone else. It is a convenient way to leverage and reproduce methodology developed by others.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-wrangling-scrnaseq-1.html#cb1-1"></a><span class="kw">library</span>(Seurat)</span>
-<span id="cb1-2"><a href="data-wrangling-scrnaseq-1.html#cb1-2"></a><span class="kw">library</span>(dplyr)</span>
-<span id="cb1-3"><a href="data-wrangling-scrnaseq-1.html#cb1-3"></a><span class="kw">library</span>(Matrix)</span>
-<span id="cb1-4"><a href="data-wrangling-scrnaseq-1.html#cb1-4"></a><span class="kw">library</span>(gdata)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="data-wrangling-scrnaseq-1.html#cb1-1"></a>knitr<span class="op">::</span>opts_knit<span class="op">$</span><span class="kw">set</span>(<span class="dt">progress=</span><span class="ot">FALSE</span>, <span class="dt">verbose=</span><span class="ot">FALSE</span>)</span>
+<span id="cb1-2"><a href="data-wrangling-scrnaseq-1.html#cb1-2"></a></span>
+<span id="cb1-3"><a href="data-wrangling-scrnaseq-1.html#cb1-3"></a><span class="kw">library</span>(Seurat)</span>
+<span id="cb1-4"><a href="data-wrangling-scrnaseq-1.html#cb1-4"></a><span class="kw">library</span>(dplyr)</span>
+<span id="cb1-5"><a href="data-wrangling-scrnaseq-1.html#cb1-5"></a><span class="kw">library</span>(Matrix)</span></code></pre></div>
 </div>
 <div id="read-in-nsclc-counts-matrix." class="section level3">
 <h3><span class="header-section-number">4.2.2</span> Read in NSCLC counts matrix.</h3>
@@ -244,8 +245,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>Task: Change the directory name to mydir/ where you saved your data</p>
 <p><strong>Task: Check the <code>dirname</code> to dir where you saved your data</strong></p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-wrangling-scrnaseq-1.html#cb2-1"></a><span class="co">## dirname &lt;- &quot;/home/genomics/workshop_materials/scrna/&quot;</span></span>
-<span id="cb2-2"><a href="data-wrangling-scrnaseq-1.html#cb2-2"></a>dirname &lt;-<span class="st"> &quot;/Users/kgosik/Documents/data/cellranger/&quot;</span></span>
-<span id="cb2-3"><a href="data-wrangling-scrnaseq-1.html#cb2-3"></a>counts_matrix_filename =<span class="st"> </span><span class="kw">paste0</span>(dirname, <span class="st">&quot;vdj-nsclc/filtered_gene_bc_matrices/GRCh38/&quot;</span>)</span>
+<span id="cb2-2"><a href="data-wrangling-scrnaseq-1.html#cb2-2"></a>dirname &lt;-<span class="st"> &quot;/Users/kgosik/Documents/data/cellranger/vdj-nsclc/&quot;</span></span>
+<span id="cb2-3"><a href="data-wrangling-scrnaseq-1.html#cb2-3"></a>counts_matrix_filename =<span class="st"> </span><span class="kw">paste0</span>(dirname, <span class="st">&quot;filtered_gene_bc_matrices/GRCh38/&quot;</span>)</span>
 <span id="cb2-4"><a href="data-wrangling-scrnaseq-1.html#cb2-4"></a>counts &lt;-<span class="st"> </span><span class="kw">Read10X</span>(<span class="dt">data.dir =</span> counts_matrix_filename)  <span class="co"># Seurat function to read in 10x count data</span></span>
 <span id="cb2-5"><a href="data-wrangling-scrnaseq-1.html#cb2-5"></a></span>
 <span id="cb2-6"><a href="data-wrangling-scrnaseq-1.html#cb2-6"></a><span class="co"># To minimize memory use on the docker - choose only the first 1000 cells</span></span>
