@@ -547,7 +547,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ## RP11-290F20.3, GZMM, CD8A, VPREB3, CD40LG, CD7, PIK3IP1, CD3E, NOSIP, LEF1, PRKCQ-AS1, CD3D,
 ## LDHB, CCR7, RPS3A</code></pre>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/do_heatmap-1.png" width="672" /></p>
-<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="feature-selection-and-cluster-analysis-1.html#cb143-1"></a>new.cluster.ids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Memory CD4 T&quot;</span>, <span class="st">&quot;CD14+ Mono&quot;</span>, <span class="st">&quot;Naive CD4 T&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;CD8 T&quot;</span>, <span class="st">&quot;FCGR3A+ Mono&quot;</span>, <span class="st">&quot;NK&quot;</span>, <span class="st">&quot;DC&quot;</span>, <span class="st">&quot;Mk&quot;</span>)</span>
+<div class="sourceCode" id="cb143"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb143-1"><a href="feature-selection-and-cluster-analysis-1.html#cb143-1"></a>new.cluster.ids &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;Memory CD4 T&quot;</span>, <span class="st">&quot;Naive CD4 T&quot;</span>, <span class="st">&quot;CD14+ Mono&quot;</span>, <span class="st">&quot;B&quot;</span>, <span class="st">&quot;CD8 T&quot;</span>, <span class="st">&quot;FCGR3A+ Mono&quot;</span>, <span class="st">&quot;NK&quot;</span>, <span class="st">&quot;DC&quot;</span>, <span class="st">&quot;Mk&quot;</span>)</span>
 <span id="cb143-2"><a href="feature-selection-and-cluster-analysis-1.html#cb143-2"></a><span class="kw">names</span>(<span class="dt">x =</span> new.cluster.ids) &lt;-<span class="st"> </span><span class="kw">levels</span>(<span class="dt">x =</span> seurat)</span>
 <span id="cb143-3"><a href="feature-selection-and-cluster-analysis-1.html#cb143-3"></a>seurat &lt;-<span class="st"> </span><span class="kw">RenameIdents</span>(<span class="dt">object =</span> seurat, new.cluster.ids)</span></code></pre></div>
 <pre><code>## Warning: Cannot find identity NA</code></pre>
@@ -673,14 +673,14 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <span id="cb185-2"><a href="feature-selection-and-cluster-analysis-1.html#cb185-2"></a><span class="kw">table</span>(seurat.query<span class="op">@</span>meta.data<span class="op">$</span>ClusterNames_<span class="fl">0.6</span>, seurat.query<span class="op">@</span>meta.data<span class="op">$</span>predicted.id)</span></code></pre></div>
 <pre><code>##               
 ##                  B CD14+ Mono CD8 T  DC FCGR3A+ Mono Memory CD4 T Naive CD4 T  NK
-##   Memory CD4 T   0         11     2   0            1          542           0   0
-##   CD14+ Mono     0        334     0   0            0           53           0   0
-##   Naive CD4 T    0          0     0   0            1            0         365   0
+##   Memory CD4 T   0          0     2   0            1          542          11   0
+##   Naive CD4 T    0          0     0   0            0           53         334   0
+##   CD14+ Mono     0        365     0   0            1            0           0   0
 ##   B            268          0     0   0            0            0           0   0
-##   CD8 T          0          7   225   0            0           12           0   0
-##   FCGR3A+ Mono   0          0     0   0          130            0           8   0
+##   CD8 T          0          0   225   0            0           12           7   0
+##   FCGR3A+ Mono   0          8     0   0          130            0           0   0
 ##   NK             1          0     7   0            0            0           0 122
-##   DC             0          0     0  28            0            0           1   0</code></pre>
+##   DC             0          1     0  28            0            0           0   0</code></pre>
 </div>
 <div id="view-entire-object-structure" class="section level3">
 <h3><span class="header-section-number">7.3.3</span> View Entire Object Structure</h3>
@@ -809,7 +809,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   ..@ commands    :List of 8
 ##   .. ..$ NormalizeData.RNA       :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;NormalizeData.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:42:46&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:15&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;NormalizeData(object = seurat, normalization.method = \&quot;LogNormalize\&quot;, &quot; &quot;    scale.factor = 10000)&quot;
 ##   .. .. .. ..@ params     :List of 5
@@ -820,7 +820,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose             : logi TRUE
 ##   .. ..$ FindVariableFeatures.RNA:Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindVariableFeatures.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:42:47&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:16&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;FindVariableFeatures(object = seurat, mean.function = ExpMean, &quot; &quot;    dispersion.function = LogVMR)&quot;
 ##   .. .. .. ..@ params     :List of 12
@@ -838,7 +838,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose            : logi TRUE
 ##   .. ..$ ScaleData.RNA           :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;ScaleData.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:42:57&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:25&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;ScaleData(object = seurat, vars.to.regress = c(\&quot;batch\&quot;, &quot; &quot;    \&quot;percent.mt\&quot;))&quot;
 ##   .. .. .. ..@ params     :List of 11
@@ -855,7 +855,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose           : logi TRUE
 ##   .. ..$ RunPCA.RNA              :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;RunPCA.RNA&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:43:02&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:31&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;RunPCA(object = seurat, do.print = TRUE, pcs.print = 1:5, &quot; &quot;    genes.print = 5)&quot;
 ##   .. .. .. ..@ params     :List of 10
@@ -871,7 +871,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ seed.use       : num 42
 ##   .. ..$ ProjectDim.RNA.pca      :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;ProjectDim.RNA.pca&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:43:03&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:32&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;ProjectDim(object = seurat, reduction = \&quot;pca\&quot;)&quot;
 ##   .. .. .. ..@ params     :List of 7
@@ -884,7 +884,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ verbose        : logi TRUE
 ##   .. ..$ FindNeighbors.RNA.pca   :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindNeighbors.RNA.pca&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:43:04&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:33&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr &quot;FindNeighbors(object = seurat, dims = 1:10)&quot;
 ##   .. .. .. ..@ params     :List of 13
@@ -903,7 +903,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ graph.name  : chr [1:2] &quot;RNA_nn&quot; &quot;RNA_snn&quot;
 ##   .. ..$ RunTSNE                 :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;RunTSNE&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:43:10&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:01:39&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;RunTSNE(seurat, reduction.use = \&quot;pca\&quot;, dims.use = 1:10, &quot; &quot;    perplexity = 10)&quot;
 ##   .. .. .. ..@ params     :List of 9
@@ -918,7 +918,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 ##   .. .. .. .. ..$ reduction.key : chr &quot;tSNE_&quot;
 ##   .. ..$ FindClusters            :Formal class &#39;SeuratCommand&#39; [package &quot;Seurat&quot;] with 5 slots
 ##   .. .. .. ..@ name       : chr &quot;FindClusters&quot;
-##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 22:44:39&quot;
+##   .. .. .. ..@ time.stamp : POSIXct[1:1], format: &quot;2020-01-15 23:03:14&quot;
 ##   .. .. .. ..@ assay.used : chr &quot;RNA&quot;
 ##   .. .. .. ..@ call.string: chr [1:2] &quot;FindClusters(object = seurat, reduction = \&quot;pca\&quot;, dims = 1:10, &quot; &quot;    resolution = 0.8)&quot;
 ##   .. .. .. ..@ params     :List of 10

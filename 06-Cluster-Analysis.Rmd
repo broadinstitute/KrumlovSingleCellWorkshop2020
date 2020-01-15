@@ -36,8 +36,8 @@ library(dplyr)
 library(ggplot2)
 library(CountClust)
 
-dirname <- "/home/genomics/workshop_materials/scrna/"
-## dirname <- "/Users/kgosik/Documents/data/cellranger/"
+## dirname <- "/home/genomics/workshop_materials/scrna/"
+dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "pbmc3k/filtered_gene_bc_matrices/hg19/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -349,7 +349,7 @@ DoHeatmap(object = seurat, features = top10$gene, label = TRUE)
 ```
 
 ```{r new_names}
-new.cluster.ids <- c("Memory CD4 T", "CD14+ Mono", "Naive CD4 T", "B", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
+new.cluster.ids <- c("Memory CD4 T", "Naive CD4 T", "CD14+ Mono", "B", "CD8 T", "FCGR3A+ Mono", "NK", "DC", "Mk")
 names(x = new.cluster.ids) <- levels(x = seurat)
 seurat <- RenameIdents(object = seurat, new.cluster.ids)
 
