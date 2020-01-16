@@ -36,8 +36,8 @@ library(dplyr)
 library(ggplot2)
 library(CountClust)
 
-## dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/"
+dirname <- "/home/genomics/workshop_materials/scrna/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "pbmc3k/filtered_gene_bc_matrices/hg19/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 

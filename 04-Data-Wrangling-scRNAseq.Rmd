@@ -36,13 +36,10 @@ Task: Change the directory name to mydir/ where you saved your data
 
 **Task: Check the <code>dirname</code> to dir where you saved your data**
 ```{r read_data}
-## dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/vdj-nsclc/"
+dirname <- "/home/genomics/workshop_materials/scrna/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/vdj-nsclc/"
 counts_matrix_filename = paste0(dirname, "filtered_gene_bc_matrices/GRCh38/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
-
-# To minimize memory use on the docker - choose only the first 1000 cells
-counts <- counts[, 1:1000]
 
 ```
 
@@ -82,14 +79,18 @@ You can learn a lot about your scRNA-seq data's quality with simple plotting. Le
 
 ```{r summary_counts}
 counts_per_cell <- Matrix::colSums(counts)
+cat("counts per cell: ", counts_per_cell[1:5], "\n") ## counts for first 5 cells
 counts_per_gene <- Matrix::rowSums(counts)
+cat("counts per gene: ", counts_per_gene[1:5], "\n")  ## counts for first 5 genes
 genes_per_cell <- Matrix::colSums(counts > 0) # count gene only if it has non-zero reads mapped.
+cat("counts for non-zero genes: ", genes_per_cell[1:5])  ## counts for first 5 genes
 ```
 
 **Task: In a similar way, can you calculate cells per genes? replace the '?' in the command below**
 ```{r cells_per_gene, eval = FALSE}
 #### cells_per_gene <- Matrix::?(counts>?) # only count cells where the gene is expressed
-cells_per_gene <- Matrix::rowSums(counts>0) # only count cells where the gene is expressed
+cells_per_gene <-  # only count cells where the gene is expressed
+cat("count of cells with expressed genes: ", cells_per_gene)
 ```
 
 colSums and rowSums are functions that work on each row or column in a matrix and return the column sums or row sums as a vector. If this is true counts_per_cell should have 1 entry per cell. Let's make sure the length of the returned vector matches the matrix dimension for column. How would you do that? ( Hint:length() ).
