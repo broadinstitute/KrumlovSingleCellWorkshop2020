@@ -331,7 +331,8 @@ Can you include only genes that are are expressed in 3 or more cells and cells w
 How many genes are you left with? How many cells?</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-wrangling-scrnaseq-1.html#cb24-1"></a><span class="co">### seurat&lt;-CreateSeuratObject(raw.data = counts, ? = 3, ? = 350, project = &quot;10X_NSCLC&quot;)</span></span>
 <span id="cb24-2"><a href="data-wrangling-scrnaseq-1.html#cb24-2"></a>seurat &lt;-<span class="st"> </span><span class="kw">CreateSeuratObject</span>(<span class="dt">counts =</span> counts, <span class="dt">min.cells =</span> <span class="dv">3</span>, <span class="dt">min.features =</span> <span class="dv">350</span>, <span class="dt">project =</span> <span class="st">&quot;10X_NSCLC&quot;</span>)</span></code></pre></div>
-<pre><code>## Warning: Feature names cannot have underscores (&#39;_&#39;), replacing with dashes (&#39;-&#39;)</code></pre>
+<pre><code>## Warning: Feature names cannot have underscores (&#39;_&#39;), replacing
+## with dashes (&#39;-&#39;)</code></pre>
 <div id="object-slots" class="section level4">
 <h4><span class="header-section-number">4.4.1.1</span> Object Slots</h4>
 <p><a href="https://github.com/satijalab/seurat/wiki/Seurat#slots">reference</a></p>
@@ -379,11 +380,11 @@ version Seurat version used when creating the object</li>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb34-1"><a href="data-wrangling-scrnaseq-1.html#cb34-1"></a><span class="co"># In addtion to rownames and colnames, one can use dimnames</span></span>
 <span id="cb34-2"><a href="data-wrangling-scrnaseq-1.html#cb34-2"></a><span class="co"># which provides a two-length list with both rownames and colnames</span></span>
 <span id="cb34-3"><a href="data-wrangling-scrnaseq-1.html#cb34-3"></a><span class="kw">head</span>(<span class="dt">x =</span> <span class="kw">rownames</span>(<span class="dt">x =</span> seurat))</span></code></pre></div>
-<pre><code>## [1] &quot;FO538757.2&quot;    &quot;AP006222.2&quot;    &quot;RP4-669L17.10&quot; &quot;RP11-206L10.9&quot; &quot;LINC00115&quot;    
-## [6] &quot;FAM41C&quot;</code></pre>
+<pre><code>## [1] &quot;FO538757.2&quot;    &quot;AP006222.2&quot;    &quot;RP4-669L17.10&quot;
+## [4] &quot;RP11-206L10.9&quot; &quot;LINC00115&quot;     &quot;FAM41C&quot;</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb36-1"><a href="data-wrangling-scrnaseq-1.html#cb36-1"></a><span class="kw">head</span>(<span class="dt">x =</span> <span class="kw">colnames</span>(<span class="dt">x =</span> seurat))</span></code></pre></div>
-<pre><code>## [1] &quot;AAACCTGAGCTAGTCT&quot; &quot;AAACCTGAGGGCACTA&quot; &quot;AAACCTGAGTACGTTC&quot; &quot;AAACCTGAGTCCGGTC&quot;
-## [5] &quot;AAACCTGCACCAGGTC&quot; &quot;AAACCTGCACCTCGTT&quot;</code></pre>
+<pre><code>## [1] &quot;AAACCTGAGCTAGTCT&quot; &quot;AAACCTGAGGGCACTA&quot; &quot;AAACCTGAGTACGTTC&quot;
+## [4] &quot;AAACCTGAGTCCGGTC&quot; &quot;AAACCTGCACCAGGTC&quot; &quot;AAACCTGCACCTCGTT&quot;</code></pre>
 <div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb38-1"><a href="data-wrangling-scrnaseq-1.html#cb38-1"></a><span class="co"># A vector of names of associated objects can be had with the names function</span></span>
 <span id="cb38-2"><a href="data-wrangling-scrnaseq-1.html#cb38-2"></a><span class="co"># These can be passed to the double [[ extract operator to pull them from the Seurat object</span></span>
 <span id="cb38-3"><a href="data-wrangling-scrnaseq-1.html#cb38-3"></a><span class="kw">names</span>(<span class="dt">x =</span> seurat)</span></code></pre></div>
@@ -440,8 +441,8 @@ version Seurat version used when creating the object</li>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb42-1"><a href="data-wrangling-scrnaseq-1.html#cb42-1"></a>seurat[[<span class="st">&#39;RNA&#39;</span>]]</span></code></pre></div>
 <pre><code>## Assay data with 20213 features for 7109 cells
 ## First 10 features:
-##  FO538757.2, AP006222.2, RP4-669L17.10, RP11-206L10.9, LINC00115, FAM41C, SAMD11,
-## NOC2L, KLHL17, PLEKHN1</code></pre>
+##  FO538757.2, AP006222.2, RP4-669L17.10, RP11-206L10.9,
+## LINC00115, FAM41C, SAMD11, NOC2L, KLHL17, PLEKHN1</code></pre>
 <p>Accessing data from an Seurat object is done with the GetAssayData function. Adding expression data to either the counts, data, or scale.data slots can be done with SetAssayData. New data must have the same cells in the same order as the current expression data. Data added to counts or data must have the same features as the current expression data.</p>
 <div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb44-1"><a href="data-wrangling-scrnaseq-1.html#cb44-1"></a><span class="co">## same as above but using object Method</span></span>
 <span id="cb44-2"><a href="data-wrangling-scrnaseq-1.html#cb44-2"></a><span class="kw">GetAssayData</span>(<span class="dt">object =</span> seurat, <span class="dt">slot =</span> <span class="st">&#39;data&#39;</span>)[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span></code></pre></div>
@@ -462,256 +463,340 @@ version Seurat version used when creating the object</li>
 <div class="sourceCode" id="cb48"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb48-1"><a href="data-wrangling-scrnaseq-1.html#cb48-1"></a><span class="co"># Cell-level meta data is stored as a data frame</span></span>
 <span id="cb48-2"><a href="data-wrangling-scrnaseq-1.html#cb48-2"></a><span class="co"># Standard data frame functions work on the meta data data frame</span></span>
 <span id="cb48-3"><a href="data-wrangling-scrnaseq-1.html#cb48-3"></a><span class="kw">colnames</span>(<span class="dt">x =</span> seurat[])</span></code></pre></div>
-<pre><code>##    [1] &quot;AAACCTGAGCTAGTCT&quot; &quot;AAACCTGAGGGCACTA&quot; &quot;AAACCTGAGTACGTTC&quot; &quot;AAACCTGAGTCCGGTC&quot;
-##    [5] &quot;AAACCTGCACCAGGTC&quot; &quot;AAACCTGCACCTCGTT&quot; &quot;AAACCTGCAGCTGTGC&quot; &quot;AAACCTGGTAAATGAC&quot;
-##    [9] &quot;AAACCTGGTACTTAGC&quot; &quot;AAACCTGTCCTCAATT&quot; &quot;AAACCTGTCCTGCAGG&quot; &quot;AAACGGGAGCTTATCG&quot;
-##   [13] &quot;AAACGGGAGGCCCTTG&quot; &quot;AAACGGGCAAGTAATG&quot; &quot;AAACGGGCACCAGATT&quot; &quot;AAACGGGGTAATCACC&quot;
-##   [17] &quot;AAACGGGGTAGCTGCC&quot; &quot;AAACGGGGTGGTGTAG&quot; &quot;AAACGGGTCACCTCGT&quot; &quot;AAACGGGTCCCAAGTA&quot;
-##   [21] &quot;AAAGATGAGAAACCTA&quot; &quot;AAAGATGAGACTTTCG&quot; &quot;AAAGATGAGATATGGT&quot; &quot;AAAGATGAGATCCGAG&quot;
-##   [25] &quot;AAAGATGAGATGAGAG&quot; &quot;AAAGATGAGCCAGTAG&quot; &quot;AAAGATGCAATCCAAC&quot; &quot;AAAGATGCACGAAATA&quot;
-##   [29] &quot;AAAGATGCACGTAAGG&quot; &quot;AAAGATGCAGAGTGTG&quot; &quot;AAAGATGCAGCCAGAA&quot; &quot;AAAGATGCAGGACCCT&quot;
-##   [33] &quot;AAAGATGGTCATACTG&quot; &quot;AAAGATGGTCCGTGAC&quot; &quot;AAAGATGGTCGAAAGC&quot; &quot;AAAGATGGTGCCTGGT&quot;
-##   [37] &quot;AAAGATGGTTACCGAT&quot; &quot;AAAGATGGTTGGTAAA&quot; &quot;AAAGATGTCAGCGATT&quot; &quot;AAAGATGTCCCAAGTA&quot;
-##   [41] &quot;AAAGATGTCCGAATGT&quot; &quot;AAAGATGTCCTAGTGA&quot; &quot;AAAGATGTCGAACTGT&quot; &quot;AAAGATGTCTGTCTCG&quot;
-##   [45] &quot;AAAGCAAAGAATTGTG&quot; &quot;AAAGCAAAGAGACGAA&quot; &quot;AAAGCAAAGAGTTGGC&quot; &quot;AAAGCAACAAGGTTCT&quot;
-##   [49] &quot;AAAGCAACACGCCAGT&quot; &quot;AAAGCAAGTAGCTGCC&quot; &quot;AAAGCAAGTGCCTGTG&quot; &quot;AAAGCAAGTTAGTGGG&quot;
-##   [53] &quot;AAAGCAATCACTATTC&quot; &quot;AAAGCAATCATCGGAT&quot; &quot;AAAGCAATCATCTGCC&quot; &quot;AAAGCAATCCTAGAAC&quot;
-##   [57] &quot;AAAGCAATCGAACGGA&quot; &quot;AAAGCAATCGTACGGC&quot; &quot;AAAGCAATCTCAAGTG&quot; &quot;AAAGTAGAGAGTAATC&quot;
-##   [61] &quot;AAAGTAGAGCCGATTT&quot; &quot;AAAGTAGAGGATTCGG&quot; &quot;AAAGTAGCAATGTAAG&quot; &quot;AAAGTAGCACGACTCG&quot;
-##   [65] &quot;AAAGTAGGTAATTGGA&quot; &quot;AAAGTAGGTATCAGTC&quot; &quot;AAAGTAGGTCGCGAAA&quot; &quot;AAAGTAGGTGGTCCGT&quot;
-##   [69] &quot;AAAGTAGGTTGCCTCT&quot; &quot;AAAGTAGTCAGGCAAG&quot; &quot;AAAGTAGTCCAAAGTC&quot; &quot;AAAGTAGTCTTGTCAT&quot;
-##   [73] &quot;AAATGCCAGACGACGT&quot; &quot;AAATGCCAGGCAAAGA&quot; &quot;AAATGCCAGGGTGTTG&quot; &quot;AAATGCCAGGTAAACT&quot;
-##   [77] &quot;AAATGCCCAATGTAAG&quot; &quot;AAATGCCCACACATGT&quot; &quot;AAATGCCCAGCTCGAC&quot; &quot;AAATGCCCATCTATGG&quot;
-##   [81] &quot;AAATGCCGTACTTCTT&quot; &quot;AAATGCCGTCTTGCGG&quot; &quot;AAATGCCGTGTAACGG&quot; &quot;AAATGCCTCCAAACAC&quot;
-##   [85] &quot;AAATGCCTCCGCGGTA&quot; &quot;AAATGCCTCGTCGTTC&quot; &quot;AACACGTAGCTAGTCT&quot; &quot;AACACGTAGGATTCGG&quot;
-##   [89] &quot;AACACGTAGTACCGGA&quot; &quot;AACACGTCACAGAGGT&quot; &quot;AACACGTCACGACTCG&quot; &quot;AACACGTCAGTCAGCC&quot;
-##   [93] &quot;AACACGTGTAATCGTC&quot; &quot;AACACGTGTACCAGTT&quot; &quot;AACACGTGTTGGGACA&quot; &quot;AACACGTTCACCACCT&quot;
-##   [97] &quot;AACACGTTCACCGGGT&quot; &quot;AACACGTTCCAGAGGA&quot; &quot;AACACGTTCCTGCAGG&quot; &quot;AACACGTTCGCATGGC&quot;
-##  [101] &quot;AACACGTTCTTACCGC&quot; &quot;AACACGTTCTTGCATT&quot; &quot;AACCATGAGTAGTGCG&quot; &quot;AACCATGCAAAGGCGT&quot;
-##  [105] &quot;AACCATGCAAGCGAGT&quot; &quot;AACCATGCAGCATACT&quot; &quot;AACCATGCATGTTGAC&quot; &quot;AACCATGCATTCTCAT&quot;
-##  [109] &quot;AACCATGGTCCGAAGA&quot; &quot;AACCATGGTGCCTGCA&quot; &quot;AACCATGGTGTTGAGG&quot; &quot;AACCATGGTTGATTCG&quot;
-##  [113] &quot;AACCATGTCAATCTCT&quot; &quot;AACCATGTCCGAAGAG&quot; &quot;AACCATGTCTCCGGTT&quot; &quot;AACCGCGAGAGGTTGC&quot;
-##  [117] &quot;AACCGCGAGGGTCTCC&quot; &quot;AACCGCGCAAGGTGTG&quot; &quot;AACCGCGCAGGACGTA&quot; &quot;AACCGCGCAGGGTTAG&quot;
-##  [121] &quot;AACCGCGCAGTAACGG&quot; &quot;AACCGCGCATTCCTGC&quot; &quot;AACCGCGGTGACTCAT&quot; &quot;AACCGCGGTGGGTCAA&quot;
-##  [125] &quot;AACCGCGTCAATCTCT&quot; &quot;AACCGCGTCCTTGGTC&quot; &quot;AACCGCGTCGCACTCT&quot; &quot;AACCGCGTCGGCCGAT&quot;
-##  [129] &quot;AACCGCGTCTTGCCGT&quot; &quot;AACGTTGAGAACTCGG&quot; &quot;AACGTTGAGGGTGTGT&quot; &quot;AACGTTGCAGGTCGTC&quot;
-##  [133] &quot;AACGTTGCAGTCGTGC&quot; &quot;AACGTTGCATATACGC&quot; &quot;AACGTTGTCATACGGT&quot; &quot;AACGTTGTCCACGACG&quot;
-##  [137] &quot;AACGTTGTCCGTCATC&quot; &quot;AACGTTGTCTGGTATG&quot; &quot;AACTCAGAGACTAAGT&quot; &quot;AACTCAGAGCGTAATA&quot;
-##  [141] &quot;AACTCAGAGCGTCTAT&quot; &quot;AACTCAGAGCTGAAAT&quot; &quot;AACTCAGAGTGGACGT&quot; &quot;AACTCAGCACATAACC&quot;
-##  [145] &quot;AACTCAGGTGTTCGAT&quot; &quot;AACTCAGGTTCTCATT&quot; &quot;AACTCAGTCACCCTCA&quot; &quot;AACTCAGTCAGCCTAA&quot;
-##  [149] &quot;AACTCAGTCCTATGTT&quot; &quot;AACTCAGTCTAACCGA&quot; &quot;AACTCAGTCTCGTATT&quot; &quot;AACTCCCAGACAAGCC&quot;
-##  [153] &quot;AACTCCCAGACTAGGC&quot; &quot;AACTCCCAGGATCGCA&quot; &quot;AACTCCCAGGCAGGTT&quot; &quot;AACTCCCAGTACGTTC&quot;
-##  [157] &quot;AACTCCCAGTCGTTTG&quot; &quot;AACTCCCAGTGACTCT&quot; &quot;AACTCCCCACAAGTAA&quot; &quot;AACTCCCCACGCATCG&quot;
-##  [161] &quot;AACTCCCCAGTATCTG&quot; &quot;AACTCCCCATCCTAGA&quot; &quot;AACTCCCCATCGTCGG&quot; &quot;AACTCCCGTCGAACAG&quot;
-##  [165] &quot;AACTCCCGTGCACGAA&quot; &quot;AACTCCCGTTCACCTC&quot; &quot;AACTCCCTCAGTTTGG&quot; &quot;AACTCCCTCTGGTGTA&quot;
-##  [169] &quot;AACTCTTCAAGAAGAG&quot; &quot;AACTCTTCAAGTCTGT&quot; &quot;AACTCTTCAATGTTGC&quot; &quot;AACTCTTCATCTCCCA&quot;
-##  [173] &quot;AACTCTTCATTTCAGG&quot; &quot;AACTCTTGTGCGGTAA&quot; &quot;AACTCTTGTGTCCTCT&quot; &quot;AACTCTTGTTTGGGCC&quot;
-##  [177] &quot;AACTCTTTCAACGAAA&quot; &quot;AACTCTTTCCTTGCCA&quot; &quot;AACTCTTTCTCGTTTA&quot; &quot;AACTGGTAGAGGTACC&quot;
-##  [181] &quot;AACTGGTAGGGAAACA&quot; &quot;AACTGGTAGGTGTGGT&quot; &quot;AACTGGTAGTACGACG&quot; &quot;AACTGGTCAAACTGCT&quot;
-##  [185] &quot;AACTGGTCACGAGGTA&quot; &quot;AACTGGTGTACATGTC&quot; &quot;AACTGGTGTGGCAAAC&quot; &quot;AACTGGTGTTACCAGT&quot;
-##  [189] &quot;AACTGGTGTTGAGGTG&quot; &quot;AACTGGTGTTGGAGGT&quot; &quot;AACTGGTGTTTGACAC&quot; &quot;AACTGGTGTTTGTTTC&quot;
-##  [193] &quot;AACTGGTTCAATCACG&quot; &quot;AACTGGTTCACAAACC&quot; &quot;AACTGGTTCACCCGAG&quot; &quot;AACTGGTTCAGCACAT&quot;
-##  [197] &quot;AACTGGTTCCTTTACA&quot; &quot;AACTGGTTCGGGAGTA&quot; &quot;AACTGGTTCGTCACGG&quot; &quot;AACTGGTTCTCTTATG&quot;
-##  [201] &quot;AACTTTCAGGCAGTCA&quot; &quot;AACTTTCAGGTTACCT&quot; &quot;AACTTTCCACCAGGCT&quot; &quot;AACTTTCCAGGTGCCT&quot;
-##  [205] &quot;AACTTTCCATGAACCT&quot; &quot;AACTTTCCATGTAAGA&quot; &quot;AACTTTCCATGTCCTC&quot; &quot;AACTTTCGTAAGTGTA&quot;
-##  [209] &quot;AACTTTCGTACACCGC&quot; &quot;AACTTTCGTATAGGTA&quot; &quot;AACTTTCGTCTAGTCA&quot; &quot;AACTTTCGTTAAAGAC&quot;
-##  [213] &quot;AACTTTCGTTACGGAG&quot; &quot;AACTTTCGTTGTGGAG&quot; &quot;AACTTTCTCACTCCTG&quot; &quot;AACTTTCTCGAACTGT&quot;
-##  [217] &quot;AACTTTCTCGCAAACT&quot; &quot;AACTTTCTCTTGCAAG&quot; &quot;AAGACCTAGAGGTAGA&quot; &quot;AAGACCTAGGATATAC&quot;
-##  [221] &quot;AAGACCTAGGCTATCT&quot; &quot;AAGACCTAGTCCAGGA&quot; &quot;AAGACCTAGTCGTTTG&quot; &quot;AAGACCTAGTGACATA&quot;
-##  [225] &quot;AAGACCTCAAGCCTAT&quot; &quot;AAGACCTCAATGAATG&quot; &quot;AAGACCTCATACAGCT&quot; &quot;AAGACCTCATGGGAAC&quot;
-##  [229] &quot;AAGACCTCATTTGCCC&quot; &quot;AAGACCTGTAATAGCA&quot; &quot;AAGACCTGTAGCTAAA&quot; &quot;AAGACCTGTCCGAGTC&quot;
-##  [233] &quot;AAGACCTGTCTAGAGG&quot; &quot;AAGACCTGTGAAAGAG&quot; &quot;AAGACCTGTTGACGTT&quot; &quot;AAGACCTTCACCGTAA&quot;
-##  [237] &quot;AAGACCTTCCGGCACA&quot; &quot;AAGACCTTCTCCAGGG&quot; &quot;AAGCCGCAGAGTCGGT&quot; &quot;AAGCCGCAGCACGCCT&quot;
-##  [241] &quot;AAGCCGCAGCCAGGAT&quot; &quot;AAGCCGCAGCTGCGAA&quot; &quot;AAGCCGCCACGACGAA&quot; &quot;AAGCCGCCATGGTTGT&quot;
-##  [245] &quot;AAGCCGCCATTCCTCG&quot; &quot;AAGCCGCGTACGCACC&quot; &quot;AAGCCGCGTCCTCCAT&quot; &quot;AAGCCGCGTTACCAGT&quot;
-##  [249] &quot;AAGCCGCGTTGACGTT&quot; &quot;AAGCCGCTCATGCAAC&quot; &quot;AAGCCGCTCCAGAGGA&quot; &quot;AAGCCGCTCCTATTCA&quot;
-##  [253] &quot;AAGCCGCTCCTCCTAG&quot; &quot;AAGCCGCTCGGATGGA&quot; &quot;AAGCCGCTCGTAGGAG&quot; &quot;AAGCCGCTCTAACTGG&quot;
-##  [257] &quot;AAGGAGCAGATGGCGT&quot; &quot;AAGGAGCAGCCCAATT&quot; &quot;AAGGAGCAGCGGCTTC&quot; &quot;AAGGAGCAGGATATAC&quot;
-##  [261] &quot;AAGGAGCAGTAACCCT&quot; &quot;AAGGAGCCAGACGCTC&quot; &quot;AAGGAGCCAGACGTAG&quot; &quot;AAGGAGCCAGCCTATA&quot;
-##  [265] &quot;AAGGAGCGTCTCAACA&quot; &quot;AAGGAGCTCAATCACG&quot; &quot;AAGGAGCTCAGGCAAG&quot; &quot;AAGGAGCTCGGAAACG&quot;
-##  [269] &quot;AAGGAGCTCTAGCACA&quot; &quot;AAGGAGCTCTCAAACG&quot; &quot;AAGGAGCTCTTGAGAC&quot; &quot;AAGGCAGAGGATGGAA&quot;
-##  [273] &quot;AAGGCAGAGTGACATA&quot; &quot;AAGGCAGCAAGTAATG&quot; &quot;AAGGCAGCACACATGT&quot; &quot;AAGGCAGCACGAGGTA&quot;
-##  [277] &quot;AAGGCAGCATACTACG&quot; &quot;AAGGCAGCATCAGTAC&quot; &quot;AAGGCAGCATTCACTT&quot; &quot;AAGGCAGGTAGCCTAT&quot;
-##  [281] &quot;AAGGCAGGTGATGTGG&quot; &quot;AAGGCAGGTGTTTGGT&quot; &quot;AAGGCAGGTTGTGGCC&quot; &quot;AAGGCAGTCAATAAGG&quot;
-##  [285] &quot;AAGGCAGTCTGCTGTC&quot; &quot;AAGGTTCAGAACAATC&quot; &quot;AAGGTTCAGAATCTCC&quot; &quot;AAGGTTCAGCGTTGCC&quot;
-##  [289] &quot;AAGGTTCAGGCCGAAT&quot; &quot;AAGGTTCAGGCTATCT&quot; &quot;AAGGTTCAGGGTGTGT&quot; &quot;AAGGTTCAGTCAAGCG&quot;
-##  [293] &quot;AAGGTTCAGTTACCCA&quot; &quot;AAGGTTCCAACACCCG&quot; &quot;AAGGTTCCACAGCGTC&quot; &quot;AAGGTTCCACTAAGTC&quot;
-##  [297] &quot;AAGGTTCCACTTGGAT&quot; &quot;AAGGTTCCATAAGACA&quot; &quot;AAGGTTCCATCACAAC&quot; &quot;AAGGTTCCATCGGACC&quot;
-##  [301] &quot;AAGGTTCGTATAGTAG&quot; &quot;AAGGTTCGTGATGATA&quot; &quot;AAGGTTCGTTATGCGT&quot; &quot;AAGGTTCGTTCCGGCA&quot;
-##  [305] &quot;AAGGTTCTCCCTTGTG&quot; &quot;AAGTCTGAGATGTGGC&quot; &quot;AAGTCTGAGGATCGCA&quot; &quot;AAGTCTGCAAGCCGCT&quot;
-##  [309] &quot;AAGTCTGGTTCCTCCA&quot; &quot;AAGTCTGTCAACCATG&quot; &quot;AAGTCTGTCATAGCAC&quot; &quot;AAGTCTGTCCAAGCCG&quot;
-##  [313] &quot;AAGTCTGTCTAACTTC&quot; &quot;AATCCAGAGCTGATAA&quot; &quot;AATCCAGAGGCTCAGA&quot; &quot;AATCCAGAGGGATCTG&quot;
-##  [317] &quot;AATCCAGAGGTGTTAA&quot; &quot;AATCCAGCACATCTTT&quot; &quot;AATCCAGCACGAAACG&quot; &quot;AATCCAGCACGGATAG&quot;
-##  [321] &quot;AATCCAGCAGACGCTC&quot; &quot;AATCCAGGTCAGAGGT&quot; &quot;AATCCAGGTCGGCTCA&quot; &quot;AATCCAGGTTCCCGAG&quot;
-##  [325] &quot;AATCCAGGTTCGGGCT&quot; &quot;AATCCAGGTTGGTGGA&quot; &quot;AATCCAGTCAGAGCTT&quot; &quot;AATCCAGTCCATTCTA&quot;
-##  [329] &quot;AATCCAGTCCTGCAGG&quot; &quot;AATCGGTAGCCACGTC&quot; &quot;AATCGGTAGGGATACC&quot; &quot;AATCGGTCAACGCACC&quot;
-##  [333] &quot;AATCGGTCACCATCCT&quot; &quot;AATCGGTCAGCGAACA&quot; &quot;AATCGGTCATGTCCTC&quot; &quot;AATCGGTCATTATCTC&quot;
-##  [337] &quot;AATCGGTGTCGGATCC&quot; &quot;AATCGGTGTCTGGTCG&quot; &quot;AATCGGTGTTTGCATG&quot; &quot;AATCGGTTCAAACGGG&quot;
-##  [341] &quot;AATCGGTTCAACGCTA&quot; &quot;AATCGGTTCCACGCAG&quot; &quot;AATCGGTTCCCGGATG&quot; &quot;AATCGGTTCGTGGACC&quot;
-##  [345] &quot;AATCGGTTCTACCAGA&quot; &quot;AATCGGTTCTAGCACA&quot; &quot;ACACCAAAGCGATATA&quot; &quot;ACACCAAAGCTCCCAG&quot;
-##  [349] &quot;ACACCAAAGTGGTAGC&quot; &quot;ACACCAAAGTGTCCAT&quot; &quot;ACACCAACAAGTCATC&quot; &quot;ACACCAACACACGCTG&quot;
-##  [353] &quot;ACACCAACACAGCCCA&quot; &quot;ACACCAACAGGTCTCG&quot; &quot;ACACCAACATCGGAAG&quot; &quot;ACACCAAGTCAAACTC&quot;
-##  [357] &quot;ACACCAAGTCGGCTCA&quot; &quot;ACACCAAGTCTGGTCG&quot; &quot;ACACCAAGTGACAAAT&quot; &quot;ACACCAAGTGCTTCTC&quot;
-##  [361] &quot;ACACCAAGTGGACGAT&quot; &quot;ACACCAATCATCGGAT&quot; &quot;ACACCAATCCGTAGTA&quot; &quot;ACACCAATCGTCTGAA&quot;
-##  [365] &quot;ACACCAATCGTTGCCT&quot; &quot;ACACCCTAGACCTAGG&quot; &quot;ACACCCTAGCCAGTAG&quot; &quot;ACACCCTAGTAGCGGT&quot;
-##  [369] &quot;ACACCCTCAACTGCTA&quot; &quot;ACACCCTCAGCCAGAA&quot; &quot;ACACCCTCATCGGTTA&quot; &quot;ACACCCTCATGCCACG&quot;
-##  [373] &quot;ACACCCTCATGTCGAT&quot; &quot;ACACCCTCATTATCTC&quot; &quot;ACACCCTGTAGGACAC&quot; &quot;ACACCCTTCAAACAAG&quot;
-##  [377] &quot;ACACCCTTCATATCGG&quot; &quot;ACACCCTTCATTATCC&quot; &quot;ACACCCTTCCAGGGCT&quot; &quot;ACACCCTTCCCTAATT&quot;
-##  [381] &quot;ACACCCTTCCGTTGCT&quot; &quot;ACACCCTTCGCGCCAA&quot; &quot;ACACCCTTCGTAGGTT&quot; &quot;ACACCCTTCGTTACGA&quot;
-##  [385] &quot;ACACCCTTCTGGGCCA&quot; &quot;ACACCGGAGAGCTATA&quot; &quot;ACACCGGAGCACCGCT&quot; &quot;ACACCGGAGGCATGGT&quot;
-##  [389] &quot;ACACCGGAGGCTATCT&quot; &quot;ACACCGGAGTCATCCA&quot; &quot;ACACCGGAGTGAAGAG&quot; &quot;ACACCGGAGTGGGATC&quot;
-##  [393] &quot;ACACCGGCAAGCCGTC&quot; &quot;ACACCGGCAGGTCTCG&quot; &quot;ACACCGGGTGACTACT&quot; &quot;ACACCGGGTTCGCTAA&quot;
-##  [397] &quot;ACACCGGTCGCCTGTT&quot; &quot;ACACCGGTCTTAGAGC&quot; &quot;ACACTGAAGACAGACC&quot; &quot;ACACTGAAGTACTTGC&quot;
-##  [401] &quot;ACACTGAAGTCTTGCA&quot; &quot;ACACTGACAACTGCGC&quot; &quot;ACACTGACAAGAGGCT&quot; &quot;ACACTGACAAGCCGCT&quot;
-##  [405] &quot;ACACTGACACCCAGTG&quot; &quot;ACACTGACACTCAGGC&quot; &quot;ACACTGAGTACACCGC&quot; &quot;ACACTGAGTAGGGTAC&quot;
-##  [409] &quot;ACACTGAGTCGCATAT&quot; &quot;ACACTGAGTCTCTCTG&quot; &quot;ACACTGAGTGGCAAAC&quot; &quot;ACACTGAGTGTCCTCT&quot;
-##  [413] &quot;ACACTGAGTTGAGTTC&quot; &quot;ACACTGATCAGTGCAT&quot; &quot;ACAGCCGAGACCACGA&quot; &quot;ACAGCCGAGACTAGGC&quot;
-##  [417] &quot;ACAGCCGAGCTACCGC&quot; &quot;ACAGCCGAGTTCGCGC&quot; &quot;ACAGCCGCAACGATCT&quot; &quot;ACAGCCGCACCAGGTC&quot;
-##  [421] &quot;ACAGCCGCACCATCCT&quot; &quot;ACAGCCGCATGGGACA&quot; &quot;ACAGCCGGTACCGGCT&quot; &quot;ACAGCCGGTAGCGTAG&quot;
-##  [425] &quot;ACAGCCGGTTCAGGCC&quot; &quot;ACAGCCGGTTCCACTC&quot; &quot;ACAGCCGGTTTCGCTC&quot; &quot;ACAGCCGTCAGGCCCA&quot;
-##  [429] &quot;ACAGCCGTCCCATTAT&quot; &quot;ACAGCCGTCGTGGACC&quot; &quot;ACAGCCGTCTGATTCT&quot; &quot;ACAGCTAAGATGGCGT&quot;
-##  [433] &quot;ACAGCTAAGCGTAGTG&quot; &quot;ACAGCTACAATAGCAA&quot; &quot;ACAGCTATCACATGCA&quot; &quot;ACAGCTATCCAACCAA&quot;
-##  [437] &quot;ACAGCTATCGTAGGAG&quot; &quot;ACAGCTATCTCGGACG&quot; &quot;ACATACGAGAATTGTG&quot; &quot;ACATACGAGAGTCTGG&quot;
-##  [441] &quot;ACATACGCAAGCCGTC&quot; &quot;ACATACGCAGACGTAG&quot; &quot;ACATACGCATCGGACC&quot; &quot;ACATACGGTCATTAGC&quot;
-##  [445] &quot;ACATACGGTCGGCACT&quot; &quot;ACATACGGTCTAGTCA&quot; &quot;ACATACGTCATGCTCC&quot; &quot;ACATCAGAGTCCCACG&quot;
-##  [449] &quot;ACATCAGAGTTATCGC&quot; &quot;ACATCAGCACACCGCA&quot; &quot;ACATCAGCACAGTCGC&quot; &quot;ACATCAGCACGCGAAA&quot;
-##  [453] &quot;ACATCAGCATCCCACT&quot; &quot;ACATCAGCATTCTTAC&quot; &quot;ACATCAGCATTTGCTT&quot; &quot;ACATCAGGTCGAACAG&quot;
-##  [457] &quot;ACATCAGGTCTCGTTC&quot; &quot;ACATCAGGTGAAAGAG&quot; &quot;ACATCAGGTGCATCTA&quot; &quot;ACATCAGTCACCGTAA&quot;
-##  [461] &quot;ACATCAGTCAGTCAGT&quot; &quot;ACATCAGTCGAACGGA&quot; &quot;ACATCAGTCGACAGCC&quot; &quot;ACATCAGTCGCACTCT&quot;
-##  [465] &quot;ACATCAGTCTTTACGT&quot; &quot;ACATGGTAGACTTGAA&quot; &quot;ACATGGTAGTAGTGCG&quot; &quot;ACATGGTCAAAGCGGT&quot;
-##  [469] &quot;ACATGGTCAATAAGCA&quot; &quot;ACATGGTCAATGAATG&quot; &quot;ACATGGTCATGCAATC&quot; &quot;ACATGGTCATGGTCAT&quot;
-##  [473] &quot;ACATGGTGTGTGCCTG&quot; &quot;ACATGGTGTTGATTCG&quot; &quot;ACATGGTTCAATCTCT&quot; &quot;ACATGGTTCCGCGTTT&quot;
-##  [477] &quot;ACATGGTTCCTAAGTG&quot; &quot;ACATGGTTCGTACGGC&quot; &quot;ACATGGTTCGTTTATC&quot; &quot;ACATGGTTCTACTATC&quot;
-##  [481] &quot;ACATGGTTCTGCCAGG&quot; &quot;ACCAGTAAGAGAGCTC&quot; &quot;ACCAGTACACGGTGTC&quot; &quot;ACCAGTACATGCAATC&quot;
-##  [485] &quot;ACCAGTAGTCTCTCGT&quot; &quot;ACCAGTAGTGCCTGCA&quot; &quot;ACCAGTAGTTCCCGAG&quot; &quot;ACCAGTAGTTTGGCGC&quot;
-##  [489] &quot;ACCAGTATCCAATGGT&quot; &quot;ACCAGTATCCATGAAC&quot; &quot;ACCCACTAGAATTCCC&quot; &quot;ACCCACTAGCGGATCA&quot;
-##  [493] &quot;ACCCACTAGCTCCTCT&quot; &quot;ACCCACTAGGCTCATT&quot; &quot;ACCCACTCAAAGCAAT&quot; &quot;ACCCACTCAACACCCG&quot;
-##  [497] &quot;ACCCACTCAGATCGGA&quot; &quot;ACCCACTCATGGTAGG&quot; &quot;ACCCACTGTCATTAGC&quot; &quot;ACCCACTGTCCTCTTG&quot;
-##  [501] &quot;ACCCACTGTCTCTTAT&quot; &quot;ACCCACTGTGGCAAAC&quot; &quot;ACCCACTGTTCCGGCA&quot; &quot;ACCCACTGTTGTTTGG&quot;
-##  [505] &quot;ACCCACTTCCTTGACC&quot; &quot;ACCCACTTCGGTGTTA&quot; &quot;ACCGTAAAGAGTGAGA&quot; &quot;ACCGTAAAGGTAAACT&quot;
-##  [509] &quot;ACCGTAACACACGCTG&quot; &quot;ACCGTAACAGCTCGAC&quot; &quot;ACCGTAACAGCTGTAT&quot; &quot;ACCGTAACATCCTAGA&quot;
-##  [513] &quot;ACCGTAACATGGGAAC&quot; &quot;ACCGTAACATTTCAGG&quot; &quot;ACCGTAAGTTCGCGAC&quot; &quot;ACCGTAATCCTATGTT&quot;
-##  [517] &quot;ACCGTAATCGGTGTTA&quot; &quot;ACCGTAATCGTCACGG&quot; &quot;ACCGTAATCTGGCGTG&quot; &quot;ACCTTTAAGAGCTTCT&quot;
-##  [521] &quot;ACCTTTAAGTTGTCGT&quot; &quot;ACCTTTACAAGCCCAC&quot; &quot;ACCTTTACATGTCCTC&quot; &quot;ACCTTTAGTAGAGTGC&quot;
-##  [525] &quot;ACCTTTATCATCTGTT&quot; &quot;ACCTTTATCCCTCTTT&quot; &quot;ACCTTTATCCCTGACT&quot; &quot;ACCTTTATCCTGTAGA&quot;
-##  [529] &quot;ACCTTTATCGCCAGCA&quot; &quot;ACCTTTATCTGCCCTA&quot; &quot;ACCTTTATCTTGACGA&quot; &quot;ACGAGCCAGAGCCTAG&quot;
-##  [533] &quot;ACGAGCCAGGTGATAT&quot; &quot;ACGAGCCCAAGCCGCT&quot; &quot;ACGAGCCCAGGCAGTA&quot; &quot;ACGAGCCGTACCGCTG&quot;
-##  [537] &quot;ACGAGCCGTAGAAAGG&quot; &quot;ACGAGCCGTTGTCGCG&quot; &quot;ACGAGCCGTTTCGCTC&quot; &quot;ACGAGCCTCACTTCAT&quot;
-##  [541] &quot;ACGAGCCTCCGTAGGC&quot; &quot;ACGAGCCTCGTCTGAA&quot; &quot;ACGAGCCTCGTGGACC&quot; &quot;ACGAGCCTCTTCATGT&quot;
-##  [545] &quot;ACGAGGAAGAAGAAGC&quot; &quot;ACGAGGAAGGTGATTA&quot; &quot;ACGAGGACACATAACC&quot; &quot;ACGAGGACATGGATGG&quot;
-##  [549] &quot;ACGAGGAGTTATCACG&quot; &quot;ACGAGGAGTTCGTTGA&quot; &quot;ACGAGGATCCAGGGCT&quot; &quot;ACGAGGATCCCTGACT&quot;
-##  [553] &quot;ACGAGGATCGAACTGT&quot; &quot;ACGATACAGAAAGTGG&quot; &quot;ACGATACAGACCTAGG&quot; &quot;ACGATACAGACTAGAT&quot;
-##  [557] &quot;ACGATACCAAACAACA&quot; &quot;ACGATACCAAGCTGGA&quot; &quot;ACGATACCACAGGCCT&quot; &quot;ACGATACCAGCCTATA&quot;
-##  [561] &quot;ACGATACGTATATCCG&quot; &quot;ACGATACGTCAATACC&quot; &quot;ACGATACGTCTTCTCG&quot; &quot;ACGATACGTGCCTTGG&quot;
-##  [565] &quot;ACGATACGTGCGATAG&quot; &quot;ACGATACGTGGAAAGA&quot; &quot;ACGATACGTTCCAACA&quot; &quot;ACGATACTCACATGCA&quot;
-##  [569] &quot;ACGATACTCAGCGATT&quot; &quot;ACGATACTCCCAGGTG&quot; &quot;ACGATGTAGAGGTACC&quot; &quot;ACGATGTAGATATGCA&quot;
-##  [573] &quot;ACGATGTCAAGCGTAG&quot; &quot;ACGATGTCAATAGCAA&quot; &quot;ACGATGTCACCAACCG&quot; &quot;ACGATGTCAGGAACGT&quot;
-##  [577] &quot;ACGATGTCATGTCGAT&quot; &quot;ACGATGTGTAGTAGTA&quot; &quot;ACGATGTGTGACTACT&quot; &quot;ACGATGTGTGCACTTA&quot;
-##  [581] &quot;ACGATGTGTGCCTGGT&quot; &quot;ACGATGTGTGGTACAG&quot; &quot;ACGATGTGTTCAGGCC&quot; &quot;ACGATGTTCCACGAAT&quot;
-##  [585] &quot;ACGATGTTCGGTCTAA&quot; &quot;ACGATGTTCGTCCGTT&quot; &quot;ACGATGTTCGTTTATC&quot; &quot;ACGATGTTCTCGCTTG&quot;
-##  [589] &quot;ACGATGTTCTGACCTC&quot; &quot;ACGATGTTCTGTCAAG&quot; &quot;ACGATGTTCTTACCGC&quot; &quot;ACGCAGCAGATCTGAA&quot;
-##  [593] &quot;ACGCAGCAGATGTGGC&quot; &quot;ACGCAGCAGTGTCTCA&quot; &quot;ACGCAGCCAACGATGG&quot; &quot;ACGCAGCCACACGCTG&quot;
-##  [597] &quot;ACGCAGCCAGCTGTTA&quot; &quot;ACGCAGCCAGGGTTAG&quot; &quot;ACGCAGCGTACTCAAC&quot; &quot;ACGCAGCGTAGGAGTC&quot;
-##  [601] &quot;ACGCAGCGTATATCCG&quot; &quot;ACGCAGCGTCACCTAA&quot; &quot;ACGCAGCGTCCTCCAT&quot; &quot;ACGCAGCGTCTTCTCG&quot;
-##  [605] &quot;ACGCAGCGTGTGGTTT&quot; &quot;ACGCAGCGTTCCTCCA&quot; &quot;ACGCAGCGTTGTCTTT&quot; &quot;ACGCAGCTCAGGATCT&quot;
-##  [609] &quot;ACGCAGCTCGACGGAA&quot; &quot;ACGCAGCTCGCCAAAT&quot; &quot;ACGCAGCTCTGATACG&quot; &quot;ACGCCAGAGAACAACT&quot;
-##  [613] &quot;ACGCCAGAGATGGGTC&quot; &quot;ACGCCAGAGATGTAAC&quot; &quot;ACGCCAGAGCACACAG&quot; &quot;ACGCCAGAGGATGTAT&quot;
-##  [617] &quot;ACGCCAGAGTAGGTGC&quot; &quot;ACGCCAGAGTCAAGCG&quot; &quot;ACGCCAGAGTCTCAAC&quot; &quot;ACGCCAGCAATGCCAT&quot;
-##  [621] &quot;ACGCCAGCACACCGCA&quot; &quot;ACGCCAGCACGTGAGA&quot; &quot;ACGCCAGCAGCGTCCA&quot; &quot;ACGCCAGGTCAATGTC&quot;
-##  [625] &quot;ACGCCAGGTCCGAGTC&quot; &quot;ACGCCAGGTCGACTAT&quot; &quot;ACGCCAGGTTCGCTAA&quot; &quot;ACGCCAGTCACTCCTG&quot;
-##  [629] &quot;ACGCCAGTCAGAGCTT&quot; &quot;ACGCCAGTCATATCGG&quot; &quot;ACGCCAGTCCCACTTG&quot; &quot;ACGCCAGTCCTGCCAT&quot;
-##  [633] &quot;ACGCCAGTCCTTTCGG&quot; &quot;ACGCCAGTCGCAGGCT&quot; &quot;ACGCCAGTCGTTTATC&quot; &quot;ACGCCGAAGACTAGGC&quot;
-##  [637] &quot;ACGCCGAAGAGGTTAT&quot; &quot;ACGCCGAAGTGTTAGA&quot; &quot;ACGCCGAAGTTACGGG&quot; &quot;ACGCCGACAATGTAAG&quot;
-##  [641] &quot;ACGCCGACAGACGCCT&quot; &quot;ACGCCGACAGGTTTCA&quot; &quot;ACGCCGACATCGGTTA&quot; &quot;ACGCCGAGTCTAACGT&quot;
-##  [645] &quot;ACGCCGAGTCTCTTTA&quot; &quot;ACGCCGAGTCTTCTCG&quot; &quot;ACGCCGAGTGTAATGA&quot; &quot;ACGCCGAGTTGCGCAC&quot;
-##  [649] &quot;ACGCCGATCAGGTAAA&quot; &quot;ACGCCGATCATGGTCA&quot; &quot;ACGCCGATCCTACAGA&quot; &quot;ACGCCGATCTCGATGA&quot;
-##  [653] &quot;ACGCCGATCTTAGAGC&quot; &quot;ACGCCGATCTTCAACT&quot; &quot;ACGGAGAAGAGGACGG&quot; &quot;ACGGAGAAGTTCGCGC&quot;
-##  [657] &quot;ACGGAGACAAGTTAAG&quot; &quot;ACGGAGACAAGTTCTG&quot; &quot;ACGGAGACAATCTACG&quot; &quot;ACGGAGACAGACTCGC&quot;
-##  [661] &quot;ACGGAGAGTACACCGC&quot; &quot;ACGGAGAGTACTTGAC&quot; &quot;ACGGAGAGTGCTCTTC&quot; &quot;ACGGAGAGTGGGTCAA&quot;
-##  [665] &quot;ACGGAGAGTGTGACGA&quot; &quot;ACGGAGAGTTCCCGAG&quot; &quot;ACGGAGAGTTCGGCAC&quot; &quot;ACGGAGATCAAACAAG&quot;
-##  [669] &quot;ACGGAGATCACATACG&quot; &quot;ACGGAGATCAGCGACC&quot; &quot;ACGGAGATCATCTGCC&quot; &quot;ACGGAGATCGAACGGA&quot;
-##  [673] &quot;ACGGCCAAGACCTAGG&quot; &quot;ACGGCCAAGCGAAGGG&quot; &quot;ACGGCCAAGCTGAAAT&quot; &quot;ACGGCCAAGGATCGCA&quot;
-##  [677] &quot;ACGGCCACAACGATCT&quot; &quot;ACGGCCACACACTGCG&quot; &quot;ACGGCCACACGAGAGT&quot; &quot;ACGGCCACACGGATAG&quot;
-##  [681] &quot;ACGGCCACACTCTGTC&quot; &quot;ACGGCCACAGTAAGAT&quot; &quot;ACGGCCAGTCAACATC&quot; &quot;ACGGCCAGTGAGTGAC&quot;
-##  [685] &quot;ACGGCCATCACTTATC&quot; &quot;ACGGCCATCATAAAGG&quot; &quot;ACGGCCATCCAAAGTC&quot; &quot;ACGGCCATCCGAGCCA&quot;
-##  [689] &quot;ACGGCCATCGGAATCT&quot; &quot;ACGGCCATCGTCACGG&quot; &quot;ACGGCCATCTGCCCTA&quot; &quot;ACGGGCTAGCCCAACC&quot;
-##  [693] &quot;ACGGGCTAGGGTATCG&quot; &quot;ACGGGCTAGGGTGTTG&quot; &quot;ACGGGCTCACACCGAC&quot; &quot;ACGGGCTCACCCATTC&quot;
-##  [697] &quot;ACGGGCTCATGTAGTC&quot; &quot;ACGGGCTCATGTCGAT&quot; &quot;ACGGGCTGTTCAACCA&quot; &quot;ACGGGCTTCAACCAAC&quot;
-##  [701] &quot;ACGGGCTTCAACCATG&quot; &quot;ACGGGCTTCTCTTGAT&quot; &quot;ACGGGTCAGATGCCAG&quot; &quot;ACGGGTCAGCACACAG&quot;
-##  [705] &quot;ACGGGTCCAGCTGTGC&quot; &quot;ACGGGTCGTATAGGTA&quot; &quot;ACGGGTCGTTGGAGGT&quot; &quot;ACGGGTCTCATGCATG&quot;
-##  [709] &quot;ACGGGTCTCATGGTCA&quot; &quot;ACGGGTCTCTCAAACG&quot; &quot;ACGGGTCTCTGGCGTG&quot; &quot;ACGTCAAAGCAATCTC&quot;
-##  [713] &quot;ACGTCAAAGTCTTGCA&quot; &quot;ACGTCAAAGTGGGTTG&quot; &quot;ACGTCAACAATCGGTT&quot; &quot;ACGTCAAGTCGAATCT&quot;
-##  [717] &quot;ACGTCAAGTGAGTGAC&quot; &quot;ACGTCAAGTGCACCAC&quot; &quot;ACGTCAATCACGAAGG&quot; &quot;ACGTCAATCAGTGCAT&quot;
-##  [721] &quot;ACGTCAATCAGTTGAC&quot; &quot;ACGTCAATCATCGGAT&quot; &quot;ACGTCAATCCAAAGTC&quot; &quot;ACGTCAATCCGAAGAG&quot;
-##  [725] &quot;ACGTCAATCTAACTTC&quot; &quot;ACGTCAATCTGATACG&quot; &quot;ACGTCAATCTGCCCTA&quot; &quot;ACTATCTAGCAACGGT&quot;
-##  [729] &quot;ACTATCTAGTAGCGGT&quot; &quot;ACTATCTCAATGCCAT&quot; &quot;ACTATCTCAGATAATG&quot; &quot;ACTATCTCATAGACTC&quot;
-##  [733] &quot;ACTATCTCATTCGACA&quot; &quot;ACTATCTGTGTAATGA&quot; &quot;ACTATCTGTTGGTGGA&quot; &quot;ACTATCTTCACGCATA&quot;
-##  [737] &quot;ACTATCTTCAGCACAT&quot; &quot;ACTATCTTCATGTCTT&quot; &quot;ACTGAACAGAAGGACA&quot; &quot;ACTGAACAGGGTCTCC&quot;
-##  [741] &quot;ACTGAACCAATGAAAC&quot; &quot;ACTGAACCACGCCAGT&quot; &quot;ACTGAACCACTTCTGC&quot; &quot;ACTGAACCAGCTGCAC&quot;
-##  [745] &quot;ACTGAACCAGGCTCAC&quot; &quot;ACTGAACGTACTTAGC&quot; &quot;ACTGAACGTATGGTTC&quot; &quot;ACTGAACGTTCGCGAC&quot;
-##  [749] &quot;ACTGAACGTTTGCATG&quot; &quot;ACTGAACTCACAAACC&quot; &quot;ACTGAACTCCATGCTC&quot; &quot;ACTGAGTAGAAGAAGC&quot;
-##  [753] &quot;ACTGAGTAGCACCGCT&quot; &quot;ACTGAGTAGGAGTACC&quot; &quot;ACTGAGTAGGCATGGT&quot; &quot;ACTGAGTCAACTGGCC&quot;
-##  [757] &quot;ACTGAGTCACACCGAC&quot; &quot;ACTGAGTCATAGAAAC&quot; &quot;ACTGAGTCATATGGTC&quot; &quot;ACTGAGTCATCCGTGG&quot;
-##  [761] &quot;ACTGAGTGTCAACTGT&quot; &quot;ACTGAGTGTCAGAAGC&quot; &quot;ACTGAGTGTGGACGAT&quot; &quot;ACTGAGTGTGTGACCC&quot;
-##  [765] &quot;ACTGAGTTCGGTCCGA&quot; &quot;ACTGATGAGAAACGAG&quot; &quot;ACTGATGAGACAAGCC&quot; &quot;ACTGATGAGCGATGAC&quot;
-##  [769] &quot;ACTGATGAGGTAAACT&quot; &quot;ACTGATGAGTAACCCT&quot; &quot;ACTGATGCACTCGACG&quot; &quot;ACTGATGCAGGTCTCG&quot;
-##  [773] &quot;ACTGATGGTCTCTCGT&quot; &quot;ACTGATGGTTCACCTC&quot; &quot;ACTGATGGTTCTGAAC&quot; &quot;ACTGATGTCCAGGGCT&quot;
-##  [777] &quot;ACTGATGTCCGCGGTA&quot; &quot;ACTGATGTCTCGCATC&quot; &quot;ACTGCTCAGTTACGGG&quot; &quot;ACTGCTCCAAACTGTC&quot;
-##  [781] &quot;ACTGCTCCAAGTTCTG&quot; &quot;ACTGCTCCACCTCGTT&quot; &quot;ACTGCTCCACTTGGAT&quot; &quot;ACTGCTCCAGCAGTTT&quot;
-##  [785] &quot;ACTGCTCGTGGTCCGT&quot; &quot;ACTGCTCTCAGAGGTG&quot; &quot;ACTGCTCTCCCGGATG&quot; &quot;ACTGCTCTCCGCGCAA&quot;
-##  [789] &quot;ACTGCTCTCTGAGTGT&quot; &quot;ACTGTCCAGACAGACC&quot; &quot;ACTGTCCAGAGATGAG&quot; &quot;ACTGTCCAGGGAACGG&quot;
-##  [793] &quot;ACTGTCCAGTTGTCGT&quot; &quot;ACTGTCCCACCTATCC&quot; &quot;ACTGTCCCAGCATGAG&quot; &quot;ACTGTCCGTCAGCTAT&quot;
-##  [797] &quot;ACTGTCCGTCCGTGAC&quot; &quot;ACTGTCCTCATTGCCC&quot; &quot;ACTGTCCTCGAACTGT&quot; &quot;ACTGTCCTCTAACTGG&quot;
-##  [801] &quot;ACTTACTAGAGGTAGA&quot; &quot;ACTTACTAGTCTTGCA&quot; &quot;ACTTACTAGTGTCCAT&quot; &quot;ACTTACTCAAGCTGAG&quot;
-##  [805] &quot;ACTTACTCACATCCAA&quot; &quot;ACTTACTCACGGTAAG&quot; &quot;ACTTACTGTAAACGCG&quot; &quot;ACTTACTGTAGCCTAT&quot;
-##  [809] &quot;ACTTACTGTCAAAGAT&quot; &quot;ACTTACTGTTTGACAC&quot; &quot;ACTTACTTCACAGTAC&quot; &quot;ACTTACTTCAGGCGAA&quot;
-##  [813] &quot;ACTTACTTCATCACCC&quot; &quot;ACTTGTTAGCGCTCCA&quot; &quot;ACTTGTTAGGCACATG&quot; &quot;ACTTGTTAGGTGCAAC&quot;
-##  [817] &quot;ACTTGTTCAATGGTCT&quot; &quot;ACTTGTTCACGCTTTC&quot; &quot;ACTTGTTCACGTCTCT&quot; &quot;ACTTGTTCAGACGCTC&quot;
-##  [821] &quot;ACTTGTTCAGTCAGAG&quot; &quot;ACTTGTTCATCCCACT&quot; &quot;ACTTGTTCATCCCATC&quot; &quot;ACTTGTTCATGAACCT&quot;
-##  [825] &quot;ACTTGTTGTCCGAGTC&quot; &quot;ACTTGTTGTCGAATCT&quot; &quot;ACTTGTTGTCGAGATG&quot; &quot;ACTTGTTGTCTCTCTG&quot;
-##  [829] &quot;ACTTGTTGTGCTGTAT&quot; &quot;ACTTGTTGTTGGGACA&quot; &quot;ACTTGTTGTTGTCTTT&quot; &quot;ACTTGTTTCCACTCCA&quot;
-##  [833] &quot;ACTTTCAAGCAGCGTA&quot; &quot;ACTTTCAAGCGTTTAC&quot; &quot;ACTTTCAAGCTAGGCA&quot; &quot;ACTTTCAAGCTCCTTC&quot;
-##  [837] &quot;ACTTTCACAAACGCGA&quot; &quot;ACTTTCACAGACTCGC&quot; &quot;ACTTTCACAGTCAGCC&quot; &quot;ACTTTCACATTGTGCA&quot;
-##  [841] &quot;ACTTTCAGTACTTAGC&quot; &quot;ACTTTCAGTACTTCTT&quot; &quot;ACTTTCAGTCTAAACC&quot; &quot;ACTTTCAGTGTAACGG&quot;
-##  [845] &quot;ACTTTCATCAACACGT&quot; &quot;ACTTTCATCCACGTTC&quot; &quot;AGAATAGAGATGTTAG&quot; &quot;AGAATAGAGCCAGGAT&quot;
-##  [849] &quot;AGAATAGAGCTCAACT&quot; &quot;AGAATAGAGGAGTACC&quot; &quot;AGAATAGAGGTAAACT&quot; &quot;AGAATAGAGGTCGGAT&quot;
-##  [853] &quot;AGAATAGAGTGGGTTG&quot; &quot;AGAATAGCAACGCACC&quot; &quot;AGAATAGCAAGGTGTG&quot; &quot;AGAATAGCACATGACT&quot;
-##  [857] &quot;AGAATAGCACCCAGTG&quot; &quot;AGAATAGCATAAAGGT&quot; &quot;AGAATAGCATAGAAAC&quot; &quot;AGAATAGCATGCCTTC&quot;
-##  [861] &quot;AGAATAGGTACTTAGC&quot; &quot;AGAATAGGTTCAGACT&quot; &quot;AGAATAGTCACCTCGT&quot; &quot;AGAATAGTCAGCTCTC&quot;
-##  [865] &quot;AGAATAGTCCTATTCA&quot; &quot;AGACGTTAGACTGGGT&quot; &quot;AGACGTTAGGCCCTCA&quot; &quot;AGACGTTAGGTAAACT&quot;
-##  [869] &quot;AGACGTTAGTGTTTGC&quot; &quot;AGACGTTCAGCTCCGA&quot; &quot;AGACGTTGTAGGACAC&quot; &quot;AGACGTTGTGGTACAG&quot;
-##  [873] &quot;AGACGTTTCAGTTAGC&quot; &quot;AGACGTTTCCGTACAA&quot; &quot;AGACGTTTCTGCAAGT&quot; &quot;AGACGTTTCTTCCTTC&quot;
-##  [877] &quot;AGAGCGAAGATCCCGC&quot; &quot;AGAGCGAAGATCCTGT&quot; &quot;AGAGCGAAGCAGATCG&quot; &quot;AGAGCGAAGTCCGGTC&quot;
-##  [881] &quot;AGAGCGACAAAGCAAT&quot; &quot;AGAGCGACAATGGAAT&quot; &quot;AGAGCGACATATGCTG&quot; &quot;AGAGCGACATCACAAC&quot;
-##  [885] &quot;AGAGCGACATGGAATA&quot; &quot;AGAGCGAGTACGACCC&quot; &quot;AGAGCGAGTCATGCAT&quot; &quot;AGAGCGAGTTGTACAC&quot;
-##  [889] &quot;AGAGCGATCACCGTAA&quot; &quot;AGAGCGATCAGCTTAG&quot; &quot;AGAGCGATCGGCGGTT&quot; &quot;AGAGCGATCGGCTTGG&quot;
-##  [893] &quot;AGAGCGATCTGTCTCG&quot; &quot;AGAGCTTAGACTAGGC&quot; &quot;AGAGCTTAGCCACGTC&quot; &quot;AGAGCTTAGTCGTTTG&quot;
-##  [897] &quot;AGAGCTTAGTGGGCTA&quot; &quot;AGAGCTTCAAGTACCT&quot; &quot;AGAGCTTCACAGCCCA&quot; &quot;AGAGCTTCACCCAGTG&quot;
-##  [901] &quot;AGAGCTTCACGCTTTC&quot; &quot;AGAGCTTCAGTATCTG&quot; &quot;AGAGCTTCATAGTAAG&quot; &quot;AGAGCTTGTCTAAACC&quot;
-##  [905] &quot;AGAGCTTGTGCTAGCC&quot; &quot;AGAGCTTGTGGCAAAC&quot; &quot;AGAGCTTGTGGTACAG&quot; &quot;AGAGCTTTCACTATTC&quot;
-##  [909] &quot;AGAGCTTTCAGAAATG&quot; &quot;AGAGCTTTCAGCACAT&quot; &quot;AGAGCTTTCCTCGCAT&quot; &quot;AGAGTGGAGAGGTAGA&quot;
-##  [913] &quot;AGAGTGGAGCCCGAAA&quot; &quot;AGAGTGGAGTCATGCT&quot; &quot;AGAGTGGAGTGGTCCC&quot; &quot;AGAGTGGAGTGTACGG&quot;
-##  [917] &quot;AGAGTGGCACATAACC&quot; &quot;AGAGTGGCACCGAAAG&quot; &quot;AGAGTGGCAGCGTTCG&quot; &quot;AGAGTGGCAGGACCCT&quot;
-##  [921] &quot;AGAGTGGCATCGATTG&quot; &quot;AGAGTGGGTAGTGAAT&quot; &quot;AGAGTGGGTATAATGG&quot; &quot;AGAGTGGTCCCGACTT&quot;
-##  [925] &quot;AGAGTGGTCTACTTAC&quot; &quot;AGAGTGGTCTGTCAAG&quot; &quot;AGATCTGAGAGGTAGA&quot; &quot;AGATCTGAGCAGGTCA&quot;
-##  [929] &quot;AGATCTGAGCCAACAG&quot; &quot;AGATCTGAGGATCGCA&quot; &quot;AGATCTGAGGGATCTG&quot; &quot;AGATCTGAGGGCTCTC&quot;
-##  [933] &quot;AGATCTGAGGTGATAT&quot; &quot;AGATCTGAGTACGTAA&quot; &quot;AGATCTGAGTTCGCAT&quot; &quot;AGATCTGCAAACAACA&quot;
-##  [937] &quot;AGATCTGCACATGACT&quot; &quot;AGATCTGGTAAGAGGA&quot; &quot;AGATCTGTCAGTTCGA&quot; &quot;AGATCTGTCGCCATAA&quot;
-##  [941] &quot;AGATCTGTCGCTTAGA&quot; &quot;AGATTGCAGAAACCAT&quot; &quot;AGATTGCAGAGGTACC&quot; &quot;AGATTGCAGATAGTCA&quot;
-##  [945] &quot;AGATTGCCACGGTTTA&quot; &quot;AGATTGCCAGGGTATG&quot; &quot;AGATTGCCATCACGTA&quot; &quot;AGATTGCGTACATGTC&quot;
-##  [949] &quot;AGATTGCGTCCAGTAT&quot; &quot;AGATTGCGTCCGTGAC&quot; &quot;AGATTGCTCAGTGCAT&quot; &quot;AGATTGCTCATGCATG&quot;
-##  [953] &quot;AGATTGCTCGGCGGTT&quot; &quot;AGCAGCCAGAAACCAT&quot; &quot;AGCAGCCAGACCTTTG&quot; &quot;AGCAGCCAGACGACGT&quot;
-##  [957] &quot;AGCAGCCAGATGTTAG&quot; &quot;AGCAGCCAGCACCGTC&quot; &quot;AGCAGCCAGTGGTAAT&quot; &quot;AGCAGCCCAAACCCAT&quot;
-##  [961] &quot;AGCAGCCCAGATGGCA&quot; &quot;AGCAGCCCATCACGAT&quot; &quot;AGCAGCCGTACTTAGC&quot; &quot;AGCAGCCGTCCGAAGA&quot;
-##  [965] &quot;AGCAGCCGTCGCTTCT&quot; &quot;AGCAGCCGTGCAGTAG&quot; &quot;AGCAGCCGTTCCCGAG&quot; &quot;AGCAGCCGTTTAGGAA&quot;
-##  [969] &quot;AGCAGCCGTTTGTTTC&quot; &quot;AGCAGCCTCCTTGCCA&quot; &quot;AGCAGCCTCGTCGTTC&quot; &quot;AGCAGCCTCTGGAGCC&quot;
-##  [973] &quot;AGCATACAGTTCGATC&quot; &quot;AGCATACCACCACGTG&quot; &quot;AGCATACCACGGATAG&quot; &quot;AGCATACCAGCTATTG&quot;
-##  [977] &quot;AGCATACGTCCTCTTG&quot; &quot;AGCATACGTTAAGGGC&quot; &quot;AGCATACGTTACTGAC&quot; &quot;AGCATACGTTAGATGA&quot;
-##  [981] &quot;AGCATACTCATCGCTC&quot; &quot;AGCATACTCCGCATCT&quot; &quot;AGCATACTCGAACTGT&quot; &quot;AGCATACTCTAACTTC&quot;
-##  [985] &quot;AGCATACTCTCGGACG&quot; &quot;AGCCTAAAGCCCAATT&quot; &quot;AGCCTAAAGGACATTA&quot; &quot;AGCCTAAAGTACGTTC&quot;
-##  [989] &quot;AGCCTAAAGTCGATAA&quot; &quot;AGCCTAAAGTCTTGCA&quot; &quot;AGCCTAACAAGCCTAT&quot; &quot;AGCCTAACACGTCTCT&quot;
-##  [993] &quot;AGCCTAACAGCCTGTG&quot; &quot;AGCCTAACATCAGTCA&quot; &quot;AGCCTAAGTATCTGCA&quot; &quot;AGCCTAAGTCGGCTCA&quot;
-##  [997] &quot;AGCCTAAGTTATCCGA&quot; &quot;AGCCTAATCAGTACGT&quot; &quot;AGCCTAATCCCTTGTG&quot; &quot;AGCCTAATCGTTTGCC&quot;
+<pre><code>##    [1] &quot;AAACCTGAGCTAGTCT&quot; &quot;AAACCTGAGGGCACTA&quot; &quot;AAACCTGAGTACGTTC&quot;
+##    [4] &quot;AAACCTGAGTCCGGTC&quot; &quot;AAACCTGCACCAGGTC&quot; &quot;AAACCTGCACCTCGTT&quot;
+##    [7] &quot;AAACCTGCAGCTGTGC&quot; &quot;AAACCTGGTAAATGAC&quot; &quot;AAACCTGGTACTTAGC&quot;
+##   [10] &quot;AAACCTGTCCTCAATT&quot; &quot;AAACCTGTCCTGCAGG&quot; &quot;AAACGGGAGCTTATCG&quot;
+##   [13] &quot;AAACGGGAGGCCCTTG&quot; &quot;AAACGGGCAAGTAATG&quot; &quot;AAACGGGCACCAGATT&quot;
+##   [16] &quot;AAACGGGGTAATCACC&quot; &quot;AAACGGGGTAGCTGCC&quot; &quot;AAACGGGGTGGTGTAG&quot;
+##   [19] &quot;AAACGGGTCACCTCGT&quot; &quot;AAACGGGTCCCAAGTA&quot; &quot;AAAGATGAGAAACCTA&quot;
+##   [22] &quot;AAAGATGAGACTTTCG&quot; &quot;AAAGATGAGATATGGT&quot; &quot;AAAGATGAGATCCGAG&quot;
+##   [25] &quot;AAAGATGAGATGAGAG&quot; &quot;AAAGATGAGCCAGTAG&quot; &quot;AAAGATGCAATCCAAC&quot;
+##   [28] &quot;AAAGATGCACGAAATA&quot; &quot;AAAGATGCACGTAAGG&quot; &quot;AAAGATGCAGAGTGTG&quot;
+##   [31] &quot;AAAGATGCAGCCAGAA&quot; &quot;AAAGATGCAGGACCCT&quot; &quot;AAAGATGGTCATACTG&quot;
+##   [34] &quot;AAAGATGGTCCGTGAC&quot; &quot;AAAGATGGTCGAAAGC&quot; &quot;AAAGATGGTGCCTGGT&quot;
+##   [37] &quot;AAAGATGGTTACCGAT&quot; &quot;AAAGATGGTTGGTAAA&quot; &quot;AAAGATGTCAGCGATT&quot;
+##   [40] &quot;AAAGATGTCCCAAGTA&quot; &quot;AAAGATGTCCGAATGT&quot; &quot;AAAGATGTCCTAGTGA&quot;
+##   [43] &quot;AAAGATGTCGAACTGT&quot; &quot;AAAGATGTCTGTCTCG&quot; &quot;AAAGCAAAGAATTGTG&quot;
+##   [46] &quot;AAAGCAAAGAGACGAA&quot; &quot;AAAGCAAAGAGTTGGC&quot; &quot;AAAGCAACAAGGTTCT&quot;
+##   [49] &quot;AAAGCAACACGCCAGT&quot; &quot;AAAGCAAGTAGCTGCC&quot; &quot;AAAGCAAGTGCCTGTG&quot;
+##   [52] &quot;AAAGCAAGTTAGTGGG&quot; &quot;AAAGCAATCACTATTC&quot; &quot;AAAGCAATCATCGGAT&quot;
+##   [55] &quot;AAAGCAATCATCTGCC&quot; &quot;AAAGCAATCCTAGAAC&quot; &quot;AAAGCAATCGAACGGA&quot;
+##   [58] &quot;AAAGCAATCGTACGGC&quot; &quot;AAAGCAATCTCAAGTG&quot; &quot;AAAGTAGAGAGTAATC&quot;
+##   [61] &quot;AAAGTAGAGCCGATTT&quot; &quot;AAAGTAGAGGATTCGG&quot; &quot;AAAGTAGCAATGTAAG&quot;
+##   [64] &quot;AAAGTAGCACGACTCG&quot; &quot;AAAGTAGGTAATTGGA&quot; &quot;AAAGTAGGTATCAGTC&quot;
+##   [67] &quot;AAAGTAGGTCGCGAAA&quot; &quot;AAAGTAGGTGGTCCGT&quot; &quot;AAAGTAGGTTGCCTCT&quot;
+##   [70] &quot;AAAGTAGTCAGGCAAG&quot; &quot;AAAGTAGTCCAAAGTC&quot; &quot;AAAGTAGTCTTGTCAT&quot;
+##   [73] &quot;AAATGCCAGACGACGT&quot; &quot;AAATGCCAGGCAAAGA&quot; &quot;AAATGCCAGGGTGTTG&quot;
+##   [76] &quot;AAATGCCAGGTAAACT&quot; &quot;AAATGCCCAATGTAAG&quot; &quot;AAATGCCCACACATGT&quot;
+##   [79] &quot;AAATGCCCAGCTCGAC&quot; &quot;AAATGCCCATCTATGG&quot; &quot;AAATGCCGTACTTCTT&quot;
+##   [82] &quot;AAATGCCGTCTTGCGG&quot; &quot;AAATGCCGTGTAACGG&quot; &quot;AAATGCCTCCAAACAC&quot;
+##   [85] &quot;AAATGCCTCCGCGGTA&quot; &quot;AAATGCCTCGTCGTTC&quot; &quot;AACACGTAGCTAGTCT&quot;
+##   [88] &quot;AACACGTAGGATTCGG&quot; &quot;AACACGTAGTACCGGA&quot; &quot;AACACGTCACAGAGGT&quot;
+##   [91] &quot;AACACGTCACGACTCG&quot; &quot;AACACGTCAGTCAGCC&quot; &quot;AACACGTGTAATCGTC&quot;
+##   [94] &quot;AACACGTGTACCAGTT&quot; &quot;AACACGTGTTGGGACA&quot; &quot;AACACGTTCACCACCT&quot;
+##   [97] &quot;AACACGTTCACCGGGT&quot; &quot;AACACGTTCCAGAGGA&quot; &quot;AACACGTTCCTGCAGG&quot;
+##  [100] &quot;AACACGTTCGCATGGC&quot; &quot;AACACGTTCTTACCGC&quot; &quot;AACACGTTCTTGCATT&quot;
+##  [103] &quot;AACCATGAGTAGTGCG&quot; &quot;AACCATGCAAAGGCGT&quot; &quot;AACCATGCAAGCGAGT&quot;
+##  [106] &quot;AACCATGCAGCATACT&quot; &quot;AACCATGCATGTTGAC&quot; &quot;AACCATGCATTCTCAT&quot;
+##  [109] &quot;AACCATGGTCCGAAGA&quot; &quot;AACCATGGTGCCTGCA&quot; &quot;AACCATGGTGTTGAGG&quot;
+##  [112] &quot;AACCATGGTTGATTCG&quot; &quot;AACCATGTCAATCTCT&quot; &quot;AACCATGTCCGAAGAG&quot;
+##  [115] &quot;AACCATGTCTCCGGTT&quot; &quot;AACCGCGAGAGGTTGC&quot; &quot;AACCGCGAGGGTCTCC&quot;
+##  [118] &quot;AACCGCGCAAGGTGTG&quot; &quot;AACCGCGCAGGACGTA&quot; &quot;AACCGCGCAGGGTTAG&quot;
+##  [121] &quot;AACCGCGCAGTAACGG&quot; &quot;AACCGCGCATTCCTGC&quot; &quot;AACCGCGGTGACTCAT&quot;
+##  [124] &quot;AACCGCGGTGGGTCAA&quot; &quot;AACCGCGTCAATCTCT&quot; &quot;AACCGCGTCCTTGGTC&quot;
+##  [127] &quot;AACCGCGTCGCACTCT&quot; &quot;AACCGCGTCGGCCGAT&quot; &quot;AACCGCGTCTTGCCGT&quot;
+##  [130] &quot;AACGTTGAGAACTCGG&quot; &quot;AACGTTGAGGGTGTGT&quot; &quot;AACGTTGCAGGTCGTC&quot;
+##  [133] &quot;AACGTTGCAGTCGTGC&quot; &quot;AACGTTGCATATACGC&quot; &quot;AACGTTGTCATACGGT&quot;
+##  [136] &quot;AACGTTGTCCACGACG&quot; &quot;AACGTTGTCCGTCATC&quot; &quot;AACGTTGTCTGGTATG&quot;
+##  [139] &quot;AACTCAGAGACTAAGT&quot; &quot;AACTCAGAGCGTAATA&quot; &quot;AACTCAGAGCGTCTAT&quot;
+##  [142] &quot;AACTCAGAGCTGAAAT&quot; &quot;AACTCAGAGTGGACGT&quot; &quot;AACTCAGCACATAACC&quot;
+##  [145] &quot;AACTCAGGTGTTCGAT&quot; &quot;AACTCAGGTTCTCATT&quot; &quot;AACTCAGTCACCCTCA&quot;
+##  [148] &quot;AACTCAGTCAGCCTAA&quot; &quot;AACTCAGTCCTATGTT&quot; &quot;AACTCAGTCTAACCGA&quot;
+##  [151] &quot;AACTCAGTCTCGTATT&quot; &quot;AACTCCCAGACAAGCC&quot; &quot;AACTCCCAGACTAGGC&quot;
+##  [154] &quot;AACTCCCAGGATCGCA&quot; &quot;AACTCCCAGGCAGGTT&quot; &quot;AACTCCCAGTACGTTC&quot;
+##  [157] &quot;AACTCCCAGTCGTTTG&quot; &quot;AACTCCCAGTGACTCT&quot; &quot;AACTCCCCACAAGTAA&quot;
+##  [160] &quot;AACTCCCCACGCATCG&quot; &quot;AACTCCCCAGTATCTG&quot; &quot;AACTCCCCATCCTAGA&quot;
+##  [163] &quot;AACTCCCCATCGTCGG&quot; &quot;AACTCCCGTCGAACAG&quot; &quot;AACTCCCGTGCACGAA&quot;
+##  [166] &quot;AACTCCCGTTCACCTC&quot; &quot;AACTCCCTCAGTTTGG&quot; &quot;AACTCCCTCTGGTGTA&quot;
+##  [169] &quot;AACTCTTCAAGAAGAG&quot; &quot;AACTCTTCAAGTCTGT&quot; &quot;AACTCTTCAATGTTGC&quot;
+##  [172] &quot;AACTCTTCATCTCCCA&quot; &quot;AACTCTTCATTTCAGG&quot; &quot;AACTCTTGTGCGGTAA&quot;
+##  [175] &quot;AACTCTTGTGTCCTCT&quot; &quot;AACTCTTGTTTGGGCC&quot; &quot;AACTCTTTCAACGAAA&quot;
+##  [178] &quot;AACTCTTTCCTTGCCA&quot; &quot;AACTCTTTCTCGTTTA&quot; &quot;AACTGGTAGAGGTACC&quot;
+##  [181] &quot;AACTGGTAGGGAAACA&quot; &quot;AACTGGTAGGTGTGGT&quot; &quot;AACTGGTAGTACGACG&quot;
+##  [184] &quot;AACTGGTCAAACTGCT&quot; &quot;AACTGGTCACGAGGTA&quot; &quot;AACTGGTGTACATGTC&quot;
+##  [187] &quot;AACTGGTGTGGCAAAC&quot; &quot;AACTGGTGTTACCAGT&quot; &quot;AACTGGTGTTGAGGTG&quot;
+##  [190] &quot;AACTGGTGTTGGAGGT&quot; &quot;AACTGGTGTTTGACAC&quot; &quot;AACTGGTGTTTGTTTC&quot;
+##  [193] &quot;AACTGGTTCAATCACG&quot; &quot;AACTGGTTCACAAACC&quot; &quot;AACTGGTTCACCCGAG&quot;
+##  [196] &quot;AACTGGTTCAGCACAT&quot; &quot;AACTGGTTCCTTTACA&quot; &quot;AACTGGTTCGGGAGTA&quot;
+##  [199] &quot;AACTGGTTCGTCACGG&quot; &quot;AACTGGTTCTCTTATG&quot; &quot;AACTTTCAGGCAGTCA&quot;
+##  [202] &quot;AACTTTCAGGTTACCT&quot; &quot;AACTTTCCACCAGGCT&quot; &quot;AACTTTCCAGGTGCCT&quot;
+##  [205] &quot;AACTTTCCATGAACCT&quot; &quot;AACTTTCCATGTAAGA&quot; &quot;AACTTTCCATGTCCTC&quot;
+##  [208] &quot;AACTTTCGTAAGTGTA&quot; &quot;AACTTTCGTACACCGC&quot; &quot;AACTTTCGTATAGGTA&quot;
+##  [211] &quot;AACTTTCGTCTAGTCA&quot; &quot;AACTTTCGTTAAAGAC&quot; &quot;AACTTTCGTTACGGAG&quot;
+##  [214] &quot;AACTTTCGTTGTGGAG&quot; &quot;AACTTTCTCACTCCTG&quot; &quot;AACTTTCTCGAACTGT&quot;
+##  [217] &quot;AACTTTCTCGCAAACT&quot; &quot;AACTTTCTCTTGCAAG&quot; &quot;AAGACCTAGAGGTAGA&quot;
+##  [220] &quot;AAGACCTAGGATATAC&quot; &quot;AAGACCTAGGCTATCT&quot; &quot;AAGACCTAGTCCAGGA&quot;
+##  [223] &quot;AAGACCTAGTCGTTTG&quot; &quot;AAGACCTAGTGACATA&quot; &quot;AAGACCTCAAGCCTAT&quot;
+##  [226] &quot;AAGACCTCAATGAATG&quot; &quot;AAGACCTCATACAGCT&quot; &quot;AAGACCTCATGGGAAC&quot;
+##  [229] &quot;AAGACCTCATTTGCCC&quot; &quot;AAGACCTGTAATAGCA&quot; &quot;AAGACCTGTAGCTAAA&quot;
+##  [232] &quot;AAGACCTGTCCGAGTC&quot; &quot;AAGACCTGTCTAGAGG&quot; &quot;AAGACCTGTGAAAGAG&quot;
+##  [235] &quot;AAGACCTGTTGACGTT&quot; &quot;AAGACCTTCACCGTAA&quot; &quot;AAGACCTTCCGGCACA&quot;
+##  [238] &quot;AAGACCTTCTCCAGGG&quot; &quot;AAGCCGCAGAGTCGGT&quot; &quot;AAGCCGCAGCACGCCT&quot;
+##  [241] &quot;AAGCCGCAGCCAGGAT&quot; &quot;AAGCCGCAGCTGCGAA&quot; &quot;AAGCCGCCACGACGAA&quot;
+##  [244] &quot;AAGCCGCCATGGTTGT&quot; &quot;AAGCCGCCATTCCTCG&quot; &quot;AAGCCGCGTACGCACC&quot;
+##  [247] &quot;AAGCCGCGTCCTCCAT&quot; &quot;AAGCCGCGTTACCAGT&quot; &quot;AAGCCGCGTTGACGTT&quot;
+##  [250] &quot;AAGCCGCTCATGCAAC&quot; &quot;AAGCCGCTCCAGAGGA&quot; &quot;AAGCCGCTCCTATTCA&quot;
+##  [253] &quot;AAGCCGCTCCTCCTAG&quot; &quot;AAGCCGCTCGGATGGA&quot; &quot;AAGCCGCTCGTAGGAG&quot;
+##  [256] &quot;AAGCCGCTCTAACTGG&quot; &quot;AAGGAGCAGATGGCGT&quot; &quot;AAGGAGCAGCCCAATT&quot;
+##  [259] &quot;AAGGAGCAGCGGCTTC&quot; &quot;AAGGAGCAGGATATAC&quot; &quot;AAGGAGCAGTAACCCT&quot;
+##  [262] &quot;AAGGAGCCAGACGCTC&quot; &quot;AAGGAGCCAGACGTAG&quot; &quot;AAGGAGCCAGCCTATA&quot;
+##  [265] &quot;AAGGAGCGTCTCAACA&quot; &quot;AAGGAGCTCAATCACG&quot; &quot;AAGGAGCTCAGGCAAG&quot;
+##  [268] &quot;AAGGAGCTCGGAAACG&quot; &quot;AAGGAGCTCTAGCACA&quot; &quot;AAGGAGCTCTCAAACG&quot;
+##  [271] &quot;AAGGAGCTCTTGAGAC&quot; &quot;AAGGCAGAGGATGGAA&quot; &quot;AAGGCAGAGTGACATA&quot;
+##  [274] &quot;AAGGCAGCAAGTAATG&quot; &quot;AAGGCAGCACACATGT&quot; &quot;AAGGCAGCACGAGGTA&quot;
+##  [277] &quot;AAGGCAGCATACTACG&quot; &quot;AAGGCAGCATCAGTAC&quot; &quot;AAGGCAGCATTCACTT&quot;
+##  [280] &quot;AAGGCAGGTAGCCTAT&quot; &quot;AAGGCAGGTGATGTGG&quot; &quot;AAGGCAGGTGTTTGGT&quot;
+##  [283] &quot;AAGGCAGGTTGTGGCC&quot; &quot;AAGGCAGTCAATAAGG&quot; &quot;AAGGCAGTCTGCTGTC&quot;
+##  [286] &quot;AAGGTTCAGAACAATC&quot; &quot;AAGGTTCAGAATCTCC&quot; &quot;AAGGTTCAGCGTTGCC&quot;
+##  [289] &quot;AAGGTTCAGGCCGAAT&quot; &quot;AAGGTTCAGGCTATCT&quot; &quot;AAGGTTCAGGGTGTGT&quot;
+##  [292] &quot;AAGGTTCAGTCAAGCG&quot; &quot;AAGGTTCAGTTACCCA&quot; &quot;AAGGTTCCAACACCCG&quot;
+##  [295] &quot;AAGGTTCCACAGCGTC&quot; &quot;AAGGTTCCACTAAGTC&quot; &quot;AAGGTTCCACTTGGAT&quot;
+##  [298] &quot;AAGGTTCCATAAGACA&quot; &quot;AAGGTTCCATCACAAC&quot; &quot;AAGGTTCCATCGGACC&quot;
+##  [301] &quot;AAGGTTCGTATAGTAG&quot; &quot;AAGGTTCGTGATGATA&quot; &quot;AAGGTTCGTTATGCGT&quot;
+##  [304] &quot;AAGGTTCGTTCCGGCA&quot; &quot;AAGGTTCTCCCTTGTG&quot; &quot;AAGTCTGAGATGTGGC&quot;
+##  [307] &quot;AAGTCTGAGGATCGCA&quot; &quot;AAGTCTGCAAGCCGCT&quot; &quot;AAGTCTGGTTCCTCCA&quot;
+##  [310] &quot;AAGTCTGTCAACCATG&quot; &quot;AAGTCTGTCATAGCAC&quot; &quot;AAGTCTGTCCAAGCCG&quot;
+##  [313] &quot;AAGTCTGTCTAACTTC&quot; &quot;AATCCAGAGCTGATAA&quot; &quot;AATCCAGAGGCTCAGA&quot;
+##  [316] &quot;AATCCAGAGGGATCTG&quot; &quot;AATCCAGAGGTGTTAA&quot; &quot;AATCCAGCACATCTTT&quot;
+##  [319] &quot;AATCCAGCACGAAACG&quot; &quot;AATCCAGCACGGATAG&quot; &quot;AATCCAGCAGACGCTC&quot;
+##  [322] &quot;AATCCAGGTCAGAGGT&quot; &quot;AATCCAGGTCGGCTCA&quot; &quot;AATCCAGGTTCCCGAG&quot;
+##  [325] &quot;AATCCAGGTTCGGGCT&quot; &quot;AATCCAGGTTGGTGGA&quot; &quot;AATCCAGTCAGAGCTT&quot;
+##  [328] &quot;AATCCAGTCCATTCTA&quot; &quot;AATCCAGTCCTGCAGG&quot; &quot;AATCGGTAGCCACGTC&quot;
+##  [331] &quot;AATCGGTAGGGATACC&quot; &quot;AATCGGTCAACGCACC&quot; &quot;AATCGGTCACCATCCT&quot;
+##  [334] &quot;AATCGGTCAGCGAACA&quot; &quot;AATCGGTCATGTCCTC&quot; &quot;AATCGGTCATTATCTC&quot;
+##  [337] &quot;AATCGGTGTCGGATCC&quot; &quot;AATCGGTGTCTGGTCG&quot; &quot;AATCGGTGTTTGCATG&quot;
+##  [340] &quot;AATCGGTTCAAACGGG&quot; &quot;AATCGGTTCAACGCTA&quot; &quot;AATCGGTTCCACGCAG&quot;
+##  [343] &quot;AATCGGTTCCCGGATG&quot; &quot;AATCGGTTCGTGGACC&quot; &quot;AATCGGTTCTACCAGA&quot;
+##  [346] &quot;AATCGGTTCTAGCACA&quot; &quot;ACACCAAAGCGATATA&quot; &quot;ACACCAAAGCTCCCAG&quot;
+##  [349] &quot;ACACCAAAGTGGTAGC&quot; &quot;ACACCAAAGTGTCCAT&quot; &quot;ACACCAACAAGTCATC&quot;
+##  [352] &quot;ACACCAACACACGCTG&quot; &quot;ACACCAACACAGCCCA&quot; &quot;ACACCAACAGGTCTCG&quot;
+##  [355] &quot;ACACCAACATCGGAAG&quot; &quot;ACACCAAGTCAAACTC&quot; &quot;ACACCAAGTCGGCTCA&quot;
+##  [358] &quot;ACACCAAGTCTGGTCG&quot; &quot;ACACCAAGTGACAAAT&quot; &quot;ACACCAAGTGCTTCTC&quot;
+##  [361] &quot;ACACCAAGTGGACGAT&quot; &quot;ACACCAATCATCGGAT&quot; &quot;ACACCAATCCGTAGTA&quot;
+##  [364] &quot;ACACCAATCGTCTGAA&quot; &quot;ACACCAATCGTTGCCT&quot; &quot;ACACCCTAGACCTAGG&quot;
+##  [367] &quot;ACACCCTAGCCAGTAG&quot; &quot;ACACCCTAGTAGCGGT&quot; &quot;ACACCCTCAACTGCTA&quot;
+##  [370] &quot;ACACCCTCAGCCAGAA&quot; &quot;ACACCCTCATCGGTTA&quot; &quot;ACACCCTCATGCCACG&quot;
+##  [373] &quot;ACACCCTCATGTCGAT&quot; &quot;ACACCCTCATTATCTC&quot; &quot;ACACCCTGTAGGACAC&quot;
+##  [376] &quot;ACACCCTTCAAACAAG&quot; &quot;ACACCCTTCATATCGG&quot; &quot;ACACCCTTCATTATCC&quot;
+##  [379] &quot;ACACCCTTCCAGGGCT&quot; &quot;ACACCCTTCCCTAATT&quot; &quot;ACACCCTTCCGTTGCT&quot;
+##  [382] &quot;ACACCCTTCGCGCCAA&quot; &quot;ACACCCTTCGTAGGTT&quot; &quot;ACACCCTTCGTTACGA&quot;
+##  [385] &quot;ACACCCTTCTGGGCCA&quot; &quot;ACACCGGAGAGCTATA&quot; &quot;ACACCGGAGCACCGCT&quot;
+##  [388] &quot;ACACCGGAGGCATGGT&quot; &quot;ACACCGGAGGCTATCT&quot; &quot;ACACCGGAGTCATCCA&quot;
+##  [391] &quot;ACACCGGAGTGAAGAG&quot; &quot;ACACCGGAGTGGGATC&quot; &quot;ACACCGGCAAGCCGTC&quot;
+##  [394] &quot;ACACCGGCAGGTCTCG&quot; &quot;ACACCGGGTGACTACT&quot; &quot;ACACCGGGTTCGCTAA&quot;
+##  [397] &quot;ACACCGGTCGCCTGTT&quot; &quot;ACACCGGTCTTAGAGC&quot; &quot;ACACTGAAGACAGACC&quot;
+##  [400] &quot;ACACTGAAGTACTTGC&quot; &quot;ACACTGAAGTCTTGCA&quot; &quot;ACACTGACAACTGCGC&quot;
+##  [403] &quot;ACACTGACAAGAGGCT&quot; &quot;ACACTGACAAGCCGCT&quot; &quot;ACACTGACACCCAGTG&quot;
+##  [406] &quot;ACACTGACACTCAGGC&quot; &quot;ACACTGAGTACACCGC&quot; &quot;ACACTGAGTAGGGTAC&quot;
+##  [409] &quot;ACACTGAGTCGCATAT&quot; &quot;ACACTGAGTCTCTCTG&quot; &quot;ACACTGAGTGGCAAAC&quot;
+##  [412] &quot;ACACTGAGTGTCCTCT&quot; &quot;ACACTGAGTTGAGTTC&quot; &quot;ACACTGATCAGTGCAT&quot;
+##  [415] &quot;ACAGCCGAGACCACGA&quot; &quot;ACAGCCGAGACTAGGC&quot; &quot;ACAGCCGAGCTACCGC&quot;
+##  [418] &quot;ACAGCCGAGTTCGCGC&quot; &quot;ACAGCCGCAACGATCT&quot; &quot;ACAGCCGCACCAGGTC&quot;
+##  [421] &quot;ACAGCCGCACCATCCT&quot; &quot;ACAGCCGCATGGGACA&quot; &quot;ACAGCCGGTACCGGCT&quot;
+##  [424] &quot;ACAGCCGGTAGCGTAG&quot; &quot;ACAGCCGGTTCAGGCC&quot; &quot;ACAGCCGGTTCCACTC&quot;
+##  [427] &quot;ACAGCCGGTTTCGCTC&quot; &quot;ACAGCCGTCAGGCCCA&quot; &quot;ACAGCCGTCCCATTAT&quot;
+##  [430] &quot;ACAGCCGTCGTGGACC&quot; &quot;ACAGCCGTCTGATTCT&quot; &quot;ACAGCTAAGATGGCGT&quot;
+##  [433] &quot;ACAGCTAAGCGTAGTG&quot; &quot;ACAGCTACAATAGCAA&quot; &quot;ACAGCTATCACATGCA&quot;
+##  [436] &quot;ACAGCTATCCAACCAA&quot; &quot;ACAGCTATCGTAGGAG&quot; &quot;ACAGCTATCTCGGACG&quot;
+##  [439] &quot;ACATACGAGAATTGTG&quot; &quot;ACATACGAGAGTCTGG&quot; &quot;ACATACGCAAGCCGTC&quot;
+##  [442] &quot;ACATACGCAGACGTAG&quot; &quot;ACATACGCATCGGACC&quot; &quot;ACATACGGTCATTAGC&quot;
+##  [445] &quot;ACATACGGTCGGCACT&quot; &quot;ACATACGGTCTAGTCA&quot; &quot;ACATACGTCATGCTCC&quot;
+##  [448] &quot;ACATCAGAGTCCCACG&quot; &quot;ACATCAGAGTTATCGC&quot; &quot;ACATCAGCACACCGCA&quot;
+##  [451] &quot;ACATCAGCACAGTCGC&quot; &quot;ACATCAGCACGCGAAA&quot; &quot;ACATCAGCATCCCACT&quot;
+##  [454] &quot;ACATCAGCATTCTTAC&quot; &quot;ACATCAGCATTTGCTT&quot; &quot;ACATCAGGTCGAACAG&quot;
+##  [457] &quot;ACATCAGGTCTCGTTC&quot; &quot;ACATCAGGTGAAAGAG&quot; &quot;ACATCAGGTGCATCTA&quot;
+##  [460] &quot;ACATCAGTCACCGTAA&quot; &quot;ACATCAGTCAGTCAGT&quot; &quot;ACATCAGTCGAACGGA&quot;
+##  [463] &quot;ACATCAGTCGACAGCC&quot; &quot;ACATCAGTCGCACTCT&quot; &quot;ACATCAGTCTTTACGT&quot;
+##  [466] &quot;ACATGGTAGACTTGAA&quot; &quot;ACATGGTAGTAGTGCG&quot; &quot;ACATGGTCAAAGCGGT&quot;
+##  [469] &quot;ACATGGTCAATAAGCA&quot; &quot;ACATGGTCAATGAATG&quot; &quot;ACATGGTCATGCAATC&quot;
+##  [472] &quot;ACATGGTCATGGTCAT&quot; &quot;ACATGGTGTGTGCCTG&quot; &quot;ACATGGTGTTGATTCG&quot;
+##  [475] &quot;ACATGGTTCAATCTCT&quot; &quot;ACATGGTTCCGCGTTT&quot; &quot;ACATGGTTCCTAAGTG&quot;
+##  [478] &quot;ACATGGTTCGTACGGC&quot; &quot;ACATGGTTCGTTTATC&quot; &quot;ACATGGTTCTACTATC&quot;
+##  [481] &quot;ACATGGTTCTGCCAGG&quot; &quot;ACCAGTAAGAGAGCTC&quot; &quot;ACCAGTACACGGTGTC&quot;
+##  [484] &quot;ACCAGTACATGCAATC&quot; &quot;ACCAGTAGTCTCTCGT&quot; &quot;ACCAGTAGTGCCTGCA&quot;
+##  [487] &quot;ACCAGTAGTTCCCGAG&quot; &quot;ACCAGTAGTTTGGCGC&quot; &quot;ACCAGTATCCAATGGT&quot;
+##  [490] &quot;ACCAGTATCCATGAAC&quot; &quot;ACCCACTAGAATTCCC&quot; &quot;ACCCACTAGCGGATCA&quot;
+##  [493] &quot;ACCCACTAGCTCCTCT&quot; &quot;ACCCACTAGGCTCATT&quot; &quot;ACCCACTCAAAGCAAT&quot;
+##  [496] &quot;ACCCACTCAACACCCG&quot; &quot;ACCCACTCAGATCGGA&quot; &quot;ACCCACTCATGGTAGG&quot;
+##  [499] &quot;ACCCACTGTCATTAGC&quot; &quot;ACCCACTGTCCTCTTG&quot; &quot;ACCCACTGTCTCTTAT&quot;
+##  [502] &quot;ACCCACTGTGGCAAAC&quot; &quot;ACCCACTGTTCCGGCA&quot; &quot;ACCCACTGTTGTTTGG&quot;
+##  [505] &quot;ACCCACTTCCTTGACC&quot; &quot;ACCCACTTCGGTGTTA&quot; &quot;ACCGTAAAGAGTGAGA&quot;
+##  [508] &quot;ACCGTAAAGGTAAACT&quot; &quot;ACCGTAACACACGCTG&quot; &quot;ACCGTAACAGCTCGAC&quot;
+##  [511] &quot;ACCGTAACAGCTGTAT&quot; &quot;ACCGTAACATCCTAGA&quot; &quot;ACCGTAACATGGGAAC&quot;
+##  [514] &quot;ACCGTAACATTTCAGG&quot; &quot;ACCGTAAGTTCGCGAC&quot; &quot;ACCGTAATCCTATGTT&quot;
+##  [517] &quot;ACCGTAATCGGTGTTA&quot; &quot;ACCGTAATCGTCACGG&quot; &quot;ACCGTAATCTGGCGTG&quot;
+##  [520] &quot;ACCTTTAAGAGCTTCT&quot; &quot;ACCTTTAAGTTGTCGT&quot; &quot;ACCTTTACAAGCCCAC&quot;
+##  [523] &quot;ACCTTTACATGTCCTC&quot; &quot;ACCTTTAGTAGAGTGC&quot; &quot;ACCTTTATCATCTGTT&quot;
+##  [526] &quot;ACCTTTATCCCTCTTT&quot; &quot;ACCTTTATCCCTGACT&quot; &quot;ACCTTTATCCTGTAGA&quot;
+##  [529] &quot;ACCTTTATCGCCAGCA&quot; &quot;ACCTTTATCTGCCCTA&quot; &quot;ACCTTTATCTTGACGA&quot;
+##  [532] &quot;ACGAGCCAGAGCCTAG&quot; &quot;ACGAGCCAGGTGATAT&quot; &quot;ACGAGCCCAAGCCGCT&quot;
+##  [535] &quot;ACGAGCCCAGGCAGTA&quot; &quot;ACGAGCCGTACCGCTG&quot; &quot;ACGAGCCGTAGAAAGG&quot;
+##  [538] &quot;ACGAGCCGTTGTCGCG&quot; &quot;ACGAGCCGTTTCGCTC&quot; &quot;ACGAGCCTCACTTCAT&quot;
+##  [541] &quot;ACGAGCCTCCGTAGGC&quot; &quot;ACGAGCCTCGTCTGAA&quot; &quot;ACGAGCCTCGTGGACC&quot;
+##  [544] &quot;ACGAGCCTCTTCATGT&quot; &quot;ACGAGGAAGAAGAAGC&quot; &quot;ACGAGGAAGGTGATTA&quot;
+##  [547] &quot;ACGAGGACACATAACC&quot; &quot;ACGAGGACATGGATGG&quot; &quot;ACGAGGAGTTATCACG&quot;
+##  [550] &quot;ACGAGGAGTTCGTTGA&quot; &quot;ACGAGGATCCAGGGCT&quot; &quot;ACGAGGATCCCTGACT&quot;
+##  [553] &quot;ACGAGGATCGAACTGT&quot; &quot;ACGATACAGAAAGTGG&quot; &quot;ACGATACAGACCTAGG&quot;
+##  [556] &quot;ACGATACAGACTAGAT&quot; &quot;ACGATACCAAACAACA&quot; &quot;ACGATACCAAGCTGGA&quot;
+##  [559] &quot;ACGATACCACAGGCCT&quot; &quot;ACGATACCAGCCTATA&quot; &quot;ACGATACGTATATCCG&quot;
+##  [562] &quot;ACGATACGTCAATACC&quot; &quot;ACGATACGTCTTCTCG&quot; &quot;ACGATACGTGCCTTGG&quot;
+##  [565] &quot;ACGATACGTGCGATAG&quot; &quot;ACGATACGTGGAAAGA&quot; &quot;ACGATACGTTCCAACA&quot;
+##  [568] &quot;ACGATACTCACATGCA&quot; &quot;ACGATACTCAGCGATT&quot; &quot;ACGATACTCCCAGGTG&quot;
+##  [571] &quot;ACGATGTAGAGGTACC&quot; &quot;ACGATGTAGATATGCA&quot; &quot;ACGATGTCAAGCGTAG&quot;
+##  [574] &quot;ACGATGTCAATAGCAA&quot; &quot;ACGATGTCACCAACCG&quot; &quot;ACGATGTCAGGAACGT&quot;
+##  [577] &quot;ACGATGTCATGTCGAT&quot; &quot;ACGATGTGTAGTAGTA&quot; &quot;ACGATGTGTGACTACT&quot;
+##  [580] &quot;ACGATGTGTGCACTTA&quot; &quot;ACGATGTGTGCCTGGT&quot; &quot;ACGATGTGTGGTACAG&quot;
+##  [583] &quot;ACGATGTGTTCAGGCC&quot; &quot;ACGATGTTCCACGAAT&quot; &quot;ACGATGTTCGGTCTAA&quot;
+##  [586] &quot;ACGATGTTCGTCCGTT&quot; &quot;ACGATGTTCGTTTATC&quot; &quot;ACGATGTTCTCGCTTG&quot;
+##  [589] &quot;ACGATGTTCTGACCTC&quot; &quot;ACGATGTTCTGTCAAG&quot; &quot;ACGATGTTCTTACCGC&quot;
+##  [592] &quot;ACGCAGCAGATCTGAA&quot; &quot;ACGCAGCAGATGTGGC&quot; &quot;ACGCAGCAGTGTCTCA&quot;
+##  [595] &quot;ACGCAGCCAACGATGG&quot; &quot;ACGCAGCCACACGCTG&quot; &quot;ACGCAGCCAGCTGTTA&quot;
+##  [598] &quot;ACGCAGCCAGGGTTAG&quot; &quot;ACGCAGCGTACTCAAC&quot; &quot;ACGCAGCGTAGGAGTC&quot;
+##  [601] &quot;ACGCAGCGTATATCCG&quot; &quot;ACGCAGCGTCACCTAA&quot; &quot;ACGCAGCGTCCTCCAT&quot;
+##  [604] &quot;ACGCAGCGTCTTCTCG&quot; &quot;ACGCAGCGTGTGGTTT&quot; &quot;ACGCAGCGTTCCTCCA&quot;
+##  [607] &quot;ACGCAGCGTTGTCTTT&quot; &quot;ACGCAGCTCAGGATCT&quot; &quot;ACGCAGCTCGACGGAA&quot;
+##  [610] &quot;ACGCAGCTCGCCAAAT&quot; &quot;ACGCAGCTCTGATACG&quot; &quot;ACGCCAGAGAACAACT&quot;
+##  [613] &quot;ACGCCAGAGATGGGTC&quot; &quot;ACGCCAGAGATGTAAC&quot; &quot;ACGCCAGAGCACACAG&quot;
+##  [616] &quot;ACGCCAGAGGATGTAT&quot; &quot;ACGCCAGAGTAGGTGC&quot; &quot;ACGCCAGAGTCAAGCG&quot;
+##  [619] &quot;ACGCCAGAGTCTCAAC&quot; &quot;ACGCCAGCAATGCCAT&quot; &quot;ACGCCAGCACACCGCA&quot;
+##  [622] &quot;ACGCCAGCACGTGAGA&quot; &quot;ACGCCAGCAGCGTCCA&quot; &quot;ACGCCAGGTCAATGTC&quot;
+##  [625] &quot;ACGCCAGGTCCGAGTC&quot; &quot;ACGCCAGGTCGACTAT&quot; &quot;ACGCCAGGTTCGCTAA&quot;
+##  [628] &quot;ACGCCAGTCACTCCTG&quot; &quot;ACGCCAGTCAGAGCTT&quot; &quot;ACGCCAGTCATATCGG&quot;
+##  [631] &quot;ACGCCAGTCCCACTTG&quot; &quot;ACGCCAGTCCTGCCAT&quot; &quot;ACGCCAGTCCTTTCGG&quot;
+##  [634] &quot;ACGCCAGTCGCAGGCT&quot; &quot;ACGCCAGTCGTTTATC&quot; &quot;ACGCCGAAGACTAGGC&quot;
+##  [637] &quot;ACGCCGAAGAGGTTAT&quot; &quot;ACGCCGAAGTGTTAGA&quot; &quot;ACGCCGAAGTTACGGG&quot;
+##  [640] &quot;ACGCCGACAATGTAAG&quot; &quot;ACGCCGACAGACGCCT&quot; &quot;ACGCCGACAGGTTTCA&quot;
+##  [643] &quot;ACGCCGACATCGGTTA&quot; &quot;ACGCCGAGTCTAACGT&quot; &quot;ACGCCGAGTCTCTTTA&quot;
+##  [646] &quot;ACGCCGAGTCTTCTCG&quot; &quot;ACGCCGAGTGTAATGA&quot; &quot;ACGCCGAGTTGCGCAC&quot;
+##  [649] &quot;ACGCCGATCAGGTAAA&quot; &quot;ACGCCGATCATGGTCA&quot; &quot;ACGCCGATCCTACAGA&quot;
+##  [652] &quot;ACGCCGATCTCGATGA&quot; &quot;ACGCCGATCTTAGAGC&quot; &quot;ACGCCGATCTTCAACT&quot;
+##  [655] &quot;ACGGAGAAGAGGACGG&quot; &quot;ACGGAGAAGTTCGCGC&quot; &quot;ACGGAGACAAGTTAAG&quot;
+##  [658] &quot;ACGGAGACAAGTTCTG&quot; &quot;ACGGAGACAATCTACG&quot; &quot;ACGGAGACAGACTCGC&quot;
+##  [661] &quot;ACGGAGAGTACACCGC&quot; &quot;ACGGAGAGTACTTGAC&quot; &quot;ACGGAGAGTGCTCTTC&quot;
+##  [664] &quot;ACGGAGAGTGGGTCAA&quot; &quot;ACGGAGAGTGTGACGA&quot; &quot;ACGGAGAGTTCCCGAG&quot;
+##  [667] &quot;ACGGAGAGTTCGGCAC&quot; &quot;ACGGAGATCAAACAAG&quot; &quot;ACGGAGATCACATACG&quot;
+##  [670] &quot;ACGGAGATCAGCGACC&quot; &quot;ACGGAGATCATCTGCC&quot; &quot;ACGGAGATCGAACGGA&quot;
+##  [673] &quot;ACGGCCAAGACCTAGG&quot; &quot;ACGGCCAAGCGAAGGG&quot; &quot;ACGGCCAAGCTGAAAT&quot;
+##  [676] &quot;ACGGCCAAGGATCGCA&quot; &quot;ACGGCCACAACGATCT&quot; &quot;ACGGCCACACACTGCG&quot;
+##  [679] &quot;ACGGCCACACGAGAGT&quot; &quot;ACGGCCACACGGATAG&quot; &quot;ACGGCCACACTCTGTC&quot;
+##  [682] &quot;ACGGCCACAGTAAGAT&quot; &quot;ACGGCCAGTCAACATC&quot; &quot;ACGGCCAGTGAGTGAC&quot;
+##  [685] &quot;ACGGCCATCACTTATC&quot; &quot;ACGGCCATCATAAAGG&quot; &quot;ACGGCCATCCAAAGTC&quot;
+##  [688] &quot;ACGGCCATCCGAGCCA&quot; &quot;ACGGCCATCGGAATCT&quot; &quot;ACGGCCATCGTCACGG&quot;
+##  [691] &quot;ACGGCCATCTGCCCTA&quot; &quot;ACGGGCTAGCCCAACC&quot; &quot;ACGGGCTAGGGTATCG&quot;
+##  [694] &quot;ACGGGCTAGGGTGTTG&quot; &quot;ACGGGCTCACACCGAC&quot; &quot;ACGGGCTCACCCATTC&quot;
+##  [697] &quot;ACGGGCTCATGTAGTC&quot; &quot;ACGGGCTCATGTCGAT&quot; &quot;ACGGGCTGTTCAACCA&quot;
+##  [700] &quot;ACGGGCTTCAACCAAC&quot; &quot;ACGGGCTTCAACCATG&quot; &quot;ACGGGCTTCTCTTGAT&quot;
+##  [703] &quot;ACGGGTCAGATGCCAG&quot; &quot;ACGGGTCAGCACACAG&quot; &quot;ACGGGTCCAGCTGTGC&quot;
+##  [706] &quot;ACGGGTCGTATAGGTA&quot; &quot;ACGGGTCGTTGGAGGT&quot; &quot;ACGGGTCTCATGCATG&quot;
+##  [709] &quot;ACGGGTCTCATGGTCA&quot; &quot;ACGGGTCTCTCAAACG&quot; &quot;ACGGGTCTCTGGCGTG&quot;
+##  [712] &quot;ACGTCAAAGCAATCTC&quot; &quot;ACGTCAAAGTCTTGCA&quot; &quot;ACGTCAAAGTGGGTTG&quot;
+##  [715] &quot;ACGTCAACAATCGGTT&quot; &quot;ACGTCAAGTCGAATCT&quot; &quot;ACGTCAAGTGAGTGAC&quot;
+##  [718] &quot;ACGTCAAGTGCACCAC&quot; &quot;ACGTCAATCACGAAGG&quot; &quot;ACGTCAATCAGTGCAT&quot;
+##  [721] &quot;ACGTCAATCAGTTGAC&quot; &quot;ACGTCAATCATCGGAT&quot; &quot;ACGTCAATCCAAAGTC&quot;
+##  [724] &quot;ACGTCAATCCGAAGAG&quot; &quot;ACGTCAATCTAACTTC&quot; &quot;ACGTCAATCTGATACG&quot;
+##  [727] &quot;ACGTCAATCTGCCCTA&quot; &quot;ACTATCTAGCAACGGT&quot; &quot;ACTATCTAGTAGCGGT&quot;
+##  [730] &quot;ACTATCTCAATGCCAT&quot; &quot;ACTATCTCAGATAATG&quot; &quot;ACTATCTCATAGACTC&quot;
+##  [733] &quot;ACTATCTCATTCGACA&quot; &quot;ACTATCTGTGTAATGA&quot; &quot;ACTATCTGTTGGTGGA&quot;
+##  [736] &quot;ACTATCTTCACGCATA&quot; &quot;ACTATCTTCAGCACAT&quot; &quot;ACTATCTTCATGTCTT&quot;
+##  [739] &quot;ACTGAACAGAAGGACA&quot; &quot;ACTGAACAGGGTCTCC&quot; &quot;ACTGAACCAATGAAAC&quot;
+##  [742] &quot;ACTGAACCACGCCAGT&quot; &quot;ACTGAACCACTTCTGC&quot; &quot;ACTGAACCAGCTGCAC&quot;
+##  [745] &quot;ACTGAACCAGGCTCAC&quot; &quot;ACTGAACGTACTTAGC&quot; &quot;ACTGAACGTATGGTTC&quot;
+##  [748] &quot;ACTGAACGTTCGCGAC&quot; &quot;ACTGAACGTTTGCATG&quot; &quot;ACTGAACTCACAAACC&quot;
+##  [751] &quot;ACTGAACTCCATGCTC&quot; &quot;ACTGAGTAGAAGAAGC&quot; &quot;ACTGAGTAGCACCGCT&quot;
+##  [754] &quot;ACTGAGTAGGAGTACC&quot; &quot;ACTGAGTAGGCATGGT&quot; &quot;ACTGAGTCAACTGGCC&quot;
+##  [757] &quot;ACTGAGTCACACCGAC&quot; &quot;ACTGAGTCATAGAAAC&quot; &quot;ACTGAGTCATATGGTC&quot;
+##  [760] &quot;ACTGAGTCATCCGTGG&quot; &quot;ACTGAGTGTCAACTGT&quot; &quot;ACTGAGTGTCAGAAGC&quot;
+##  [763] &quot;ACTGAGTGTGGACGAT&quot; &quot;ACTGAGTGTGTGACCC&quot; &quot;ACTGAGTTCGGTCCGA&quot;
+##  [766] &quot;ACTGATGAGAAACGAG&quot; &quot;ACTGATGAGACAAGCC&quot; &quot;ACTGATGAGCGATGAC&quot;
+##  [769] &quot;ACTGATGAGGTAAACT&quot; &quot;ACTGATGAGTAACCCT&quot; &quot;ACTGATGCACTCGACG&quot;
+##  [772] &quot;ACTGATGCAGGTCTCG&quot; &quot;ACTGATGGTCTCTCGT&quot; &quot;ACTGATGGTTCACCTC&quot;
+##  [775] &quot;ACTGATGGTTCTGAAC&quot; &quot;ACTGATGTCCAGGGCT&quot; &quot;ACTGATGTCCGCGGTA&quot;
+##  [778] &quot;ACTGATGTCTCGCATC&quot; &quot;ACTGCTCAGTTACGGG&quot; &quot;ACTGCTCCAAACTGTC&quot;
+##  [781] &quot;ACTGCTCCAAGTTCTG&quot; &quot;ACTGCTCCACCTCGTT&quot; &quot;ACTGCTCCACTTGGAT&quot;
+##  [784] &quot;ACTGCTCCAGCAGTTT&quot; &quot;ACTGCTCGTGGTCCGT&quot; &quot;ACTGCTCTCAGAGGTG&quot;
+##  [787] &quot;ACTGCTCTCCCGGATG&quot; &quot;ACTGCTCTCCGCGCAA&quot; &quot;ACTGCTCTCTGAGTGT&quot;
+##  [790] &quot;ACTGTCCAGACAGACC&quot; &quot;ACTGTCCAGAGATGAG&quot; &quot;ACTGTCCAGGGAACGG&quot;
+##  [793] &quot;ACTGTCCAGTTGTCGT&quot; &quot;ACTGTCCCACCTATCC&quot; &quot;ACTGTCCCAGCATGAG&quot;
+##  [796] &quot;ACTGTCCGTCAGCTAT&quot; &quot;ACTGTCCGTCCGTGAC&quot; &quot;ACTGTCCTCATTGCCC&quot;
+##  [799] &quot;ACTGTCCTCGAACTGT&quot; &quot;ACTGTCCTCTAACTGG&quot; &quot;ACTTACTAGAGGTAGA&quot;
+##  [802] &quot;ACTTACTAGTCTTGCA&quot; &quot;ACTTACTAGTGTCCAT&quot; &quot;ACTTACTCAAGCTGAG&quot;
+##  [805] &quot;ACTTACTCACATCCAA&quot; &quot;ACTTACTCACGGTAAG&quot; &quot;ACTTACTGTAAACGCG&quot;
+##  [808] &quot;ACTTACTGTAGCCTAT&quot; &quot;ACTTACTGTCAAAGAT&quot; &quot;ACTTACTGTTTGACAC&quot;
+##  [811] &quot;ACTTACTTCACAGTAC&quot; &quot;ACTTACTTCAGGCGAA&quot; &quot;ACTTACTTCATCACCC&quot;
+##  [814] &quot;ACTTGTTAGCGCTCCA&quot; &quot;ACTTGTTAGGCACATG&quot; &quot;ACTTGTTAGGTGCAAC&quot;
+##  [817] &quot;ACTTGTTCAATGGTCT&quot; &quot;ACTTGTTCACGCTTTC&quot; &quot;ACTTGTTCACGTCTCT&quot;
+##  [820] &quot;ACTTGTTCAGACGCTC&quot; &quot;ACTTGTTCAGTCAGAG&quot; &quot;ACTTGTTCATCCCACT&quot;
+##  [823] &quot;ACTTGTTCATCCCATC&quot; &quot;ACTTGTTCATGAACCT&quot; &quot;ACTTGTTGTCCGAGTC&quot;
+##  [826] &quot;ACTTGTTGTCGAATCT&quot; &quot;ACTTGTTGTCGAGATG&quot; &quot;ACTTGTTGTCTCTCTG&quot;
+##  [829] &quot;ACTTGTTGTGCTGTAT&quot; &quot;ACTTGTTGTTGGGACA&quot; &quot;ACTTGTTGTTGTCTTT&quot;
+##  [832] &quot;ACTTGTTTCCACTCCA&quot; &quot;ACTTTCAAGCAGCGTA&quot; &quot;ACTTTCAAGCGTTTAC&quot;
+##  [835] &quot;ACTTTCAAGCTAGGCA&quot; &quot;ACTTTCAAGCTCCTTC&quot; &quot;ACTTTCACAAACGCGA&quot;
+##  [838] &quot;ACTTTCACAGACTCGC&quot; &quot;ACTTTCACAGTCAGCC&quot; &quot;ACTTTCACATTGTGCA&quot;
+##  [841] &quot;ACTTTCAGTACTTAGC&quot; &quot;ACTTTCAGTACTTCTT&quot; &quot;ACTTTCAGTCTAAACC&quot;
+##  [844] &quot;ACTTTCAGTGTAACGG&quot; &quot;ACTTTCATCAACACGT&quot; &quot;ACTTTCATCCACGTTC&quot;
+##  [847] &quot;AGAATAGAGATGTTAG&quot; &quot;AGAATAGAGCCAGGAT&quot; &quot;AGAATAGAGCTCAACT&quot;
+##  [850] &quot;AGAATAGAGGAGTACC&quot; &quot;AGAATAGAGGTAAACT&quot; &quot;AGAATAGAGGTCGGAT&quot;
+##  [853] &quot;AGAATAGAGTGGGTTG&quot; &quot;AGAATAGCAACGCACC&quot; &quot;AGAATAGCAAGGTGTG&quot;
+##  [856] &quot;AGAATAGCACATGACT&quot; &quot;AGAATAGCACCCAGTG&quot; &quot;AGAATAGCATAAAGGT&quot;
+##  [859] &quot;AGAATAGCATAGAAAC&quot; &quot;AGAATAGCATGCCTTC&quot; &quot;AGAATAGGTACTTAGC&quot;
+##  [862] &quot;AGAATAGGTTCAGACT&quot; &quot;AGAATAGTCACCTCGT&quot; &quot;AGAATAGTCAGCTCTC&quot;
+##  [865] &quot;AGAATAGTCCTATTCA&quot; &quot;AGACGTTAGACTGGGT&quot; &quot;AGACGTTAGGCCCTCA&quot;
+##  [868] &quot;AGACGTTAGGTAAACT&quot; &quot;AGACGTTAGTGTTTGC&quot; &quot;AGACGTTCAGCTCCGA&quot;
+##  [871] &quot;AGACGTTGTAGGACAC&quot; &quot;AGACGTTGTGGTACAG&quot; &quot;AGACGTTTCAGTTAGC&quot;
+##  [874] &quot;AGACGTTTCCGTACAA&quot; &quot;AGACGTTTCTGCAAGT&quot; &quot;AGACGTTTCTTCCTTC&quot;
+##  [877] &quot;AGAGCGAAGATCCCGC&quot; &quot;AGAGCGAAGATCCTGT&quot; &quot;AGAGCGAAGCAGATCG&quot;
+##  [880] &quot;AGAGCGAAGTCCGGTC&quot; &quot;AGAGCGACAAAGCAAT&quot; &quot;AGAGCGACAATGGAAT&quot;
+##  [883] &quot;AGAGCGACATATGCTG&quot; &quot;AGAGCGACATCACAAC&quot; &quot;AGAGCGACATGGAATA&quot;
+##  [886] &quot;AGAGCGAGTACGACCC&quot; &quot;AGAGCGAGTCATGCAT&quot; &quot;AGAGCGAGTTGTACAC&quot;
+##  [889] &quot;AGAGCGATCACCGTAA&quot; &quot;AGAGCGATCAGCTTAG&quot; &quot;AGAGCGATCGGCGGTT&quot;
+##  [892] &quot;AGAGCGATCGGCTTGG&quot; &quot;AGAGCGATCTGTCTCG&quot; &quot;AGAGCTTAGACTAGGC&quot;
+##  [895] &quot;AGAGCTTAGCCACGTC&quot; &quot;AGAGCTTAGTCGTTTG&quot; &quot;AGAGCTTAGTGGGCTA&quot;
+##  [898] &quot;AGAGCTTCAAGTACCT&quot; &quot;AGAGCTTCACAGCCCA&quot; &quot;AGAGCTTCACCCAGTG&quot;
+##  [901] &quot;AGAGCTTCACGCTTTC&quot; &quot;AGAGCTTCAGTATCTG&quot; &quot;AGAGCTTCATAGTAAG&quot;
+##  [904] &quot;AGAGCTTGTCTAAACC&quot; &quot;AGAGCTTGTGCTAGCC&quot; &quot;AGAGCTTGTGGCAAAC&quot;
+##  [907] &quot;AGAGCTTGTGGTACAG&quot; &quot;AGAGCTTTCACTATTC&quot; &quot;AGAGCTTTCAGAAATG&quot;
+##  [910] &quot;AGAGCTTTCAGCACAT&quot; &quot;AGAGCTTTCCTCGCAT&quot; &quot;AGAGTGGAGAGGTAGA&quot;
+##  [913] &quot;AGAGTGGAGCCCGAAA&quot; &quot;AGAGTGGAGTCATGCT&quot; &quot;AGAGTGGAGTGGTCCC&quot;
+##  [916] &quot;AGAGTGGAGTGTACGG&quot; &quot;AGAGTGGCACATAACC&quot; &quot;AGAGTGGCACCGAAAG&quot;
+##  [919] &quot;AGAGTGGCAGCGTTCG&quot; &quot;AGAGTGGCAGGACCCT&quot; &quot;AGAGTGGCATCGATTG&quot;
+##  [922] &quot;AGAGTGGGTAGTGAAT&quot; &quot;AGAGTGGGTATAATGG&quot; &quot;AGAGTGGTCCCGACTT&quot;
+##  [925] &quot;AGAGTGGTCTACTTAC&quot; &quot;AGAGTGGTCTGTCAAG&quot; &quot;AGATCTGAGAGGTAGA&quot;
+##  [928] &quot;AGATCTGAGCAGGTCA&quot; &quot;AGATCTGAGCCAACAG&quot; &quot;AGATCTGAGGATCGCA&quot;
+##  [931] &quot;AGATCTGAGGGATCTG&quot; &quot;AGATCTGAGGGCTCTC&quot; &quot;AGATCTGAGGTGATAT&quot;
+##  [934] &quot;AGATCTGAGTACGTAA&quot; &quot;AGATCTGAGTTCGCAT&quot; &quot;AGATCTGCAAACAACA&quot;
+##  [937] &quot;AGATCTGCACATGACT&quot; &quot;AGATCTGGTAAGAGGA&quot; &quot;AGATCTGTCAGTTCGA&quot;
+##  [940] &quot;AGATCTGTCGCCATAA&quot; &quot;AGATCTGTCGCTTAGA&quot; &quot;AGATTGCAGAAACCAT&quot;
+##  [943] &quot;AGATTGCAGAGGTACC&quot; &quot;AGATTGCAGATAGTCA&quot; &quot;AGATTGCCACGGTTTA&quot;
+##  [946] &quot;AGATTGCCAGGGTATG&quot; &quot;AGATTGCCATCACGTA&quot; &quot;AGATTGCGTACATGTC&quot;
+##  [949] &quot;AGATTGCGTCCAGTAT&quot; &quot;AGATTGCGTCCGTGAC&quot; &quot;AGATTGCTCAGTGCAT&quot;
+##  [952] &quot;AGATTGCTCATGCATG&quot; &quot;AGATTGCTCGGCGGTT&quot; &quot;AGCAGCCAGAAACCAT&quot;
+##  [955] &quot;AGCAGCCAGACCTTTG&quot; &quot;AGCAGCCAGACGACGT&quot; &quot;AGCAGCCAGATGTTAG&quot;
+##  [958] &quot;AGCAGCCAGCACCGTC&quot; &quot;AGCAGCCAGTGGTAAT&quot; &quot;AGCAGCCCAAACCCAT&quot;
+##  [961] &quot;AGCAGCCCAGATGGCA&quot; &quot;AGCAGCCCATCACGAT&quot; &quot;AGCAGCCGTACTTAGC&quot;
+##  [964] &quot;AGCAGCCGTCCGAAGA&quot; &quot;AGCAGCCGTCGCTTCT&quot; &quot;AGCAGCCGTGCAGTAG&quot;
+##  [967] &quot;AGCAGCCGTTCCCGAG&quot; &quot;AGCAGCCGTTTAGGAA&quot; &quot;AGCAGCCGTTTGTTTC&quot;
+##  [970] &quot;AGCAGCCTCCTTGCCA&quot; &quot;AGCAGCCTCGTCGTTC&quot; &quot;AGCAGCCTCTGGAGCC&quot;
+##  [973] &quot;AGCATACAGTTCGATC&quot; &quot;AGCATACCACCACGTG&quot; &quot;AGCATACCACGGATAG&quot;
+##  [976] &quot;AGCATACCAGCTATTG&quot; &quot;AGCATACGTCCTCTTG&quot; &quot;AGCATACGTTAAGGGC&quot;
+##  [979] &quot;AGCATACGTTACTGAC&quot; &quot;AGCATACGTTAGATGA&quot; &quot;AGCATACTCATCGCTC&quot;
+##  [982] &quot;AGCATACTCCGCATCT&quot; &quot;AGCATACTCGAACTGT&quot; &quot;AGCATACTCTAACTTC&quot;
+##  [985] &quot;AGCATACTCTCGGACG&quot; &quot;AGCCTAAAGCCCAATT&quot; &quot;AGCCTAAAGGACATTA&quot;
+##  [988] &quot;AGCCTAAAGTACGTTC&quot; &quot;AGCCTAAAGTCGATAA&quot; &quot;AGCCTAAAGTCTTGCA&quot;
+##  [991] &quot;AGCCTAACAAGCCTAT&quot; &quot;AGCCTAACACGTCTCT&quot; &quot;AGCCTAACAGCCTGTG&quot;
+##  [994] &quot;AGCCTAACATCAGTCA&quot; &quot;AGCCTAAGTATCTGCA&quot; &quot;AGCCTAAGTCGGCTCA&quot;
+##  [997] &quot;AGCCTAAGTTATCCGA&quot; &quot;AGCCTAATCAGTACGT&quot; &quot;AGCCTAATCCCTTGTG&quot;
+## [1000] &quot;AGCCTAATCGTTTGCC&quot;
 ##  [ reached getOption(&quot;max.print&quot;) -- omitted 6109 entries ]</code></pre>
 <div class="sourceCode" id="cb50"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb50-1"><a href="data-wrangling-scrnaseq-1.html#cb50-1"></a><span class="co"># One can pull multiple values from the data frame at any time</span></span>
 <span id="cb50-2"><a href="data-wrangling-scrnaseq-1.html#cb50-2"></a><span class="kw">head</span>(<span class="dt">x =</span> seurat<span class="op">@</span>meta.data[<span class="kw">c</span>(<span class="st">&#39;nCount_RNA&#39;</span>, <span class="st">&#39;nFeature_RNA&#39;</span>)])</span></code></pre></div>
@@ -730,8 +815,8 @@ version Seurat version used when creating the object</li>
 <div class="sourceCode" id="cb54"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb54-1"><a href="data-wrangling-scrnaseq-1.html#cb54-1"></a><span class="co"># Passing `drop = TRUE` will turn the meta data into a names vector</span></span>
 <span id="cb54-2"><a href="data-wrangling-scrnaseq-1.html#cb54-2"></a><span class="co"># with each entry being named for the cell it corresponds to</span></span>
 <span id="cb54-3"><a href="data-wrangling-scrnaseq-1.html#cb54-3"></a><span class="kw">head</span>(<span class="dt">x =</span> seurat<span class="op">@</span>meta.data[<span class="st">&#39;nFeature_RNA&#39;</span>, <span class="dt">drop =</span> <span class="ot">TRUE</span>])</span></code></pre></div>
-<pre><code>## Warning in `[.data.frame`(seurat@meta.data, &quot;nFeature_RNA&quot;, drop = TRUE): &#39;drop&#39; argument will
-## be ignored</code></pre>
+<pre><code>## Warning in `[.data.frame`(seurat@meta.data, &quot;nFeature_RNA&quot;, drop =
+## TRUE): &#39;drop&#39; argument will be ignored</code></pre>
 <pre><code>##                  nFeature_RNA
 ## AAACCTGAGCTAGTCT         1184
 ## AAACCTGAGGGCACTA         1387
@@ -745,118 +830,216 @@ version Seurat version used when creating the object</li>
 <h4><span class="header-section-number">4.4.1.4</span> Methods</h4>
 <p>Methods for the Seurat class can be found with the following:</p>
 <div class="sourceCode" id="cb58"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb58-1"><a href="data-wrangling-scrnaseq-1.html#cb58-1"></a>utils<span class="op">::</span><span class="kw">methods</span>(<span class="dt">class =</span> <span class="st">&#39;Seurat&#39;</span>)</span></code></pre></div>
-<pre><code>##  [1] [                       [[                      [[&lt;-                   
-##  [4] $                       $&lt;-                     AddMetaData            
-##  [7] as.CellDataSet          as.loom                 as.SingleCellExperiment
-## [10] colMeans                colSums                 Command                
-## [13] DefaultAssay            DefaultAssay&lt;-          dim                    
-## [16] dimnames                droplevels              Embeddings             
-## [19] FindClusters            FindMarkers             FindNeighbors          
-## [22] FindVariableFeatures    GetAssay                GetAssayData           
-## [25] HVFInfo                 Idents                  Idents&lt;-               
-## [28] Key                     levels                  levels&lt;-               
-## [31] Loadings                merge                   Misc                   
-## [34] Misc&lt;-                  names                   NormalizeData          
-## [37] OldWhichCells           Project                 Project&lt;-              
-## [40] RenameCells             RenameIdents            ReorderIdent           
-## [43] rowMeans                rowSums                 RunALRA                
-## [46] RunCCA                  RunICA                  RunLSI                 
-## [49] RunPCA                  RunTSNE                 RunUMAP                
-## [52] ScaleData               ScoreJackStraw          SetAssayData           
-## [55] SetIdent                show                    StashIdent             
-## [58] Stdev                   subset                  SubsetData             
-## [61] Tool                    Tool&lt;-                  VariableFeatures       
-## [64] VariableFeatures&lt;-      WhichCells             
+<pre><code>##  [1] [                       [[                     
+##  [3] [[&lt;-                    $                      
+##  [5] $&lt;-                     AddMetaData            
+##  [7] as.CellDataSet          as.loom                
+##  [9] as.SingleCellExperiment colMeans               
+## [11] colSums                 Command                
+## [13] DefaultAssay            DefaultAssay&lt;-         
+## [15] dim                     dimnames               
+## [17] droplevels              Embeddings             
+## [19] FindClusters            FindMarkers            
+## [21] FindNeighbors           FindVariableFeatures   
+## [23] GetAssay                GetAssayData           
+## [25] HVFInfo                 Idents                 
+## [27] Idents&lt;-                Key                    
+## [29] levels                  levels&lt;-               
+## [31] Loadings                merge                  
+## [33] Misc                    Misc&lt;-                 
+## [35] names                   NormalizeData          
+## [37] OldWhichCells           Project                
+## [39] Project&lt;-               RenameCells            
+## [41] RenameIdents            ReorderIdent           
+## [43] rowMeans                rowSums                
+## [45] RunALRA                 RunCCA                 
+## [47] RunICA                  RunLSI                 
+## [49] RunPCA                  RunTSNE                
+## [51] RunUMAP                 ScaleData              
+## [53] ScoreJackStraw          SetAssayData           
+## [55] SetIdent                show                   
+## [57] StashIdent              Stdev                  
+## [59] subset                  SubsetData             
+## [61] Tool                    Tool&lt;-                 
+## [63] VariableFeatures        VariableFeatures&lt;-     
+## [65] WhichCells             
 ## see &#39;?methods&#39; for accessing help and source code</code></pre>
 <p>You can also list all functions in the Seurat package by using:</p>
 <div class="sourceCode" id="cb60"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb60-1"><a href="data-wrangling-scrnaseq-1.html#cb60-1"></a><span class="kw">ls</span>(<span class="st">&quot;package:Seurat&quot;</span>)</span></code></pre></div>
-<pre><code>##   [1] &quot;AddMetaData&quot;                     &quot;AddModuleScore&quot;                 
-##   [3] &quot;ALRAChooseKPlot&quot;                 &quot;as.CellDataSet&quot;                 
-##   [5] &quot;as.Graph&quot;                        &quot;as.loom&quot;                        
-##   [7] &quot;as.Seurat&quot;                       &quot;as.SingleCellExperiment&quot;        
-##   [9] &quot;as.sparse&quot;                       &quot;Assays&quot;                         
-##  [11] &quot;AugmentPlot&quot;                     &quot;AverageExpression&quot;              
-##  [13] &quot;BarcodeInflectionsPlot&quot;          &quot;BlackAndWhite&quot;                  
-##  [15] &quot;BlueAndRed&quot;                      &quot;BoldTitle&quot;                      
-##  [17] &quot;BuildClusterTree&quot;                &quot;CalculateBarcodeInflections&quot;    
-##  [19] &quot;CaseMatch&quot;                       &quot;cc.genes&quot;                       
-##  [21] &quot;cc.genes.updated.2019&quot;           &quot;CellCycleScoring&quot;               
-##  [23] &quot;Cells&quot;                           &quot;CellsByIdentities&quot;              
-##  [25] &quot;CellScatter&quot;                     &quot;CellSelector&quot;                   
-##  [27] &quot;CollapseEmbeddingOutliers&quot;       &quot;CollapseSpeciesExpressionMatrix&quot;
-##  [29] &quot;ColorDimSplit&quot;                   &quot;CombinePlots&quot;                   
-##  [31] &quot;Command&quot;                         &quot;CreateAssayObject&quot;              
-##  [33] &quot;CreateDimReducObject&quot;            &quot;CreateGeneActivityMatrix&quot;       
-##  [35] &quot;CreateSeuratObject&quot;              &quot;CustomDistance&quot;                 
-##  [37] &quot;CustomPalette&quot;                   &quot;DarkTheme&quot;                      
-##  [39] &quot;DefaultAssay&quot;                    &quot;DefaultAssay&lt;-&quot;                 
-##  [41] &quot;DietSeurat&quot;                      &quot;DimHeatmap&quot;                     
-##  [43] &quot;DimPlot&quot;                         &quot;DoHeatmap&quot;                      
-##  [45] &quot;DotPlot&quot;                         &quot;ElbowPlot&quot;                      
-##  [47] &quot;Embeddings&quot;                      &quot;ExpMean&quot;                        
-##  [49] &quot;ExportToCellbrowser&quot;             &quot;ExpSD&quot;                          
-##  [51] &quot;ExpVar&quot;                          &quot;FeatureLocator&quot;                 
-##  [53] &quot;FeaturePlot&quot;                     &quot;FeatureScatter&quot;                 
-##  [55] &quot;FetchData&quot;                       &quot;FindAllMarkers&quot;                 
-##  [57] &quot;FindClusters&quot;                    &quot;FindConservedMarkers&quot;           
-##  [59] &quot;FindIntegrationAnchors&quot;          &quot;FindMarkers&quot;                    
-##  [61] &quot;FindNeighbors&quot;                   &quot;FindTransferAnchors&quot;            
-##  [63] &quot;FindVariableFeatures&quot;            &quot;FontSize&quot;                       
-##  [65] &quot;GeneSymbolThesarus&quot;              &quot;GetAssay&quot;                       
-##  [67] &quot;GetAssayData&quot;                    &quot;GetIntegrationData&quot;             
-##  [69] &quot;GetResidual&quot;                     &quot;HoverLocator&quot;                   
-##  [71] &quot;HTODemux&quot;                        &quot;HTOHeatmap&quot;                     
-##  [73] &quot;HVFInfo&quot;                         &quot;Idents&quot;                         
-##  [75] &quot;Idents&lt;-&quot;                        &quot;IntegrateData&quot;                  
-##  [77] &quot;IsGlobal&quot;                        &quot;JackStraw&quot;                      
-##  [79] &quot;JackStrawPlot&quot;                   &quot;JS&quot;                             
-##  [81] &quot;JS&lt;-&quot;                            &quot;Key&quot;                            
-##  [83] &quot;Key&lt;-&quot;                           &quot;L2CCA&quot;                          
-##  [85] &quot;L2Dim&quot;                           &quot;LabelClusters&quot;                  
-##  [87] &quot;LabelPoints&quot;                     &quot;Loadings&quot;                       
-##  [89] &quot;Loadings&lt;-&quot;                      &quot;LocalStruct&quot;                    
-##  [91] &quot;LogNormalize&quot;                    &quot;LogSeuratCommand&quot;               
-##  [93] &quot;LogVMR&quot;                          &quot;MetaFeature&quot;                    
-##  [95] &quot;MinMax&quot;                          &quot;Misc&quot;                           
-##  [97] &quot;Misc&lt;-&quot;                          &quot;MixingMetric&quot;                   
-##  [99] &quot;MULTIseqDemux&quot;                   &quot;NoAxes&quot;                         
-## [101] &quot;NoGrid&quot;                          &quot;NoLegend&quot;                       
-## [103] &quot;NormalizeData&quot;                   &quot;OldWhichCells&quot;                  
-## [105] &quot;pbmc_small&quot;                      &quot;PCAPlot&quot;                        
-## [107] &quot;PCASigGenes&quot;                     &quot;PCHeatmap&quot;                      
-## [109] &quot;PercentageFeatureSet&quot;            &quot;PlotClusterTree&quot;                
-## [111] &quot;PolyDimPlot&quot;                     &quot;PolyFeaturePlot&quot;                
-## [113] &quot;PrepSCTIntegration&quot;              &quot;Project&quot;                        
-## [115] &quot;Project&lt;-&quot;                       &quot;ProjectDim&quot;                     
-## [117] &quot;PurpleAndYellow&quot;                 &quot;Read10X&quot;                        
-## [119] &quot;Read10X_h5&quot;                      &quot;ReadAlevin&quot;                     
-## [121] &quot;ReadAlevinCsv&quot;                   &quot;ReadH5AD&quot;                       
-## [123] &quot;Reductions&quot;                      &quot;RegroupIdents&quot;                  
-## [125] &quot;RelativeCounts&quot;                  &quot;RenameAssays&quot;                   
-## [127] &quot;RenameCells&quot;                     &quot;RenameIdents&quot;                   
-## [129] &quot;ReorderIdent&quot;                    &quot;RestoreLegend&quot;                  
-## [131] &quot;RidgePlot&quot;                       &quot;RotatedAxis&quot;                    
-## [133] &quot;RowMergeSparseMatrices&quot;          &quot;RunALRA&quot;                        
-## [135] &quot;RunCCA&quot;                          &quot;RunICA&quot;                         
-## [137] &quot;RunLSI&quot;                          &quot;RunPCA&quot;                         
-## [139] &quot;RunTSNE&quot;                         &quot;RunUMAP&quot;                        
-## [141] &quot;SampleUMI&quot;                       &quot;ScaleData&quot;                      
-## [143] &quot;ScoreJackStraw&quot;                  &quot;SCTransform&quot;                    
-## [145] &quot;SelectIntegrationFeatures&quot;       &quot;SetAssayData&quot;                   
-## [147] &quot;SetIdent&quot;                        &quot;SetIntegrationData&quot;             
-## [149] &quot;SeuratAxes&quot;                      &quot;SeuratTheme&quot;                    
-## [151] &quot;SpatialTheme&quot;                    &quot;SplitObject&quot;                    
-## [153] &quot;StashIdent&quot;                      &quot;Stdev&quot;                          
-## [155] &quot;StopCellbrowser&quot;                 &quot;SubsetByBarcodeInflections&quot;     
-## [157] &quot;SubsetData&quot;                      &quot;TF.IDF&quot;                         
-## [159] &quot;Tool&quot;                            &quot;Tool&lt;-&quot;                         
-## [161] &quot;TopCells&quot;                        &quot;TopFeatures&quot;                    
-## [163] &quot;TransferData&quot;                    &quot;TSNEPlot&quot;                       
-## [165] &quot;UMAPPlot&quot;                        &quot;UpdateSeuratObject&quot;             
-## [167] &quot;UpdateSymbolList&quot;                &quot;VariableFeaturePlot&quot;            
-## [169] &quot;VariableFeatures&quot;                &quot;VariableFeatures&lt;-&quot;             
-## [171] &quot;VizDimLoadings&quot;                  &quot;VlnPlot&quot;                        
-## [173] &quot;WhichCells&quot;                      &quot;WhiteBackground&quot;</code></pre>
+<pre><code>##   [1] &quot;AddMetaData&quot;                    
+##   [2] &quot;AddModuleScore&quot;                 
+##   [3] &quot;ALRAChooseKPlot&quot;                
+##   [4] &quot;as.CellDataSet&quot;                 
+##   [5] &quot;as.Graph&quot;                       
+##   [6] &quot;as.loom&quot;                        
+##   [7] &quot;as.Seurat&quot;                      
+##   [8] &quot;as.SingleCellExperiment&quot;        
+##   [9] &quot;as.sparse&quot;                      
+##  [10] &quot;Assays&quot;                         
+##  [11] &quot;AugmentPlot&quot;                    
+##  [12] &quot;AverageExpression&quot;              
+##  [13] &quot;BarcodeInflectionsPlot&quot;         
+##  [14] &quot;BlackAndWhite&quot;                  
+##  [15] &quot;BlueAndRed&quot;                     
+##  [16] &quot;BoldTitle&quot;                      
+##  [17] &quot;BuildClusterTree&quot;               
+##  [18] &quot;CalculateBarcodeInflections&quot;    
+##  [19] &quot;CaseMatch&quot;                      
+##  [20] &quot;cc.genes&quot;                       
+##  [21] &quot;cc.genes.updated.2019&quot;          
+##  [22] &quot;CellCycleScoring&quot;               
+##  [23] &quot;Cells&quot;                          
+##  [24] &quot;CellsByIdentities&quot;              
+##  [25] &quot;CellScatter&quot;                    
+##  [26] &quot;CellSelector&quot;                   
+##  [27] &quot;CollapseEmbeddingOutliers&quot;      
+##  [28] &quot;CollapseSpeciesExpressionMatrix&quot;
+##  [29] &quot;ColorDimSplit&quot;                  
+##  [30] &quot;CombinePlots&quot;                   
+##  [31] &quot;Command&quot;                        
+##  [32] &quot;CreateAssayObject&quot;              
+##  [33] &quot;CreateDimReducObject&quot;           
+##  [34] &quot;CreateGeneActivityMatrix&quot;       
+##  [35] &quot;CreateSeuratObject&quot;             
+##  [36] &quot;CustomDistance&quot;                 
+##  [37] &quot;CustomPalette&quot;                  
+##  [38] &quot;DarkTheme&quot;                      
+##  [39] &quot;DefaultAssay&quot;                   
+##  [40] &quot;DefaultAssay&lt;-&quot;                 
+##  [41] &quot;DietSeurat&quot;                     
+##  [42] &quot;DimHeatmap&quot;                     
+##  [43] &quot;DimPlot&quot;                        
+##  [44] &quot;DoHeatmap&quot;                      
+##  [45] &quot;DotPlot&quot;                        
+##  [46] &quot;ElbowPlot&quot;                      
+##  [47] &quot;Embeddings&quot;                     
+##  [48] &quot;ExpMean&quot;                        
+##  [49] &quot;ExportToCellbrowser&quot;            
+##  [50] &quot;ExpSD&quot;                          
+##  [51] &quot;ExpVar&quot;                         
+##  [52] &quot;FeatureLocator&quot;                 
+##  [53] &quot;FeaturePlot&quot;                    
+##  [54] &quot;FeatureScatter&quot;                 
+##  [55] &quot;FetchData&quot;                      
+##  [56] &quot;FindAllMarkers&quot;                 
+##  [57] &quot;FindClusters&quot;                   
+##  [58] &quot;FindConservedMarkers&quot;           
+##  [59] &quot;FindIntegrationAnchors&quot;         
+##  [60] &quot;FindMarkers&quot;                    
+##  [61] &quot;FindNeighbors&quot;                  
+##  [62] &quot;FindTransferAnchors&quot;            
+##  [63] &quot;FindVariableFeatures&quot;           
+##  [64] &quot;FontSize&quot;                       
+##  [65] &quot;GeneSymbolThesarus&quot;             
+##  [66] &quot;GetAssay&quot;                       
+##  [67] &quot;GetAssayData&quot;                   
+##  [68] &quot;GetIntegrationData&quot;             
+##  [69] &quot;GetResidual&quot;                    
+##  [70] &quot;HoverLocator&quot;                   
+##  [71] &quot;HTODemux&quot;                       
+##  [72] &quot;HTOHeatmap&quot;                     
+##  [73] &quot;HVFInfo&quot;                        
+##  [74] &quot;Idents&quot;                         
+##  [75] &quot;Idents&lt;-&quot;                       
+##  [76] &quot;IntegrateData&quot;                  
+##  [77] &quot;IsGlobal&quot;                       
+##  [78] &quot;JackStraw&quot;                      
+##  [79] &quot;JackStrawPlot&quot;                  
+##  [80] &quot;JS&quot;                             
+##  [81] &quot;JS&lt;-&quot;                           
+##  [82] &quot;Key&quot;                            
+##  [83] &quot;Key&lt;-&quot;                          
+##  [84] &quot;L2CCA&quot;                          
+##  [85] &quot;L2Dim&quot;                          
+##  [86] &quot;LabelClusters&quot;                  
+##  [87] &quot;LabelPoints&quot;                    
+##  [88] &quot;Loadings&quot;                       
+##  [89] &quot;Loadings&lt;-&quot;                     
+##  [90] &quot;LocalStruct&quot;                    
+##  [91] &quot;LogNormalize&quot;                   
+##  [92] &quot;LogSeuratCommand&quot;               
+##  [93] &quot;LogVMR&quot;                         
+##  [94] &quot;MetaFeature&quot;                    
+##  [95] &quot;MinMax&quot;                         
+##  [96] &quot;Misc&quot;                           
+##  [97] &quot;Misc&lt;-&quot;                         
+##  [98] &quot;MixingMetric&quot;                   
+##  [99] &quot;MULTIseqDemux&quot;                  
+## [100] &quot;NoAxes&quot;                         
+## [101] &quot;NoGrid&quot;                         
+## [102] &quot;NoLegend&quot;                       
+## [103] &quot;NormalizeData&quot;                  
+## [104] &quot;OldWhichCells&quot;                  
+## [105] &quot;pbmc_small&quot;                     
+## [106] &quot;PCAPlot&quot;                        
+## [107] &quot;PCASigGenes&quot;                    
+## [108] &quot;PCHeatmap&quot;                      
+## [109] &quot;PercentageFeatureSet&quot;           
+## [110] &quot;PlotClusterTree&quot;                
+## [111] &quot;PolyDimPlot&quot;                    
+## [112] &quot;PolyFeaturePlot&quot;                
+## [113] &quot;PrepSCTIntegration&quot;             
+## [114] &quot;Project&quot;                        
+## [115] &quot;Project&lt;-&quot;                      
+## [116] &quot;ProjectDim&quot;                     
+## [117] &quot;PurpleAndYellow&quot;                
+## [118] &quot;Read10X&quot;                        
+## [119] &quot;Read10X_h5&quot;                     
+## [120] &quot;ReadAlevin&quot;                     
+## [121] &quot;ReadAlevinCsv&quot;                  
+## [122] &quot;ReadH5AD&quot;                       
+## [123] &quot;Reductions&quot;                     
+## [124] &quot;RegroupIdents&quot;                  
+## [125] &quot;RelativeCounts&quot;                 
+## [126] &quot;RenameAssays&quot;                   
+## [127] &quot;RenameCells&quot;                    
+## [128] &quot;RenameIdents&quot;                   
+## [129] &quot;ReorderIdent&quot;                   
+## [130] &quot;RestoreLegend&quot;                  
+## [131] &quot;RidgePlot&quot;                      
+## [132] &quot;RotatedAxis&quot;                    
+## [133] &quot;RowMergeSparseMatrices&quot;         
+## [134] &quot;RunALRA&quot;                        
+## [135] &quot;RunCCA&quot;                         
+## [136] &quot;RunICA&quot;                         
+## [137] &quot;RunLSI&quot;                         
+## [138] &quot;RunPCA&quot;                         
+## [139] &quot;RunTSNE&quot;                        
+## [140] &quot;RunUMAP&quot;                        
+## [141] &quot;SampleUMI&quot;                      
+## [142] &quot;ScaleData&quot;                      
+## [143] &quot;ScoreJackStraw&quot;                 
+## [144] &quot;SCTransform&quot;                    
+## [145] &quot;SelectIntegrationFeatures&quot;      
+## [146] &quot;SetAssayData&quot;                   
+## [147] &quot;SetIdent&quot;                       
+## [148] &quot;SetIntegrationData&quot;             
+## [149] &quot;SeuratAxes&quot;                     
+## [150] &quot;SeuratTheme&quot;                    
+## [151] &quot;SpatialTheme&quot;                   
+## [152] &quot;SplitObject&quot;                    
+## [153] &quot;StashIdent&quot;                     
+## [154] &quot;Stdev&quot;                          
+## [155] &quot;StopCellbrowser&quot;                
+## [156] &quot;SubsetByBarcodeInflections&quot;     
+## [157] &quot;SubsetData&quot;                     
+## [158] &quot;TF.IDF&quot;                         
+## [159] &quot;Tool&quot;                           
+## [160] &quot;Tool&lt;-&quot;                         
+## [161] &quot;TopCells&quot;                       
+## [162] &quot;TopFeatures&quot;                    
+## [163] &quot;TransferData&quot;                   
+## [164] &quot;TSNEPlot&quot;                       
+## [165] &quot;UMAPPlot&quot;                       
+## [166] &quot;UpdateSeuratObject&quot;             
+## [167] &quot;UpdateSymbolList&quot;               
+## [168] &quot;VariableFeaturePlot&quot;            
+## [169] &quot;VariableFeatures&quot;               
+## [170] &quot;VariableFeatures&lt;-&quot;             
+## [171] &quot;VizDimLoadings&quot;                 
+## [172] &quot;VlnPlot&quot;                        
+## [173] &quot;WhichCells&quot;                     
+## [174] &quot;WhiteBackground&quot;</code></pre>
 </div>
 </div>
 </div>
@@ -938,7 +1121,12 @@ Filter based on:
 3. n.exp.hkgenes</p>
 <p><strong>Task: Change the thresholds to what you think they should be according to the violin plots</strong></p>
 <div class="sourceCode" id="cb72"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb72-1"><a href="data-wrangling-scrnaseq-1.html#cb72-1"></a><span class="kw">VlnPlot</span>(<span class="dt">object =</span> seurat, <span class="dt">features =</span> <span class="kw">c</span>(<span class="st">&quot;nFeature_RNA&quot;</span>,<span class="st">&quot;percent.mt&quot;</span>,<span class="st">&quot;n.exp.hkgenes&quot;</span>), <span class="dt">ncol =</span> <span class="dv">3</span>)</span></code></pre></div>
-<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-wrangling-scrnaseq-1.html#cb73-1"></a><span class="co">#### seurat &lt;- FilterCells(object = seurat, subset.names = c(&quot;nGene&quot;, &quot;percent.mito&quot;,&quot;n.exp.hkgenes&quot;), low.thresholds = c(350, -Inf,55), high.thresholds = c(5000, 0.1, Inf))</span></span></code></pre></div>
+<div class="sourceCode" id="cb73"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb73-1"><a href="data-wrangling-scrnaseq-1.html#cb73-1"></a><span class="co"># seurat &lt;- SubsetData(object = seurat, subset.names = c(&quot;nFeature_RNA&quot;, &quot;percent.mito&quot;,&quot;n.exp.hkgenes&quot;), low.thresholds = c(350, -Inf,55), high.thresholds = c(5000, 0.1, Inf))</span></span>
+<span id="cb73-2"><a href="data-wrangling-scrnaseq-1.html#cb73-2"></a></span>
+<span id="cb73-3"><a href="data-wrangling-scrnaseq-1.html#cb73-3"></a>seurat &lt;-<span class="st"> </span>Seurat<span class="op">::</span><span class="kw">subset</span>(seurat, nFeature_RNA <span class="op">&lt;</span><span class="st"> </span><span class="dv">5000</span>)</span>
+<span id="cb73-4"><a href="data-wrangling-scrnaseq-1.html#cb73-4"></a>seurat &lt;-<span class="st"> </span>Seurat<span class="op">::</span><span class="kw">subset</span>(seurat, nFeature_RNA <span class="op">&gt;</span><span class="st"> </span><span class="dv">350</span>)</span>
+<span id="cb73-5"><a href="data-wrangling-scrnaseq-1.html#cb73-5"></a>seuart &lt;-<span class="st"> </span>Seurat<span class="op">::</span><span class="kw">subset</span>(seurat, n.exp.hkgenes <span class="op">&gt;</span><span class="st"> </span><span class="dv">55</span>)</span>
+<span id="cb73-6"><a href="data-wrangling-scrnaseq-1.html#cb73-6"></a>seuart &lt;-<span class="st"> </span>Seurat<span class="op">::</span><span class="kw">subset</span>(seurat, percent.mt <span class="op">&lt;</span><span class="st"> </span><span class="dv">10</span>)</span></code></pre></div>
 <p>How many cells are you left with?</p>
 <div class="sourceCode" id="cb74"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb74-1"><a href="data-wrangling-scrnaseq-1.html#cb74-1"></a>seurat</span></code></pre></div>
 <div id="preprocessing-step-2-expression-normalization" class="section level3">
