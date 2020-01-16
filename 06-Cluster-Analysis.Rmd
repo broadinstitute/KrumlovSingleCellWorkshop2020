@@ -85,12 +85,15 @@ FeatureScatter(object = seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RN
 # 'gate'.  -Inf and Inf should be used if you don't want a lower or upper
 # threshold.
 
-seurat <- SubsetData(object = seurat, 
-                    subset.names = c("nFeature_RNA", "percent.mt"), 
-                    low.thresholds = c(200, -Inf), 
-                    high.thresholds = c(2500, 0.1))
+# seurat <- SubsetData(object = seurat, 
+#                     subset.names = c("nFeature_RNA", "percent.mt"), 
+#                     low.thresholds = c(200, -Inf), 
+#                     high.thresholds = c(2500, 0.1))
 
 
+seurat <- Seurat::subset(seurat, nFeature_RNA < 2500)
+seurat <- Seurat::subset(seurat, nFeature_RNA > 200)
+seuart <- Seurat::subset(seurat, percent.mt < 0.1)
 ```
 
 
