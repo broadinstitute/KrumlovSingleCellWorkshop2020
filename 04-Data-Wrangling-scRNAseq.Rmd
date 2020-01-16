@@ -166,7 +166,7 @@ seurat@assays$RNA@counts[1:10,1:10]
 
 Summary information about Seurat objects can be had quickly and easily using standard R functions. Object shape/dimensions can be found using the dim, ncol, and nrow functions; cell and feature names can be found using the colnames and rownames functions, respectively, or the dimnames function. A vector of names of Assay, DimReduc, and Graph objects contained in a Seurat object can be had by using names.
 
-# The following examples use the PBMC 3k dataset
+**The following examples use the PBMC 3k dataset**
 ```{r obj_info}
 seurat
 
