@@ -36,8 +36,8 @@ library(dplyr)
 library(ggplot2)
 library(CountClust)
 
-## dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/"
+dirname <- "/home/genomics/workshop_materials/scrna/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/"
 counts_matrix_filename = paste0(dirname, "pbmc3k/filtered_gene_bc_matrices/hg19/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -91,9 +91,9 @@ FeatureScatter(object = seurat, feature1 = "nCount_RNA", feature2 = "nFeature_RN
 #                     high.thresholds = c(2500, 0.1))
 
 
-seurat <- Seurat::subset(seurat, nFeature_RNA < 2500)
-seurat <- Seurat::subset(seurat, nFeature_RNA > 200)
-seuart <- Seurat::subset(seurat, percent.mt < 0.1)
+seurat <- subset(seurat, nFeature_RNA < 2500)
+seurat <- subset(seurat, nFeature_RNA > 200)
+seuart <- subset(seurat, percent.mt < 10)
 ```
 
 
@@ -154,9 +154,8 @@ This will run pca on the
 ```{r run_pca}
 seurat <- RunPCA(object = seurat, 
                # features = seurat@assays$RNA@var.features, 
-               do.print = TRUE, 
-               pcs.print = 1:5, 
-               genes.print = 5)
+               ndims.print = 1:5, 
+               nfeatures.print = 5)
 ```
 
 

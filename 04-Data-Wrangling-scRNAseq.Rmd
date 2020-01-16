@@ -37,8 +37,8 @@ Task: Change the directory name to mydir/ where you saved your data
 
 **Task: Check the <code>dirname</code> to dir where you saved your data**
 ```{r read_data}
-## dirname <- "/home/genomics/workshop_materials/scrna/"
-dirname <- "/Users/kgosik/Documents/data/cellranger/vdj-nsclc/"
+dirname <- "/home/genomics/workshop_materials/scrna/"
+## dirname <- "/Users/kgosik/Documents/data/cellranger/vdj-nsclc/"
 counts_matrix_filename = paste0(dirname, "filtered_gene_bc_matrices/GRCh38/")
 counts <- Read10X(data.dir = counts_matrix_filename)  # Seurat function to read in 10x count data
 
@@ -427,10 +427,10 @@ VlnPlot(object = seurat, features = c("nFeature_RNA","percent.mt","n.exp.hkgenes
 ```{r, eval = FALSE}
 # seurat <- SubsetData(object = seurat, subset.names = c("nFeature_RNA", "percent.mito","n.exp.hkgenes"), low.thresholds = c(350, -Inf,55), high.thresholds = c(5000, 0.1, Inf))
 
-seurat <- Seurat::subset(seurat, nFeature_RNA < 5000)
-seurat <- Seurat::subset(seurat, nFeature_RNA > 350)
-seuart <- Seurat::subset(seurat, n.exp.hkgenes > 55)
-seuart <- Seurat::subset(seurat, percent.mt < 10)
+seurat <- subset(seurat, nFeature_RNA < 5000)
+seurat <- subset(seurat, nFeature_RNA > 350)
+seuart <- subset(seurat, n.exp.hkgenes > 55)
+seuart <- subset(seurat, percent.mt < 10)
 ```
 
 How many cells are you left with?
