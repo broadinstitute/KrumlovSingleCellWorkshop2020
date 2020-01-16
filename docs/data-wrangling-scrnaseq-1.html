@@ -247,10 +247,7 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="data-wrangling-scrnaseq-1.html#cb2-1"></a><span class="co">## dirname &lt;- &quot;/home/genomics/workshop_materials/scrna/&quot;</span></span>
 <span id="cb2-2"><a href="data-wrangling-scrnaseq-1.html#cb2-2"></a>dirname &lt;-<span class="st"> &quot;/Users/kgosik/Documents/data/cellranger/vdj-nsclc/&quot;</span></span>
 <span id="cb2-3"><a href="data-wrangling-scrnaseq-1.html#cb2-3"></a>counts_matrix_filename =<span class="st"> </span><span class="kw">paste0</span>(dirname, <span class="st">&quot;filtered_gene_bc_matrices/GRCh38/&quot;</span>)</span>
-<span id="cb2-4"><a href="data-wrangling-scrnaseq-1.html#cb2-4"></a>counts &lt;-<span class="st"> </span><span class="kw">Read10X</span>(<span class="dt">data.dir =</span> counts_matrix_filename)  <span class="co"># Seurat function to read in 10x count data</span></span>
-<span id="cb2-5"><a href="data-wrangling-scrnaseq-1.html#cb2-5"></a></span>
-<span id="cb2-6"><a href="data-wrangling-scrnaseq-1.html#cb2-6"></a><span class="co"># To minimize memory use on the docker - choose only the first 1000 cells</span></span>
-<span id="cb2-7"><a href="data-wrangling-scrnaseq-1.html#cb2-7"></a>counts &lt;-<span class="st"> </span>counts[, <span class="dv">1</span><span class="op">:</span><span class="dv">1000</span>]</span></code></pre></div>
+<span id="cb2-4"><a href="data-wrangling-scrnaseq-1.html#cb2-4"></a>counts &lt;-<span class="st"> </span><span class="kw">Read10X</span>(<span class="dt">data.dir =</span> counts_matrix_filename)  <span class="co"># Seurat function to read in 10x count data</span></span></code></pre></div>
 </div>
 <div id="lets-examine-the-sparse-counts-matrix" class="section level3">
 <h3><span class="header-section-number">4.2.3</span> Let’s examine the sparse counts matrix</h3>
@@ -272,15 +269,15 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="how-big-is-the-matrix" class="section level3">
 <h3><span class="header-section-number">4.2.4</span> How big is the matrix?</h3>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="data-wrangling-scrnaseq-1.html#cb5-1"></a><span class="kw">dim</span>(counts) <span class="co"># report number of genes (rows) and number of cells (columns)</span></span></code></pre></div>
-<pre><code>## [1] 33694  1000</code></pre>
+<pre><code>## [1] 33694  7802</code></pre>
 <p>Here we see the counts matrix has 33694 genes and 7802 cells.</p>
 </div>
 <div id="how-much-memory-does-a-sparse-matrix-take-up-relative-to-a-dense-matrix" class="section level3">
 <h3><span class="header-section-number">4.2.5</span> How much memory does a sparse matrix take up relative to a dense matrix?</h3>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="data-wrangling-scrnaseq-1.html#cb7-1"></a><span class="kw">object.size</span>(counts) <span class="co"># size in bytes</span></span></code></pre></div>
-<pre><code>## [1] 23923312 bytes</code></pre>
+<pre><code>## 169457000 bytes</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="data-wrangling-scrnaseq-1.html#cb9-1"></a><span class="kw">object.size</span>(<span class="kw">as.matrix</span>(counts)) <span class="co"># size in bytes</span></span></code></pre></div>
-<pre><code>## [1] 271919144 bytes</code></pre>
+<pre><code>## 2106010424 bytes</code></pre>
 <p>We see here that the sparse matrix takes 225 Mb in memory while storing the matrix in a dense format (where all count values including zeros are stored) takes almost 10 times as much memory! This memory saving is very important, especially as data sets are now being created that are beyond a million cells. These matrices can become unmanageable without special computing resources.</p>
 <p>In the sparse representation, we assume that the majority of count values in a matrix are zero. We only store the non-zero values. This is implemented in the Matrix package using a dgTMatrix object.</p>
 </div>
@@ -291,31 +288,38 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <div id="look-at-the-summary-counts-for-genes-and-cells" class="section level3">
 <h3><span class="header-section-number">4.3.1</span> Look at the summary counts for genes and cells</h3>
 <div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb11-1"><a href="data-wrangling-scrnaseq-1.html#cb11-1"></a>counts_per_cell &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">colSums</span>(counts)</span>
-<span id="cb11-2"><a href="data-wrangling-scrnaseq-1.html#cb11-2"></a>counts_per_gene &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">rowSums</span>(counts)</span>
-<span id="cb11-3"><a href="data-wrangling-scrnaseq-1.html#cb11-3"></a>genes_per_cell &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">colSums</span>(counts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="co"># count gene only if it has non-zero reads mapped.</span></span></code></pre></div>
+<span id="cb11-2"><a href="data-wrangling-scrnaseq-1.html#cb11-2"></a><span class="kw">cat</span>(<span class="st">&quot;counts per cell: &quot;</span>, counts_per_cell[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>) <span class="co">## counts for first 5 cells</span></span></code></pre></div>
+<pre><code>## counts per cell:  3605 3828 6457 3075 9400</code></pre>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-wrangling-scrnaseq-1.html#cb13-1"></a>counts_per_gene &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">rowSums</span>(counts)</span>
+<span id="cb13-2"><a href="data-wrangling-scrnaseq-1.html#cb13-2"></a><span class="kw">cat</span>(<span class="st">&quot;counts per gene: &quot;</span>, counts_per_gene[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>], <span class="st">&quot;</span><span class="ch">\n</span><span class="st">&quot;</span>)  <span class="co">## counts for first 5 genes</span></span></code></pre></div>
+<pre><code>## counts per gene:  2 0 0 2 0</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-wrangling-scrnaseq-1.html#cb15-1"></a>genes_per_cell &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">colSums</span>(counts <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>) <span class="co"># count gene only if it has non-zero reads mapped.</span></span>
+<span id="cb15-2"><a href="data-wrangling-scrnaseq-1.html#cb15-2"></a><span class="kw">cat</span>(<span class="st">&quot;counts for non-zero genes: &quot;</span>, genes_per_cell[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>])  <span class="co">## counts for first 5 genes</span></span></code></pre></div>
+<pre><code>## counts for non-zero genes:  1184 1387 1784 1092 2626</code></pre>
 <p><strong>Task: In a similar way, can you calculate cells per genes? replace the ‘?’ in the command below</strong></p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="data-wrangling-scrnaseq-1.html#cb12-1"></a><span class="co">#### cells_per_gene &lt;- Matrix::?(counts&gt;?) # only count cells where the gene is expressed</span></span>
-<span id="cb12-2"><a href="data-wrangling-scrnaseq-1.html#cb12-2"></a>cells_per_gene &lt;-<span class="st"> </span>Matrix<span class="op">::</span><span class="kw">rowSums</span>(counts<span class="op">&gt;</span><span class="dv">0</span>) <span class="co"># only count cells where the gene is expressed</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-wrangling-scrnaseq-1.html#cb17-1"></a><span class="co">#### cells_per_gene &lt;- Matrix::?(counts&gt;?) # only count cells where the gene is expressed</span></span>
+<span id="cb17-2"><a href="data-wrangling-scrnaseq-1.html#cb17-2"></a>cells_per_gene &lt;-<span class="st">  </span><span class="co"># only count cells where the gene is expressed</span></span>
+<span id="cb17-3"><a href="data-wrangling-scrnaseq-1.html#cb17-3"></a><span class="kw">cat</span>(<span class="st">&quot;count of cells with expressed genes: &quot;</span>, cells_per_gene)</span></code></pre></div>
 <p>colSums and rowSums are functions that work on each row or column in a matrix and return the column sums or row sums as a vector. If this is true counts_per_cell should have 1 entry per cell. Let’s make sure the length of the returned vector matches the matrix dimension for column. How would you do that? ( Hint:length() ).</p>
 <p>Notes:
 1. Matrix::colSums is a way to force functions from the Matrix library to be used. There are many libraries that implement colSums, we are forcing the one from the Matrix library to be used here to make sure it handles the dgTmatrix (sparse matrix) correctly. This is good practice.</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="data-wrangling-scrnaseq-1.html#cb13-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(counts_per_cell<span class="op">+</span><span class="dv">1</span>),<span class="dt">main=</span><span class="st">&#39;counts per cell&#39;</span>,<span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-wrangling-scrnaseq-1.html#cb18-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(counts_per_cell<span class="op">+</span><span class="dv">1</span>),<span class="dt">main=</span><span class="st">&#39;counts per cell&#39;</span>,<span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/plot_counts-1.png" width="672" /></p>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="data-wrangling-scrnaseq-1.html#cb14-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(genes_per_cell<span class="op">+</span><span class="dv">1</span>), <span class="dt">main=</span><span class="st">&#39;genes per cell&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-wrangling-scrnaseq-1.html#cb19-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(genes_per_cell<span class="op">+</span><span class="dv">1</span>), <span class="dt">main=</span><span class="st">&#39;genes per cell&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/plot_counts-2.png" width="672" /></p>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb15-1"><a href="data-wrangling-scrnaseq-1.html#cb15-1"></a><span class="kw">plot</span>(counts_per_cell, genes_per_cell, <span class="dt">log=</span><span class="st">&#39;xy&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span>
-<span id="cb15-2"><a href="data-wrangling-scrnaseq-1.html#cb15-2"></a><span class="kw">title</span>(<span class="st">&#39;counts vs genes per cell&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="data-wrangling-scrnaseq-1.html#cb20-1"></a><span class="kw">plot</span>(counts_per_cell, genes_per_cell, <span class="dt">log=</span><span class="st">&#39;xy&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span>
+<span id="cb20-2"><a href="data-wrangling-scrnaseq-1.html#cb20-2"></a><span class="kw">title</span>(<span class="st">&#39;counts vs genes per cell&#39;</span>)</span></code></pre></div>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/plot_counts-3.png" width="672" /></p>
 <p>Here we see examples of plotting a new plot, the histogram. R makes this really easy with the hist function. We are also transforming the values to log10 before plotting, this is done with the log10 method. When logging count data, the + 1 is used to avoid log10(0) which is not defined.</p>
 <p>Can you make a histogram of counts per gene in log10 scale?</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="data-wrangling-scrnaseq-1.html#cb16-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(counts_per_gene<span class="op">+</span><span class="dv">1</span>), <span class="dt">main=</span><span class="st">&#39;counts per gene&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-wrangling-scrnaseq-1.html#cb21-1"></a><span class="kw">hist</span>(<span class="kw">log10</span>(counts_per_gene<span class="op">+</span><span class="dv">1</span>), <span class="dt">main=</span><span class="st">&#39;counts per gene&#39;</span>, <span class="dt">col=</span><span class="st">&#39;wheat&#39;</span>)</span></code></pre></div>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/hist_genes-1.png" width="672" /></p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="data-wrangling-scrnaseq-1.html#cb17-1"></a><span class="co">### hist(?(?+1), main=&#39;counts per gene&#39;, col=&#39;wheat&#39;)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="data-wrangling-scrnaseq-1.html#cb22-1"></a><span class="co">### hist(?(?+1), main=&#39;counts per gene&#39;, col=&#39;wheat&#39;)</span></span></code></pre></div>
 </div>
 <div id="plot-cells-ranked-by-their-number-of-detected-genes." class="section level3">
 <h3><span class="header-section-number">4.3.2</span> Plot cells ranked by their number of detected genes.</h3>
 <p>Here we rank each cell by its library complexity, ie the number of genes detected per cell. This is a very useful plot as it shows the distribution of library complexity in the sequencing run. One can use this plot to investigate observations (potential cells) that are actually failed libraries (lower end outliers) or observations that are cell doublets (higher end outliers).</p>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="data-wrangling-scrnaseq-1.html#cb18-1"></a><span class="kw">plot</span>(<span class="kw">sort</span>(genes_per_cell), <span class="dt">xlab=</span><span class="st">&#39;cell&#39;</span>, <span class="dt">log=</span><span class="st">&#39;y&#39;</span>, <span class="dt">main=</span><span class="st">&#39;genes per cell (ordered)&#39;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="data-wrangling-scrnaseq-1.html#cb23-1"></a><span class="kw">plot</span>(<span class="kw">sort</span>(genes_per_cell), <span class="dt">xlab=</span><span class="st">&#39;cell&#39;</span>, <span class="dt">log=</span><span class="st">&#39;y&#39;</span>, <span class="dt">main=</span><span class="st">&#39;genes per cell (ordered)&#39;</span>)</span></code></pre></div>
 <p><img src="KrumlovSingleCellWorkshop2020_files/figure-html/rank_cells-1.png" width="672" /></p>
 </div>
 </div>
@@ -327,8 +331,8 @@ code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warni
 <p>To analyze our single cell data we will use a seurat object. Can you create an Seurat object with the 10x data and save it in an object called ‘seurat’? hint: CreateSeuratObject().
 Can you include only genes that are are expressed in 3 or more cells and cells with complexity of 350 genes or more?
 How many genes are you left with? How many cells?</p>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="data-wrangling-scrnaseq-1.html#cb19-1"></a><span class="co">### seurat&lt;-CreateSeuratObject(raw.data = counts, ? = 3, ? = 350, project = &quot;10X_NSCLC&quot;)</span></span>
-<span id="cb19-2"><a href="data-wrangling-scrnaseq-1.html#cb19-2"></a>seurat &lt;-<span class="st"> </span><span class="kw">CreateSeuratObject</span>(<span class="dt">counts =</span> counts, <span class="dt">min.cells =</span> <span class="dv">3</span>, <span class="dt">min.features =</span> <span class="dv">350</span>, <span class="dt">project =</span> <span class="st">&quot;10X_NSCLC&quot;</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb24-1"><a href="data-wrangling-scrnaseq-1.html#cb24-1"></a><span class="co">### seurat&lt;-CreateSeuratObject(raw.data = counts, ? = 3, ? = 350, project = &quot;10X_NSCLC&quot;)</span></span>
+<span id="cb24-2"><a href="data-wrangling-scrnaseq-1.html#cb24-2"></a>seurat &lt;-<span class="st"> </span><span class="kw">CreateSeuratObject</span>(<span class="dt">counts =</span> counts, <span class="dt">min.cells =</span> <span class="dv">3</span>, <span class="dt">min.features =</span> <span class="dv">350</span>, <span class="dt">project =</span> <span class="st">&quot;10X_NSCLC&quot;</span>)</span></code></pre></div>
 <pre><code>## Warning: Feature names cannot have underscores (&#39;_&#39;), replacing with dashes (&#39;-&#39;)</code></pre>
 <div id="object-slots" class="section level4">
 <h4><span class="header-section-number">4.4.1.1</span> Object Slots</h4>
@@ -347,20 +351,20 @@ How many genes are you left with? How many cells?</p>
 version Seurat version used when creating the object</li>
 </ul>
 <p><code>seurat@assays$RNA@counts</code> is a slot that stores the original gene count matrix. We can view the first 10 rows (genes) and the first 10 columns (cells).</p>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="data-wrangling-scrnaseq-1.html#cb21-1"></a>seurat<span class="op">@</span>assays<span class="op">$</span>RNA<span class="op">@</span>counts[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="data-wrangling-scrnaseq-1.html#cb26-1"></a>seurat<span class="op">@</span>assays<span class="op">$</span>RNA<span class="op">@</span>counts[<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>,<span class="dv">1</span><span class="op">:</span><span class="dv">10</span>]</span></code></pre></div>
 <pre><code>## 10 x 10 sparse Matrix of class &quot;dgCMatrix&quot;</code></pre>
 <pre><code>##    [[ suppressing 10 column names &#39;AAACCTGAGCTAGTCT&#39;, &#39;AAACCTGAGGGCACTA&#39;, &#39;AAACCTGAGTACGTTC&#39; ... ]]</code></pre>
 <pre><code>##                                  
 ## FO538757.2    . . . . 1 2 . . . .
+## AP006222.2    . . . . . . . . . .
 ## RP4-669L17.10 . . . . . . . . . .
 ## RP11-206L10.9 . . . . . . . . . .
 ## LINC00115     . . . . . . . . . .
+## FAM41C        . . . . . . . . . .
+## SAMD11        . . . . . 1 . . . .
 ## NOC2L         . . . . 2 4 . 1 . .
 ## KLHL17        . . . . . . . . . .
-## PLEKHN1       . . . . . . . . . .
-## HES4          . . . . . 9 . . . 1
-## ISG15         . . . . 1 1 . . 1 .
-## AGRN          . . . . . . . . . .</code></pre>
+## PLEKHN1       . . . . . . . . . .</code></pre>
 </div>
 <div id="object-information" class="section level4">
 <h4><span class="header-section-number">4.4.1.2</span> Object Information</h4>
