@@ -27,12 +27,12 @@ docker run --rm -ti -v `pwd`:/home/rstudio -e DISABLE_AUTH=true -p 8787:8787 kdg
 After running the docker command navigate to your browser and go to [http://localhost:8787/](http://localhost:8787/).  This will open up Rstudio in your browser and have the necessary R packages installed needed for the course.
 
 
-## COURSE OVERVIEW
+## Course Overview
 
 In recent years single cell RNA-seq (scRNA-seq) has become widely used for transcriptome analysis in many areas of biology. In contrast to bulk RNA-seq, scRNA-seq provides quantitative measurements of the expression of every gene in a single cell. However, to analyze scRNA-seq data, novel methods are required and some of the underlying assumptions for the methods developed for bulk RNA-seq experiments are no longer valid. In this course we will cover all steps of the scRNA-seq processing, starting from the raw reads coming off the sequencer. The course includes common analysis strategies, using state-of-the-art methods and we also discuss the central biological questions that can be addressed using scRNA-seq.
 
 
-## TARGETED AUDIENCE & ASSUMED BACKGROUND
+## Targeted Audience & Assumed Background
 
 This course is aimed at researchers and technical workers who are or will be analyzing scRNA-seq data. The material is suitable both for experimentalists who want to learn more about data-analysis as well as computational biologists who want to learn about scRNASeq methods. Examples demonstrated in this course can be applied to any experimental protocol or biological system.
 
@@ -42,16 +42,13 @@ The requirements for this course are:
   3. Familiarity with next-generation sequencing data and its analyses (using alignment and quantification tools for bulk sequencing data)
 
 
-## COURSE FORMAT
+## Course Format
 
 The course will be delivered over the course of five days. Each day will include a lecture and laboratory component. The lecture will introduce the topics of discussion and the laboratory sessions will be focused on practical hands-on analysis of scRNA-seq data. These sessions will involve a combination of both mirroring exercises with the instructor to demonstrate a skill as well as applying these skills on your own to complete individual exercises. After and during each exercise, interpretation of results will be discussed as a group. Computing will be done using a combination of tools installed on the attendees laptop computer and web resources accessed via web browser.
 
 
 
-## Getting Started
-
-
-## SESSION CONTENT
+## Session Content
 
 ### Introduction
 
