@@ -1,3 +1,4 @@
 resources/
 .Rproj.user/
 .Rproj.user
+docker/.rstudio/
