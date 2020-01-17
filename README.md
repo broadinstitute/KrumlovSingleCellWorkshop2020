@@ -1,5 +1,31 @@
 # Introduction
 
+## Get Course Material
+
+Once you have docker running and you are in the terminal you can pull the course content to your computer by running the command below. This will bring all the Rmarkdown files for you to run.
+
+```
+git clone https://github.com/broadinstitute/KrumlovSingleCellWorkshop2020.git
+```
+
+
+## Run Docker
+
+Same command as above but add the option bash at the end to access the ternimal in the docker container.
+
+```
+docker run --rm -ti -v `pwd`:/home/rstudio -e DISABLE_AUTH=true -p 8787:8787 kdgosik/krumlov2020
+```
+
+**OR**
+
+```
+./run_docker.sh
+```
+
+After running the docker command navigate to your browser and go to [](http://localhost:8787/).  This will open up Rstudio in your browser and have the necessary R packages installed needed for the course.
+
+
 ## COURSE OVERVIEW
 
 In recent years single cell RNA-seq (scRNA-seq) has become widely used for transcriptome analysis in many areas of biology. In contrast to bulk RNA-seq, scRNA-seq provides quantitative measurements of the expression of every gene in a single cell. However, to analyze scRNA-seq data, novel methods are required and some of the underlying assumptions for the methods developed for bulk RNA-seq experiments are no longer valid. In this course we will cover all steps of the scRNA-seq processing, starting from the raw reads coming off the sequencer. The course includes common analysis strategies, using state-of-the-art methods and we also discuss the central biological questions that can be addressed using scRNA-seq.
