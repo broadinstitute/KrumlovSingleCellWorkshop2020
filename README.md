@@ -2,10 +2,11 @@
 
 ## Get Course Material
 
-Once you have docker running and you are in the terminal you can pull the course content to your computer by running the command below. This will bring all the Rmarkdown files for you to run.
+You can pull the course content to your computer by running the command below. This will bring all the Rmarkdown files for you to run.
 
 ```
 git clone https://github.com/broadinstitute/KrumlovSingleCellWorkshop2020.git
+cd KrumlovSingleCellWorkshop2020
 ```
 
 
