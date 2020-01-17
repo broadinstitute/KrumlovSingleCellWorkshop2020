@@ -24,7 +24,7 @@ docker run --rm -ti -v `pwd`:/home/rstudio -e DISABLE_AUTH=true -p 8787:8787 kdg
 ./run_docker.sh
 ```
 
-After running the docker command navigate to your browser and go to [](http://localhost:8787/).  This will open up Rstudio in your browser and have the necessary R packages installed needed for the course.
+After running the docker command navigate to your browser and go to [http://localhost:8787/](http://localhost:8787/).  This will open up Rstudio in your browser and have the necessary R packages installed needed for the course.
 
 
 ## COURSE OVERVIEW
